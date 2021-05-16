@@ -1,10 +1,11 @@
 package serviceProviderController
 
 import (
-	"net/http"	
+	"net/http"
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService"
-	"github.com/AdairHdz/OnTheWayRestAPI/helpers/hashing"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
@@ -17,15 +18,9 @@ var (
 
 func RegisterServiceProvider() gin.HandlerFunc{
 	return func(context *gin.Context){
-		receivedData := struct {
-			Names string `json:"names" validate:"required,min=1,max=50,lettersAndSpaces"`
-			LastName string `json:"lastName" validate:"required,min=1,max=50,lettersAndSpaces"`
-			EmailAddress string `json:"emailAddress" validate:"required,email,max=254"`
-			Password string `json:"password" validate:"required,max=80"`
-			StateID uuid.UUID `json:"stateId" validate:"required"`		
-		}{}
+		receivedData := dataTransferObjects.ReceivedUserDTO{}
+		context.BindJSON(&receivedData)
 
-		context.BindJSON(&receivedData)		
 		validate := validators.GetValidator()
 		validationErrors := validate.Struct(receivedData)
 
@@ -34,25 +29,16 @@ func RegisterServiceProvider() gin.HandlerFunc{
 			return
 		}
 
-		hashedPassword, hashingError := hashing.GenerateHash(receivedData.Password)
+		userEntity, mappingError := mappers.CreateUserEntity(receivedData, 1)
 
-		if hashingError != nil {
+		if mappingError != nil {
 			context.AbortWithStatus(http.StatusConflict)
 			return
 		}
 
 		serviceProviderEntity := businessEntities.ServiceProvider{
 			ID: uuid.NewV4(),
-			User: businessEntities.User{
-				ID: uuid.NewV4(),
-				Names: receivedData.Names,
-				LastName: receivedData.LastName,
-				EmailAddress: receivedData.EmailAddress,
-				Password: hashedPassword,
-				UserType: 1,
-				Verified: false,
-				StateID: receivedData.StateID,				
-			},
+			User: userEntity,
 			AverageScore: 0,
 			PriceRates: nil,
 		}
@@ -64,23 +50,7 @@ func RegisterServiceProvider() gin.HandlerFunc{
 			context.AbortWithStatus(http.StatusConflict)
 		}
 
-		response := struct {
-			ID uuid.UUID
-			Names string
-			LastName string
-			EmailAddress string
-			UserType uint8
-			Verified bool
-			StateID uuid.UUID
-		}{
-			ID: serviceProviderEntity.ID,
-			Names: serviceProviderEntity.User.Names,
-			LastName: serviceProviderEntity.User.LastName,
-			EmailAddress: serviceProviderEntity.User.EmailAddress,
-			UserType: serviceProviderEntity.User.UserType,
-			Verified: serviceProviderEntity.User.Verified,
-			StateID: serviceProviderEntity.User.StateID,
-		}
+		response := mappers.CreateUserDTOAsResponse(serviceProviderEntity.User, serviceProviderEntity.ID)
 		
 		context.JSON(http.StatusCreated, response)
 	}
@@ -122,24 +92,7 @@ func Find() gin.HandlerFunc{
 			return
 		}
 
-		response := struct {
-			ID uuid.UUID `json:"id"`
-			Names string `json:"names"`
-			LastName string `json:"lastName"`
-			EmailAddress string `json:"emailAddress"`
-			UserType uint8 `json:"userType"`
-			Verified bool `json:"verified"`
-			StateID uuid.UUID `json:"stateId"`
-		}{
-			ID: serviceProvider.ID,
-			Names: serviceProvider.User.Names,
-			LastName: serviceProvider.User.LastName,
-			EmailAddress: serviceProvider.User.EmailAddress,
-			UserType: serviceProvider.User.UserType,
-			Verified: serviceProvider.User.Verified,
-			StateID: serviceProvider.User.StateID,
-		}
-
+		response := mappers.CreateUserDTOAsResponse(serviceProvider.User, serviceProvider.ID)
 		context.JSON(http.StatusOK, response)
 	}
 }
