@@ -1,8 +1,10 @@
 package serviceRequesterController
 
 import (
+	"fmt"
 	"net/http"
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
+	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequesterManagementService"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/hashing"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
@@ -122,57 +124,87 @@ func FindServiceRequester() gin.HandlerFunc{
 	}
 }
 
-// func UpdateServiceRequester() gin.HandlerFunc{
-// 	return func(context *gin.Context){
-// 		serviceRequesterID, parsingError := uuid.FromString(context.Param("requesterId"))
+func UpdateServiceRequester() gin.HandlerFunc{
+	return func(context *gin.Context){
+		serviceRequesterID, parsingError := uuid.FromString(context.Param("requesterId"))
 
-// 		if parsingError != nil {
-// 			context.AbortWithStatus(http.StatusConflict)
-// 			return
-// 		}
+		if parsingError != nil {
+			fmt.Println("ERROR: ", parsingError.Error())
+			context.AbortWithStatus(http.StatusConflict)
+			return
+		}
 
-// 		receivedData := struct{
-// 			Names string `json:"names" validate:"required,min=1,max=50,lettersAndSpaces"`
-// 			LastName string `json:"lastName" validate:"required,min=1,max=50,lettersAndSpaces"`
-// 			Password string `json:"password" validate:"required,max=80"`
-// 		}{}
+		receivedData := struct{
+			Names string `json:"names"`
+			LastName string `json:"lastName"`
+			Password string `json:"password"`
+		}{}
 
-// 		context.BindJSON(&receivedData)
+		bindingError := context.BindJSON(&receivedData)
 
-// 		var validate *validator.Validate = validator.New()
-// 		validate.RegisterValidation("lettersAndSpaces", validators.LettersAndSpaces)
-// 		validationErrors := validate.Struct(receivedData)		
+		if bindingError != nil {
+			fmt.Println(bindingError)
+			return
+		}
 
-// 		if validationErrors != nil {
-// 			context.AbortWithStatus(http.StatusBadRequest)
-// 			return
-// 		}
-		
+		serviceRequester := businessEntities.ServiceRequester{ }
+		serviceRequester.Find(serviceRequesterID)
 
-// 		serviceRequester := businessEntities.ServiceRequester{ }
-// 		serviceRequester.Find(serviceRequesterID)
-// 		serviceRequester.User.Names = receivedData.Names
-// 		serviceRequester.User.LastName = receivedData.LastName
+		if receivedData.Names != ""{
+			serviceRequester.User.Names = receivedData.Names
+		}
 
-// 		if receivedData.Password != "" {
-// 			hashedPassword, hashingError := hashing.GenerateHash(serviceRequester.User.Password)	
-// 			if hashingError != nil {
-// 				context.AbortWithStatus(http.StatusConflict)
-// 				return
-// 			}
+		if receivedData.LastName != "" {
+			serviceRequester.User.LastName = receivedData.LastName
+		}
+				
+		if receivedData.Password != "" {
+			hashedPassword, hashingError := hashing.GenerateHash(serviceRequester.User.Password)	
+			if hashingError != nil {
+				context.AbortWithStatus(http.StatusConflict)
+				return
+			}
 	
-// 			serviceRequester.User.Password = hashedPassword
-// 		}				
+			serviceRequester.User.Password = hashedPassword
+		}				
 		
-// 		repository := repositories.Repository{}
-// 		updateError := repository.Update(&serviceRequester.User)
+		validator :=  validators.GetValidator()
+		validationErrors := validator.Var(serviceRequester.User.Names, "required,min=1,max=50,lettersAndSpaces")
 
-// 		if updateError != nil {
-// 			context.AbortWithStatus(http.StatusConflict)
-// 			return
-// 		}
+		if validationErrors != nil {
+			context.AbortWithStatus(http.StatusBadRequest)
+			return
+		}
 
-// 		context.Status(http.StatusOK)
+		validationErrors = validator.Var(serviceRequester.User.LastName, "required,min=1,max=50,lettersAndSpaces")
 
-// 	}
-// }
+		if validationErrors != nil {
+			context.AbortWithStatus(http.StatusBadRequest)
+			return
+		}
+
+		validationErrors = validator.Var(serviceRequester.User.Password, "required,max=80")
+
+		if validationErrors != nil {
+			context.AbortWithStatus(http.StatusBadRequest)
+			return
+		}
+
+		if validationErrors != nil {
+			context.AbortWithStatus(http.StatusBadRequest)
+			return
+		}
+
+		repository := repositories.Repository{}
+		updateError := repository.Update(&serviceRequester.User)
+
+		if updateError != nil {
+			fmt.Println("ERROR: ", updateError.Error())
+			context.AbortWithStatus(http.StatusConflict)
+			return
+		}
+
+		context.Status(http.StatusOK)
+
+	}
+}

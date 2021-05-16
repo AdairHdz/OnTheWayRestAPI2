@@ -18,7 +18,7 @@ func Routes(route *gin.RouterGroup) {
 	{
 		requesters.POST("/", serviceRequesterController.RegisterServiceRequester())	
 		requesters.GET("/:requesterId", serviceRequesterController.FindServiceRequester())
-		// requesters.PATCH("/:requesterId", serviceRequesterController.UpdateServiceRequester()) TODO: Fix
+		requesters.PATCH("/:requesterId", serviceRequesterController.UpdateServiceRequester()) //TODO: Fix
 		requesters.POST("/:requesterId/addresses", addressController.RegisterAddress())
 		requesters.GET("/:requesterId/addresses", addressController.FindAllAddressesOfServiceRequester())		
 		requesters.GET("/:requesterId/requests", func(context *gin.Context) {
