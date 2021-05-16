@@ -7,6 +7,7 @@
 [GIN-debug] POST   /v1/login                 --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/loginController.Login.func1 (4 handlers)
 [GIN-debug] POST   /v1/requesters/           --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController.RegisterServiceRequester.func1 (4 handlers)
 [GIN-debug] GET    /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController.FindServiceRequester.func1 (4 handlers)
+[GIN-debug] PATCH  /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController.UpdateServiceRequester.func1 (4 handlers)
 [GIN-debug] POST   /v1/requesters/:requesterId/addresses --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/addressController.RegisterAddress.func1 (4 handlers)
 [GIN-debug] GET    /v1/requesters/:requesterId/addresses --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/addressController.FindAllAddressesOfServiceRequester.func1 (4 handlers)
 [GIN-debug] GET    /v1/requesters/:requesterId/requests --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/requesters.Routes.func1 (4 handlers)
@@ -28,6 +29,11 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-[GIN-debug] redirecting request 307: /v1/providers/ --> /v1/providers/
-192.168.100.41 - [16 May 21 12:53 CDT] POST /v1/providers/ 400 1.9988ms
-[GIN] 2021/05/16 - 12:53:01 | 400 |      1.9988ms |  192.168.100.41 | POST     "/v1/providers/"
+192.168.100.41 - [16 May 21 15:55 CDT] PATCH /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f 200 137.085ms
+[GIN] 2021/05/16 - 15:55:44 | 200 |    137.5564ms |  192.168.100.41 | PATCH    "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f"
+192.168.100.41 - [16 May 21 15:55 CDT] PATCH /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f 200 168.2819ms
+[GIN] 2021/05/16 - 15:55:55 | 200 |    169.8052ms |  192.168.100.41 | PATCH    "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f"
+192.168.100.41 - [16 May 21 15:56 CDT] PATCH /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f 200 143.4505ms
+[GIN] 2021/05/16 - 15:56:14 | 200 |    144.4779ms |  192.168.100.41 | PATCH    "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f"
+192.168.100.41 - [16 May 21 15:56 CDT] PATCH /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f 200 145.1044ms
+[GIN] 2021/05/16 - 15:56:28 | 200 |    147.9132ms |  192.168.100.41 | PATCH    "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f"
