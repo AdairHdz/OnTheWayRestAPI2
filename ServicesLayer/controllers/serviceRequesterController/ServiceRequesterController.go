@@ -7,7 +7,6 @@ import (
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/hashing"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
 	"github.com/gin-gonic/gin"
-	validator "github.com/go-playground/validator"
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -26,9 +25,8 @@ func RegisterServiceRequester() gin.HandlerFunc{
 		}{}
 
 		context.BindJSON(&receivedData)
-		var validate *validator.Validate = validator.New()
-		validate.RegisterValidation("lettersAndSpaces", validators.LettersAndSpaces)
-		validationErrors := validate.Struct(receivedData)		
+		validate := validators.GetValidator()
+		validationErrors := validate.Struct(receivedData)
 
 		if validationErrors != nil {
 			context.AbortWithStatus(http.StatusBadRequest)

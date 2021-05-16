@@ -10,10 +10,10 @@
 [GIN-debug] POST   /v1/requesters/:requesterId/addresses --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/addressController.RegisterAddress.func1 (4 handlers)
 [GIN-debug] GET    /v1/requesters/:requesterId/addresses --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/addressController.FindAllAddressesOfServiceRequester.func1 (4 handlers)
 [GIN-debug] GET    /v1/requesters/:requesterId/requests --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/requesters.Routes.func1 (4 handlers)
-[GIN-debug] POST   /v1/providers/            --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.Register.func1 (4 handlers)
-[GIN-debug] GET    /v1/providers/            --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.FindMatches.func1 (4 handlers)
-[GIN-debug] GET    /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.Find.func1 (4 handlers)
-[GIN-debug] PATCH  /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.Update.func1 (4 handlers)
+[GIN-debug] POST   /v1/providers/            --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController.RegisterServiceProvider.func1 (4 handlers)
+[GIN-debug] GET    /v1/providers/            --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController.FindMatches.func1 (4 handlers)
+[GIN-debug] GET    /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController.Find.func1 (4 handlers)
+[GIN-debug] PATCH  /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController.Update.func1 (4 handlers)
 [GIN-debug] PUT    /v1/providers/:providerId/image --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func1 (4 handlers)
 [GIN-debug] POST   /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Register.func1 (4 handlers)
 [GIN-debug] GET    /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Find.func1 (4 handlers)
@@ -28,7 +28,6 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.41 - [16 May 21 10:56 CDT] POST /v1/login 200 96.0561ms
-[GIN] 2021/05/16 - 10:56:12 | 200 |     96.0561ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [16 May 21 10:56 CDT] POST /v1/login 409 46.8218ms
-[GIN] 2021/05/16 - 10:56:19 | 409 |     47.3547ms |  192.168.100.41 | POST     "/v1/login"
+[GIN-debug] redirecting request 307: /v1/providers/ --> /v1/providers/
+192.168.100.41 - [16 May 21 12:53 CDT] POST /v1/providers/ 400 1.9988ms
+[GIN] 2021/05/16 - 12:53:01 | 400 |      1.9988ms |  192.168.100.41 | POST     "/v1/providers/"

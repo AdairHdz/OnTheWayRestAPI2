@@ -1,14 +1,13 @@
 package providers
 
 import (					
-	"github.com/gin-gonic/gin"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService"
+	"github.com/gin-gonic/gin"	
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService"
 )
 
-var(
-	serviceProviderMgtService = serviceProviderManagementService.ServiceProviderManagementService{}
+var(	
 	reviewMgtService = reviewManagementService.ReviewManagementService{}
 	priceRateMgtService = priceRateManagementService.PriceRateManagementService{}
 )
@@ -16,10 +15,10 @@ var(
 func Routes(route *gin.RouterGroup) {
 	providers := route.Group("/providers")
 	{
-		providers.POST("/", serviceProviderMgtService.Register())
-		providers.GET("/", serviceProviderMgtService.FindMatches()) //TODO
-		providers.GET("/:providerId", serviceProviderMgtService.Find())
-		providers.PATCH("/:providerId", serviceProviderMgtService.Update())
+		providers.POST("/", serviceProviderController.RegisterServiceProvider())
+		providers.GET("/", serviceProviderController.FindMatches()) //TODO
+		providers.GET("/:providerId", serviceProviderController.Find())
+		providers.PATCH("/:providerId", serviceProviderController.Update())
 		providers.PUT("/:providerId/image", func(context *gin.Context) {
 
 		})
