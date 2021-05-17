@@ -31,6 +31,7 @@ func (serviceRequester *ServiceRequester) Find(serviceRequesterID uuid.UUID) (er
 
 func (serviceRequester *ServiceRequester) Update() error{
 	repository := serviceRequesterRepository.ServiceRequesterRepository{}	
-	databaseError := repository.Update(&serviceRequester)
+	databaseError := repository.Update(&serviceRequester.User)
 	return databaseError
+	
 }
