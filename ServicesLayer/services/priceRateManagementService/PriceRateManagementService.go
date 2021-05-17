@@ -9,7 +9,12 @@ type PriceRateManagementService struct{}
 
 func (PriceRateManagementService) Register() gin.HandlerFunc {
 	return func(context *gin.Context){
-		
+		// receivedData := struct {
+		// 	Title string 
+		// 	Details string
+		// 	Score uint8
+			
+		// }{}
 	}
 }
 

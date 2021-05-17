@@ -30,7 +30,7 @@ func RegisterServiceRequester() gin.HandlerFunc{
 			return
 		}
 
-		userEntity, mappingError := mappers.CreateUserEntity(receivedData, 2)
+		userEntity, mappingError := mappers.CreateUserEntity(receivedData)
 
 		if mappingError != nil {
 			context.AbortWithStatus(http.StatusConflict)

@@ -22,7 +22,7 @@ func CreateUserDTOAsResponse(user businessEntities.User, CustomID uuid.UUID) dat
 	return response
 }
 
-func CreateUserEntity(receivedUserDTO dataTransferObjects.ReceivedUserDTO, userType uint8) (businessEntities.User, error) {
+func CreateUserEntity(receivedUserDTO dataTransferObjects.ReceivedUserDTO) (businessEntities.User, error) {
 
 	hashedPassword, hashingError := hashing.GenerateHash(receivedUserDTO.Password)
 
@@ -36,7 +36,7 @@ func CreateUserEntity(receivedUserDTO dataTransferObjects.ReceivedUserDTO, userT
 		LastName: receivedUserDTO.LastName,
 		EmailAddress: receivedUserDTO.EmailAddress,
 		Password: hashedPassword,
-		UserType: userType,
+		UserType: receivedUserDTO.UserType,
 		Verified: false,
 		StateID: receivedUserDTO.StateID,
 	}

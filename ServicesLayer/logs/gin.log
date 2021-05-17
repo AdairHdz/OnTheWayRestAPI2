@@ -6,7 +6,8 @@
 
 [GIN-debug] GET    /images/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
 [GIN-debug] HEAD   /images/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
-[GIN-debug] POST   /v1/login                 --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/loginController.Login.func1 (4 handlers)
+[GIN-debug] POST   /v1/register              --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/registerService.RegisterService.RegisterUser.func1 (4 handlers)
+[GIN-debug] POST   /v1/login                 --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/loginService.LoginService.Login.func1 (4 handlers)
 [GIN-debug] POST   /v1/requesters/           --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController.RegisterServiceRequester.func1 (4 handlers)
 [GIN-debug] GET    /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController.FindServiceRequester.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController.UpdateServiceRequester.func1 (4 handlers)
@@ -31,7 +32,7 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.41 - [16 May 21 21:27 CDT] PUT /v1/providers/16b9a643-b605-4e07-b128-d8f1528bc50e/image 200 399.9108ms
-[GIN] 2021/05/16 - 21:27:18 | 200 |    402.1069ms |  192.168.100.41 | PUT      "/v1/providers/16b9a643-b605-4e07-b128-d8f1528bc50e/image"
-192.168.100.41 - [16 May 21 21:30 CDT] GET /v1/providers/16b9a643-b605-4e07-b128-d8f1528bc50e 200 5.3265ms
-[GIN] 2021/05/16 - 21:30:08 | 200 |      5.8766ms |  192.168.100.41 | GET      "/v1/providers/16b9a643-b605-4e07-b128-d8f1528bc50e"
+192.168.100.41 - [16 May 21 23:33 CDT] POST /v1/login 401 32.7455ms
+[GIN] 2021/05/16 - 23:33:26 | 401 |     32.7455ms |  192.168.100.41 | POST     "/v1/login"
+192.168.100.41 - [16 May 21 23:33 CDT] POST /v1/login 200 37.8885ms
+[GIN] 2021/05/16 - 23:33:31 | 200 |     38.8902ms |  192.168.100.41 | POST     "/v1/login"

@@ -6,6 +6,10 @@ import (
 	"gorm.io/gorm"
 )
 
+const (
+	ServiceProviderType = iota
+	ServiceRequesterType = iota
+)
 
 type User struct {
 	gorm.Model

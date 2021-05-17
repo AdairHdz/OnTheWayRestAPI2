@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
@@ -35,7 +34,7 @@ func RegisterServiceProvider() gin.HandlerFunc{
 			return
 		}
 
-		userEntity, mappingError := mappers.CreateUserEntity(receivedData, 1)
+		userEntity, mappingError := mappers.CreateUserEntity(receivedData)
 
 		if mappingError != nil {
 			context.AbortWithStatus(http.StatusConflict)
