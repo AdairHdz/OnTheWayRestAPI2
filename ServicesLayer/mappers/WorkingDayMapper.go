@@ -5,12 +5,13 @@ import (
 )
 
 
-func CreateWorkingDayDTOSliceAsResponse(workingDays []businessEntities.WorkingDay) []uint8 {
+func CreateWorkingDayDTOSliceAsResponse(workingDays []businessEntities.WorkingDay) []int {
 	
-	var response []uint8
+	var response []int
 
 	for _, workingDayElement := range workingDays {		
 
+		
 		response = append(response, workingDayElement.ID)
 	}
 

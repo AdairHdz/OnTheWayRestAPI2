@@ -12,7 +12,7 @@ type ResponsePriceRateDTO struct {
 	Price float32 `json:"price"`
 	KindOfService uint8 `json:"kindOfService"`
 	CityID uuid.UUID `json:"cityId"`
-	WorkingDays []uint8 `json:"workingDays"`
+	WorkingDays []int `json:"workingDays"`
 }
 
 type ReceivedPriceRateDTO struct {	
@@ -21,7 +21,7 @@ type ReceivedPriceRateDTO struct {
 	Price float32 `json:"price"`
 	KindOfService uint8 `json:"kindOfService"`
 	CityID uuid.UUID `json:"cityId"`
-	WorkingDays []uint8 `json:"workingDays"`
+	WorkingDays []int `json:"workingDays"`
 }
 
 type ResponsePriceRateDTOWithCity struct {
@@ -31,5 +31,5 @@ type ResponsePriceRateDTOWithCity struct {
 	Price float32 `json:"price"`
 	KindOfService uint8 `json:"kindOfService"`
 	City CityDTO `json:"city"`
-	WorkingDays []uint8 `json:"workingDays"`
+	WorkingDays []int `json:"workingDays"`
 }

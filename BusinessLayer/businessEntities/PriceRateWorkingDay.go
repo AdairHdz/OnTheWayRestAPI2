@@ -10,7 +10,7 @@ import (
 
 type PriceRateWorkingDay struct {
 	PriceRateID uuid.UUID `gorm:"primaryKey;size:191"`
-	WorkingDayID uint8 `gorm:"primaryKey"`
+	WorkingDayID int `gorm:"primaryKey"`
 	CreatedAt time.Time
 	DeletedAt gorm.DeletedAt
 }
