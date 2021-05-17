@@ -1,5 +1,5 @@
 package dataTransferObjects
 
-type EvidenceDTO struct {
+type ReviewEvidenceDTO struct {
 	Name string `json:"name"`
 }

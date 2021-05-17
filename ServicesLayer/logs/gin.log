@@ -30,5 +30,5 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.41 - [17 May 21 02:10 CDT] GET /v1/providers/55b6fa9d-7c18-493a-9dd0-ca61a976056a/reviews 200 2.8213ms
-[GIN] 2021/05/17 - 02:10:36 | 200 |      3.3932ms |  192.168.100.41 | GET      "/v1/providers/55b6fa9d-7c18-493a-9dd0-ca61a976056a/reviews"
+192.168.100.41 - [17 May 21 13:43 CDT] GET /v1/providers/55b6fa9d-7c18-493a-9dd0-ca61a976056a/reviews 200 87.2012ms
+[GIN] 2021/05/17 - 13:43:02 | 200 |     87.2012ms |  192.168.100.41 | GET      "/v1/providers/55b6fa9d-7c18-493a-9dd0-ca61a976056a/reviews"

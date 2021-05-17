@@ -17,8 +17,8 @@ func CreateReviewEntity(reviewDTO dataTransferObjects.ReceivedReviewDTO, service
 		Details: reviewDTO.Details,
 		Score: reviewDTO.Score,
 		ServiceRequesterID: reviewDTO.ServiceRequesterID,
-		ServiceProviderID: serviceProviderID,
-		//Evidence
+		ServiceProviderID: serviceProviderID,		
+		Evidence: CreateSliceOfReviewEvidenceEntities(reviewDTO.Evidence),
 	}
 	return response
 }
@@ -30,26 +30,34 @@ func CreateResponseReviewDTO(review businessEntities.Review) dataTransferObjects
 		Title: review.Title,
 		Details: review.Details,
 		Score: review.Score,
-		Evidence: nil,
+		Evidence: CreateSliceOfReviewEvidenceDTOAsResponse(review.Evidence),
 		ServiceRequesterID: review.ServiceRequesterID,
 	}
 	return response
 }
 
-func CreateSliceOfResponseReviewDTO(reviews []businessEntities.Review) []dataTransferObjects.ResponseReviewDTO {
+func CreateSliceOfResponseReviewDTO(reviews []businessEntities.Review) []dataTransferObjects.ResponseReviewDTOWithServiceRequesterData {
 	
-	var response []dataTransferObjects.ResponseReviewDTO
+	var response []dataTransferObjects.ResponseReviewDTOWithServiceRequesterData
 
 	for _, reviewElement := range reviews {
 
-		review := dataTransferObjects.ResponseReviewDTO {
+		review := dataTransferObjects.ResponseReviewDTOWithServiceRequesterData {
 			ID: reviewElement.ID,
 			DateOfReview: reviewElement.DateOfReview,
 			Title: reviewElement.Title,
 			Details: reviewElement.Details,
 			Score: reviewElement.Score,
-			Evidence: nil,
-			ServiceRequesterID: reviewElement.ServiceRequesterID,
+			Evidence: CreateSliceOfReviewEvidenceDTOAsResponse(reviewElement.Evidence),
+			ServiceRequester: struct{
+				ID uuid.UUID "json:\"id\""; 
+				Name string "json:\"name\""; 
+				LastName string "json:\"lastName\""
+			}{
+				ID: reviewElement.ServiceRequester.ID,
+				Name: reviewElement.ServiceRequester.User.Names,
+				LastName: reviewElement.ServiceRequester.User.LastName,
+			},
 		}
 
 		response = append(response, review)
