@@ -4,6 +4,8 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
+[GIN-debug] GET    /images/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] HEAD   /images/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
 [GIN-debug] POST   /v1/login                 --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/loginController.Login.func1 (4 handlers)
 [GIN-debug] POST   /v1/requesters/           --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController.RegisterServiceRequester.func1 (4 handlers)
 [GIN-debug] GET    /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController.FindServiceRequester.func1 (4 handlers)
@@ -15,35 +17,21 @@
 [GIN-debug] GET    /v1/providers/            --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController.FindMatches.func1 (4 handlers)
 [GIN-debug] GET    /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController.Update.func1 (4 handlers)
-[GIN-debug] PUT    /v1/providers/:providerId/image --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func1 (4 handlers)
+[GIN-debug] PUT    /v1/providers/:providerId/image --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController.UpdateServiceProviderImage.func1 (4 handlers)
 [GIN-debug] POST   /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Register.func1 (4 handlers)
 [GIN-debug] GET    /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Find.func1 (4 handlers)
-[GIN-debug] POST   /v1/providers/:providerId/reviews/:reviewId/evidence --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func2 (4 handlers)
+[GIN-debug] POST   /v1/providers/:providerId/reviews/:reviewId/evidence --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func1 (4 handlers)
 [GIN-debug] POST   /v1/providers/:providerId/priceRates --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.Register.func1 (4 handlers)
 [GIN-debug] GET    /v1/providers/:providerId/priceRates --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.FindAll.func1 (4 handlers)
 [GIN-debug] DELETE /v1/providers/:providerId/priceRates/:priceRateId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.Delete.func1 (4 handlers)
-[GIN-debug] GET    /v1/providers/:providerId/requests --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func3 (4 handlers)
+[GIN-debug] GET    /v1/providers/:providerId/requests --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func2 (4 handlers)
 [GIN-debug] GET    /v1/states/               --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/states.Routes.func1 (4 handlers)
 [GIN-debug] GET    /v1/states/:stateId/cities --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/states.Routes.func2 (4 handlers)
 [GIN-debug] POST   /v1/requests/             --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Register.func1 (4 handlers)
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.41 - [16 May 21 17:26 CDT] GET /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses 200 16.2613ms
-[GIN] 2021/05/16 - 17:26:16 | 200 |     16.8382ms |  192.168.100.41 | GET      "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses"
-192.168.100.41 - [16 May 21 17:26 CDT] GET /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4/addresses 409 0s
-[GIN] 2021/05/16 - 17:26:30 | 409 |       884.9µs |  192.168.100.41 | GET      "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4/addresses"
-192.168.100.41 - [16 May 21 17:26 CDT] GET /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4q/addresses 409 0s
-[GIN] 2021/05/16 - 17:26:36 | 409 |       756.5µs |  192.168.100.41 | GET      "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4q/addresses"
-192.168.100.41 - [16 May 21 17:26 CDT] GET /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses 200 23.3341ms
-[GIN] 2021/05/16 - 17:26:41 | 200 |     26.7792ms |  192.168.100.41 | GET      "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses"
-192.168.100.41 - [16 May 21 17:27 CDT] GET /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses 200 51.8897ms
-[GIN] 2021/05/16 - 17:27:47 | 200 |     52.4699ms |  192.168.100.41 | GET      "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses"
-192.168.100.41 - [16 May 21 17:27 CDT] POST /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses 201 267.8978ms
-[GIN] 2021/05/16 - 17:27:54 | 201 |    268.4656ms |  192.168.100.41 | POST     "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses"
-192.168.100.41 - [16 May 21 17:27 CDT] GET /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses 200 3.0808ms
-[GIN] 2021/05/16 - 17:27:59 | 200 |      3.6654ms |  192.168.100.41 | GET      "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses"
-192.168.100.41 - [16 May 21 17:28 CDT] POST /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses 201 219.0675ms
-[GIN] 2021/05/16 - 17:28:34 | 201 |    219.7018ms |  192.168.100.41 | POST     "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses"
-192.168.100.41 - [16 May 21 17:28 CDT] GET /v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses 200 17.8206ms
-[GIN] 2021/05/16 - 17:28:38 | 200 |     17.8206ms |  192.168.100.41 | GET      "/v1/requesters/0219cfe2-913e-471e-902e-1c32c7766f4f/addresses"
+192.168.100.41 - [16 May 21 21:27 CDT] PUT /v1/providers/16b9a643-b605-4e07-b128-d8f1528bc50e/image 200 399.9108ms
+[GIN] 2021/05/16 - 21:27:18 | 200 |    402.1069ms |  192.168.100.41 | PUT      "/v1/providers/16b9a643-b605-4e07-b128-d8f1528bc50e/image"
+192.168.100.41 - [16 May 21 21:30 CDT] GET /v1/providers/16b9a643-b605-4e07-b128-d8f1528bc50e 200 5.3265ms
+[GIN] 2021/05/16 - 21:30:08 | 200 |      5.8766ms |  192.168.100.41 | GET      "/v1/providers/16b9a643-b605-4e07-b128-d8f1528bc50e"

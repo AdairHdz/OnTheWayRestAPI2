@@ -3,16 +3,17 @@ package routes
 import (
 	"fmt"
 	"io"
+	"net/http"
 	"os"
+
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/loginController"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/middlewares"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/requesters"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/serviceRequests"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/states"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/loginService"	
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/loginController"	
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/loginService"
 	"github.com/gin-gonic/gin"
-	
 )
 
 var (
@@ -32,6 +33,8 @@ func init(){
 	router.Use(middlewares.Logger())	
 	v1 := router.Group("/v1")
 	{
+		router.StaticFS("/images", http.Dir("./images"))
+
 		v1.POST("/login", loginController.Login())
 		requesters.Routes(v1)
 		providers.Routes(v1)
