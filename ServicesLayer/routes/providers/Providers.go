@@ -1,10 +1,10 @@
 package providers
 
-import (					
-	"github.com/gin-gonic/gin"	
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService"
+import (
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceProviderController"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService"
+	"github.com/gin-gonic/gin"
 )
 
 var(	
@@ -19,9 +19,7 @@ func Routes(route *gin.RouterGroup) {
 		providers.GET("/", serviceProviderController.FindMatches()) //TODO
 		providers.GET("/:providerId", serviceProviderController.Find())
 		providers.PATCH("/:providerId", serviceProviderController.Update())
-		providers.PUT("/:providerId/image", func(context *gin.Context) {
-
-		})
+		providers.PUT("/:providerId/image", serviceProviderController.UpdateServiceProviderImage())
 
 		reviews := providers.Group("/:providerId")
 		{

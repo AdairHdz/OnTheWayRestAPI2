@@ -15,6 +15,7 @@ type ServiceProvider struct {
 	AverageScore float32
 	Reviews []Review
 	PriceRates []PriceRate
+	BusinessPicture string
 }
 
 func (serviceProvider ServiceProvider) Register() error {
