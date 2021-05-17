@@ -8,5 +8,5 @@ type ResponseServiceProviderDTO struct {
 	LastName string
 	EmailAddress string
 	AverageScore uint8
-	PriceRates []ResponsePriceRateDTO
+	PriceRates []ResponsePriceRateDTOWithCity
 }

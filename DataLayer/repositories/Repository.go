@@ -27,3 +27,9 @@ func (Repository) Update(entity interface{}) error {
 	result := DB.Updates(entity)
 	return result.Error
 }
+
+func (Repository) Delete(entity, query, args interface{}) error {
+	DB := database.GetDatabase()
+	result := DB.Where(query, args).Delete(entity)
+	return result.Error
+}

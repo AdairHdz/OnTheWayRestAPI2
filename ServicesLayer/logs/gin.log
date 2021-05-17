@@ -30,5 +30,7 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.41 - [17 May 21 13:43 CDT] GET /v1/providers/55b6fa9d-7c18-493a-9dd0-ca61a976056a/reviews 200 87.2012ms
-[GIN] 2021/05/17 - 13:43:02 | 200 |     87.2012ms |  192.168.100.41 | GET      "/v1/providers/55b6fa9d-7c18-493a-9dd0-ca61a976056a/reviews"
+192.168.100.41 - [17 May 21 15:52 CDT] DELETE /v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/priceRates/63e632ae-10d5-41eb-a110-a5c13e6e8c5e 204 347.6278ms
+[GIN] 2021/05/17 - 15:52:50 | 204 |    363.1163ms |  192.168.100.41 | DELETE   "/v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/priceRates/63e632ae-10d5-41eb-a110-a5c13e6e8c5e"
+192.168.100.41 - [17 May 21 15:53 CDT] GET /v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/priceRates 200 75.8142ms
+[GIN] 2021/05/17 - 15:53:00 | 200 |     78.8504ms |  192.168.100.41 | GET      "/v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/priceRates"

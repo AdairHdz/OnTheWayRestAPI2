@@ -2,6 +2,6 @@ package businessEntities
 
 
 type WorkingDay struct {
-	ID uint8
+	ID int
 	Name string
 }
