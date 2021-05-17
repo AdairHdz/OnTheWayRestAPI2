@@ -1,11 +1,12 @@
 package requesters
 
-import (	
+import (		
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/addressController"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/controllers/serviceRequesterController"	
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/addressManagementService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequesterManagementService"
 	"github.com/gin-gonic/gin"
+	
 )
 
 var (
@@ -16,8 +17,7 @@ var (
 func Routes(route *gin.RouterGroup) {
 	requesters := route.Group("/requesters")
 	{
-		requesters.POST("/", serviceRequesterController.RegisterServiceRequester())	
-		requesters.GET("/:requesterId", serviceRequesterController.FindServiceRequester())
+		requesters.GET("/:requesterId", serviceRequesterMgtService.Find())
 		requesters.PATCH("/:requesterId", serviceRequesterController.UpdateServiceRequester()) //TODO: Fix
 		requesters.POST("/:requesterId/addresses", addressController.RegisterAddress())
 		requesters.GET("/:requesterId/addresses", addressController.FindAllAddressesOfServiceRequester())		

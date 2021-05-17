@@ -4,8 +4,6 @@ import (
 	"net/http"
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequesterManagementService"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/hashing"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
@@ -17,63 +15,9 @@ var (
 	serviceRequesterMgtService = serviceRequesterManagementService.ServiceRequesterManagementService{}
 )
 
-func RegisterServiceRequester() gin.HandlerFunc{
-	return func(context *gin.Context) {
-		receivedData := dataTransferObjects.ReceivedUserDTO{}
-		context.BindJSON(&receivedData)
-
-		validate := validators.GetValidator()
-		validationErrors := validate.Struct(receivedData)
-
-		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
-			return
-		}
-
-		userEntity, mappingError := mappers.CreateUserEntity(receivedData)
-
-		if mappingError != nil {
-			context.AbortWithStatus(http.StatusConflict)
-			return
-		}
-
-		serviceRequesterEntity := businessEntities.ServiceRequester{
-			ID: uuid.NewV4(),
-			User: userEntity,
-			Addresses: nil,
-		}
-
-		registryError := serviceRequesterMgtService.Register(serviceRequesterEntity)
-
-		if registryError != nil {
-			context.AbortWithStatus(http.StatusConflict)
-		}
-
-		response := mappers.CreateUserDTOAsResponse(serviceRequesterEntity.User, serviceRequesterEntity.ID)
-
-		context.JSON(http.StatusCreated, response)
-		
-	}	
-}
-
 func FindServiceRequester() gin.HandlerFunc{
 	return func(context *gin.Context){
-		serviceRequesterID, parsingError := uuid.FromString(context.Param("requesterId"))
-
-		if parsingError != nil {
-			context.AbortWithStatus(http.StatusConflict)
-			return
-		}
-
-		serviceRequester, searchError := serviceRequesterMgtService.Find(serviceRequesterID)
-
-		if searchError != nil {
-			context.AbortWithStatus(http.StatusConflict)
-			return
-		}
-
-		response := mappers.CreateUserDTOAsResponse(serviceRequester.User, serviceRequesterID)
-		context.JSON(http.StatusOK, response)
+		
 
 	}
 }
