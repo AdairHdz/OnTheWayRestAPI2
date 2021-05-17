@@ -1,23 +1,17 @@
 package mappers
 
 import (
-	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"	
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
+	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"		
 )
 
 
-func CreateWorkingDayDTOSliceAsResponse(workingDays []businessEntities.WorkingDay) []dataTransferObjects.ResponseWorkingDayDTO {
+func CreateWorkingDayDTOSliceAsResponse(workingDays []businessEntities.WorkingDay) []uint8 {
 	
-	var response []dataTransferObjects.ResponseWorkingDayDTO
+	var response []uint8
 
+	for _, workingDayElement := range workingDays {		
 
-	for _, workingDayElement := range workingDays {
-		workingDay := dataTransferObjects.ResponseWorkingDayDTO {
-			ID: workingDayElement.ID,
-			Name: workingDayElement.Name,
-		}
-
-		response = append(response, workingDay)
+		response = append(response, workingDayElement.ID)
 	}
 
 	return response

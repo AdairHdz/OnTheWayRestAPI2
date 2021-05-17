@@ -51,7 +51,6 @@ func (ReviewManagementService) Find() gin.HandlerFunc {
 
 		review := businessEntities.Review{}
 		reviews, databaseError := review.Find(serviceProviderID)
-
 		
 		if databaseError != nil {
 			context.AbortWithStatus(http.StatusConflict)
@@ -59,7 +58,6 @@ func (ReviewManagementService) Find() gin.HandlerFunc {
 		}
 
 		response := mappers.CreateSliceOfResponseReviewDTO(reviews)
-		context.JSON(http.StatusOK, response)
-		
+		context.JSON(http.StatusOK, response)		
 	}
 }
