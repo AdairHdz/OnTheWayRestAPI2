@@ -21,6 +21,7 @@ func main() {
 		&businessEntities.PriceRate{},
 		&businessEntities.ServiceRequest{},		
 		&businessEntities.Review{},
+		&businessEntities.ReviewEvidence{},
 		&businessEntities.ServiceRequester{},
 		&businessEntities.Address{})	
 

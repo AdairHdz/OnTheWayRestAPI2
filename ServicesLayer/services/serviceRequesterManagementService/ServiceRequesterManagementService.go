@@ -1,7 +1,6 @@
 package serviceRequesterManagementService
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
@@ -102,8 +101,6 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 		}
 
 		updateError := serviceRequester.Update()
-		
-		fmt.Println(serviceRequester)
 
 
 		if updateError != nil {
