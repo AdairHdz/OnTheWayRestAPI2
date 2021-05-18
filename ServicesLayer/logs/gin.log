@@ -30,7 +30,6 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.41 - [17 May 21 21:44 CDT] PUT /v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/image 200 305.9575ms
-[GIN] 2021/05/17 - 21:44:28 | 200 |    306.7573ms |  192.168.100.41 | PUT      "/v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/image"
-192.168.100.41 - [17 May 21 21:44 CDT] PUT /v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/image 200 444.3352ms
-[GIN] 2021/05/17 - 21:44:36 | 200 |    445.3362ms |  192.168.100.41 | PUT      "/v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/image"
+[GIN-debug] redirecting request 301: /v1/providers/ --> /v1/providers/?maxPriceRate=90&city=Xalapa&kindOfService=1
+192.168.100.41 - [18 May 21 02:04 CDT] GET /v1/providers/?maxPriceRate=90&city=Xalapa&kindOfService=1 200 21.1372ms
+[GIN] 2021/05/18 - 02:04:19 | 200 |     22.1393ms |  192.168.100.41 | GET      "/v1/providers/?maxPriceRate=90&city=Xalapa&kindOfService=1"

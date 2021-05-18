@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
+
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/fileAnalyzer"
@@ -41,7 +43,24 @@ func (ServiceProviderManagementService) Find() gin.HandlerFunc {
 
 func (ServiceProviderManagementService) FindMatches() gin.HandlerFunc {
 	return func(context *gin.Context){
-		
+		maxPriceRate, parseError := strconv.ParseFloat(context.Query("maxPriceRate"), 32)
+
+		if parseError != nil {
+			context.Status(http.StatusBadRequest)
+			return
+		}
+
+		city := context.Query("city")
+		kindOfService, parseError := strconv.ParseInt(context.Query("kindOfService"), 10, 8)
+		serviceProvider := businessEntities.ServiceProvider{}
+		serviceProviders, err := serviceProvider.FindMatches(maxPriceRate, city, kindOfService)
+
+		if err != nil {
+			context.Status(http.StatusConflict)
+			return
+		}
+		response := mappers.CreateServiceProviderOverviewDTOAsResponse(serviceProviders)
+		context.JSON(http.StatusOK, response)
 	}
 }
 
