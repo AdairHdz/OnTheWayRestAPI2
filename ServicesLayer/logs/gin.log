@@ -30,5 +30,7 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.41 - [17 May 21 16:31 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities 200 50.0312ms
-[GIN] 2021/05/17 - 16:31:21 | 200 |     64.1962ms |  192.168.100.41 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities"
+192.168.100.41 - [17 May 21 21:44 CDT] PUT /v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/image 200 305.9575ms
+[GIN] 2021/05/17 - 21:44:28 | 200 |    306.7573ms |  192.168.100.41 | PUT      "/v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/image"
+192.168.100.41 - [17 May 21 21:44 CDT] PUT /v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/image 200 444.3352ms
+[GIN] 2021/05/17 - 21:44:36 | 200 |    445.3362ms |  192.168.100.41 | PUT      "/v1/providers/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/image"

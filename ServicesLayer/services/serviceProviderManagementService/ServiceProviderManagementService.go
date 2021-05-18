@@ -1,10 +1,10 @@
 package serviceProviderManagementService
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"path/filepath"
-
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/fileAnalyzer"
@@ -153,11 +153,13 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 		}
 
 		if !dirIsEmpty {
-			pathOfImageToBeDeleted := path + serviceProvider.BusinessPicture
+			pathOfImageToBeDeleted := path + "/" + serviceProvider.BusinessPicture
+			
+			fmt.Println(pathOfImageToBeDeleted)
 			os.Remove(pathOfImageToBeDeleted)
 		}
 		
-		err = context.SaveUploadedFile(file, path + "/profile_picture" + fileExtension)
+		err = context.SaveUploadedFile(file, path + "/" + file.Filename)
 		
 		if err != nil {
 			context.AbortWithStatus(http.StatusConflict)
@@ -166,7 +168,12 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 
 		serviceProvider.BusinessPicture = file.Filename
 
-		serviceProvider.Update()
+		databaseError := serviceProvider.Update()
+
+		if databaseError != nil{
+			context.AbortWithStatus(http.StatusConflict)
+			return
+		}
 		
 		context.Status(http.StatusOK)
 	}

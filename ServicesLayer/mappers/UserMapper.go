@@ -43,3 +43,13 @@ func CreateUserEntity(receivedUserDTO dataTransferObjects.ReceivedUserDTO) (busi
 
 	return userEntity, nil
 }
+
+func CreateUserDTOWithNameOnlyAsResponse(user businessEntities.User, CustomID uuid.UUID) dataTransferObjects.ResponseUserDTOWithNamesOnly {
+	response := dataTransferObjects.ResponseUserDTOWithNamesOnly {
+		ID: CustomID,
+		Names: user.Names,
+		LastName: user.LastName,
+	}
+	
+	return response
+}
