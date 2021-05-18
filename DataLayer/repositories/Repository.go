@@ -33,3 +33,9 @@ func (Repository) Delete(entity, query, args interface{}) error {
 	result := DB.Where(query, args).Delete(entity)
 	return result.Error
 }
+
+func (Repository) FindAll(target interface{}) error {
+	DB := database.GetDatabase()
+	result := DB.Find(target)
+	return result.Error
+}
