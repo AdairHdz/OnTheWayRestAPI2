@@ -22,3 +22,9 @@ type ResponseUserDTO struct {
 	Verified bool `json:"verified"`
 	StateID      uuid.UUID `json:"stateId"`
 }
+
+type ResponseUserDTOWithNamesOnly struct {
+	ID uuid.UUID `json:"id"`
+	Names string `json:"names"`
+	LastName string `json:"lastName"`
+}

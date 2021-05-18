@@ -10,3 +10,11 @@ type ResponseServiceProviderDTO struct {
 	AverageScore uint8
 	PriceRates []ResponsePriceRateDTOWithCity
 }
+
+type ResponseServiceProviderOverviewDTO struct {
+	ID uuid.UUID `json:"id"`
+	Names string
+	LastName string	
+	AverageScore uint8
+	PriceRate float32
+}

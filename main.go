@@ -105,5 +105,5 @@ func main() {
 
 	DB.Save(&cities)	
 
-	routes.StartServer()
+	routes.StartServer()	
 }

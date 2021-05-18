@@ -1,9 +1,11 @@
 package serviceProviderManagementService
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
@@ -41,7 +43,24 @@ func (ServiceProviderManagementService) Find() gin.HandlerFunc {
 
 func (ServiceProviderManagementService) FindMatches() gin.HandlerFunc {
 	return func(context *gin.Context){
-		
+		maxPriceRate, parseError := strconv.ParseFloat(context.Query("maxPriceRate"), 32)
+
+		if parseError != nil {
+			context.Status(http.StatusBadRequest)
+			return
+		}
+
+		city := context.Query("city")
+		kindOfService, parseError := strconv.ParseInt(context.Query("kindOfService"), 10, 8)
+		serviceProvider := businessEntities.ServiceProvider{}
+		serviceProviders, err := serviceProvider.FindMatches(maxPriceRate, city, kindOfService)
+
+		if err != nil {
+			context.Status(http.StatusConflict)
+			return
+		}
+		response := mappers.CreateServiceProviderOverviewDTOAsResponse(serviceProviders)
+		context.JSON(http.StatusOK, response)
 	}
 }
 
@@ -153,11 +172,13 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 		}
 
 		if !dirIsEmpty {
-			pathOfImageToBeDeleted := path + serviceProvider.BusinessPicture
+			pathOfImageToBeDeleted := path + "/" + serviceProvider.BusinessPicture
+			
+			fmt.Println(pathOfImageToBeDeleted)
 			os.Remove(pathOfImageToBeDeleted)
 		}
 		
-		err = context.SaveUploadedFile(file, path + "/profile_picture" + fileExtension)
+		err = context.SaveUploadedFile(file, path + "/" + file.Filename)
 		
 		if err != nil {
 			context.AbortWithStatus(http.StatusConflict)
@@ -166,7 +187,12 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 
 		serviceProvider.BusinessPicture = file.Filename
 
-		serviceProvider.Update()
+		databaseError := serviceProvider.Update()
+
+		if databaseError != nil{
+			context.AbortWithStatus(http.StatusConflict)
+			return
+		}
 		
 		context.Status(http.StatusOK)
 	}
