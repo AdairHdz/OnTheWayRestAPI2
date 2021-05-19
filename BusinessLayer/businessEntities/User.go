@@ -20,6 +20,7 @@ type User struct {
 	Password     string 
 	Verified     bool   
 	UserType     uint8
+	VerificationCode string
 	StateID      uuid.UUID `gorm:"size:191"`
 	State        State
 }
