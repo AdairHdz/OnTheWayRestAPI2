@@ -16,7 +16,7 @@ type User struct {
 	ID uuid.UUID
 	Names        string 
 	LastName     string 
-	EmailAddress string 
+	EmailAddress string `gorm:"unique"`
 	Password     string 
 	Verified     bool   
 	UserType     uint8

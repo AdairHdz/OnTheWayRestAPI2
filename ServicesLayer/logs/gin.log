@@ -30,6 +30,7 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-[GIN-debug] redirecting request 301: /v1/providers/ --> /v1/providers/?maxPriceRate=90&city=Xalapa&kindOfService=1
-192.168.100.41 - [18 May 21 02:04 CDT] GET /v1/providers/?maxPriceRate=90&city=Xalapa&kindOfService=1 200 21.1372ms
-[GIN] 2021/05/18 - 02:04:19 | 200 |     22.1393ms |  192.168.100.41 | GET      "/v1/providers/?maxPriceRate=90&city=Xalapa&kindOfService=1"
+::1 - [18 May 21 21:12 CDT] POST /v1/register 409 188.0481ms
+[GIN] 2021/05/18 - 21:12:49 | 409 |    189.5668ms |             ::1 | POST     "/v1/register"
+::1 - [18 May 21 21:14 CDT] POST /v1/register 201 431.6029ms
+[GIN] 2021/05/18 - 21:14:16 | 201 |    432.2014ms |             ::1 | POST     "/v1/register"

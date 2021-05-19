@@ -45,7 +45,7 @@ func (RegisterService) RegisterUser() gin.HandlerFunc {
 				}
 
 				registryError := serviceProviderEntity.Register()
-
+								
 				if registryError != nil {
 					context.AbortWithStatus(http.StatusConflict)
 					return
@@ -60,9 +60,10 @@ func (RegisterService) RegisterUser() gin.HandlerFunc {
 				}
 
 				registryError := serviceRequesterEntity.Register()
-
-				if registryError != nil {
+				
+				if registryError != nil {					
 					context.AbortWithStatus(http.StatusConflict)
+					return
 				}
 
 				response = mappers.CreateUserDTOAsResponse(serviceRequesterEntity.User, serviceRequesterEntity.ID)
