@@ -12,10 +12,10 @@ import (
 type PriceRate struct {
 	gorm.Model
 	ID uuid.UUID
-	StartingHour time.Time
-	EndingHour time.Time
+	StartingHour time.Time `gorm:"type:time not null;"`
+	EndingHour time.Time `gorm:"type:time not null;"`
 	Price float32
-	WorkingDays []WorkingDay `gorm:"many2many:pricerate_workingday;"`
+	WorkingDays []WorkingDay `gorm:"many2many:pricerate_workingday;constraint:OnDelete:CASCADE;"`
 	ServiceProviderID uuid.UUID `gorm:"size:191"`
 	CityID uuid.UUID `gorm:"size:191"`
 	City City
