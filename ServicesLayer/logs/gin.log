@@ -30,17 +30,23 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (4 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (4 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.81 - [22 May 21 18:08 CDT] POST /v1/register 201 510.1668ms
-[GIN] 2021/05/22 - 18:08:10 | 201 |    510.9025ms |  192.168.100.81 | POST     "/v1/register"
-192.168.100.81 - [22 May 21 18:08 CDT] POST /v1/login 200 41.3051ms
-[GIN] 2021/05/22 - 18:08:21 | 200 |     42.3476ms |  192.168.100.81 | POST     "/v1/login"
-192.168.100.81 - [22 May 21 18:08 CDT] GET /v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa 200 47.7235ms
-[GIN] 2021/05/22 - 18:08:21 | 200 |     48.3073ms |  192.168.100.81 | GET      "/v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa"
-192.168.100.41 - [22 May 21 18:08 CDT] POST /v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa/priceRates 201 358.5864ms
-[GIN] 2021/05/22 - 18:08:43 | 201 |    358.5864ms |  192.168.100.41 | POST     "/v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa/priceRates"
-192.168.100.41 - [22 May 21 18:08 CDT] GET /v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa/priceRates 200 4.6688ms
-[GIN] 2021/05/22 - 18:08:50 | 200 |      5.2216ms |  192.168.100.41 | GET      "/v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa/priceRates"
-192.168.100.41 - [22 May 21 18:09 CDT] POST /v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa/priceRates 400 152.3843ms
-[GIN] 2021/05/22 - 18:09:16 | 400 |    152.9546ms |  192.168.100.41 | POST     "/v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa/priceRates"
-192.168.100.41 - [22 May 21 18:09 CDT] POST /v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa/priceRates 400 363.2858ms
-[GIN] 2021/05/22 - 18:09:22 | 400 |    363.8298ms |  192.168.100.41 | POST     "/v1/providers/670e73f5-1e5a-4d61-8434-2ee2fcd820fa/priceRates"
+192.168.100.41 - [23 May 21 09:48 CDT] POST /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/reviews 409 540.7398ms
+[GIN] 2021/05/23 - 09:48:07 | 409 |    541.3566ms |  192.168.100.41 | POST     "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/reviews"
+192.168.100.41 - [23 May 21 09:48 CDT] POST /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates 201 548.9509ms
+[GIN] 2021/05/23 - 09:48:33 | 201 |    548.9509ms |  192.168.100.41 | POST     "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates"
+192.168.100.41 - [23 May 21 09:48 CDT] POST /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates 409 8.5504ms
+[GIN] 2021/05/23 - 09:48:37 | 409 |      9.6567ms |  192.168.100.41 | POST     "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates"
+192.168.100.41 - [23 May 21 09:49 CDT] POST /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates 201 224.3209ms
+[GIN] 2021/05/23 - 09:49:38 | 201 |    224.3209ms |  192.168.100.41 | POST     "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates"
+192.168.100.41 - [23 May 21 09:49 CDT] POST /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates 409 49.9593ms
+[GIN] 2021/05/23 - 09:49:51 | 409 |     51.9794ms |  192.168.100.41 | POST     "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates"
+192.168.100.41 - [23 May 21 09:49 CDT] POST /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates 201 240.1248ms
+[GIN] 2021/05/23 - 09:49:58 | 201 |    244.8053ms |  192.168.100.41 | POST     "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates"
+192.168.100.41 - [23 May 21 09:50 CDT] POST /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates 409 4.9017ms
+[GIN] 2021/05/23 - 09:50:09 | 409 |      6.0036ms |  192.168.100.41 | POST     "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates"
+192.168.100.41 - [23 May 21 09:50 CDT] POST /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates 201 148.6786ms
+[GIN] 2021/05/23 - 09:50:14 | 201 |    149.8869ms |  192.168.100.41 | POST     "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates"
+192.168.100.41 - [23 May 21 09:50 CDT] GET /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates 200 8.1526ms
+[GIN] 2021/05/23 - 09:50:18 | 200 |      8.7068ms |  192.168.100.41 | GET      "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates"
+192.168.100.41 - [23 May 21 09:50 CDT] POST /v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates 201 229.5892ms
+[GIN] 2021/05/23 - 09:50:36 | 201 |    230.3527ms |  192.168.100.41 | POST     "/v1/providers/1dba093b-5f01-426d-8629-ca9e76b6048d/priceRates"

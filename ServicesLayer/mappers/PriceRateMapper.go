@@ -1,6 +1,8 @@
 package mappers
 
 import (
+	"time"
+
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
 	uuid "github.com/satori/go.uuid"
@@ -43,7 +45,7 @@ func CreatePriceRateDTOAsResponse(priceRate businessEntities.PriceRate) dataTran
 	return response
 }
 
-func CreatePriceRateEntity(priceRateDTO dataTransferObjects.ReceivedPriceRateDTO, serviceProviderID uuid.UUID) businessEntities.PriceRate {
+func CreatePriceRateEntity(priceRateDTO dataTransferObjects.ReceivedPriceRateDTO, serviceProviderID uuid.UUID) (businessEntities.PriceRate, error) {
 	
 	var workingDayEntities []businessEntities.WorkingDay
 
@@ -53,6 +55,16 @@ func CreatePriceRateEntity(priceRateDTO dataTransferObjects.ReceivedPriceRateDTO
 		}
 
 		workingDayEntities = append(workingDayEntities, workingDay)
+	}
+
+	_, startingHourParsingError := time.Parse(time.Kitchen, priceRateDTO.StartingHour)
+	if startingHourParsingError != nil {
+		return businessEntities.PriceRate{}, startingHourParsingError
+	}
+
+	_, endingHourParsingError := time.Parse(time.Kitchen, priceRateDTO.EndingHour)
+	if endingHourParsingError != nil {
+		return businessEntities.PriceRate{}, endingHourParsingError
 	}
 
 	priceRate := businessEntities.PriceRate{
@@ -66,5 +78,5 @@ func CreatePriceRateEntity(priceRateDTO dataTransferObjects.ReceivedPriceRateDTO
 		KindOfService: priceRateDTO.KindOfService,
 	}
 
-	return priceRate
+	return priceRate, nil
 }

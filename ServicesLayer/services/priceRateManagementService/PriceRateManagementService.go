@@ -1,8 +1,7 @@
 package priceRateManagementService
 
 import (
-	"net/http"
-
+	"net/http"	
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
@@ -15,6 +14,17 @@ type PriceRateManagementService struct{}
 
 func (PriceRateManagementService) Register() gin.HandlerFunc {
 	return func(context *gin.Context){
+		// receivedData := struct{
+		// 	CustomTime string
+		// }{}
+
+		// context.BindJSON(&receivedData)
+		// parsedTimeFromReceivedTime, err := time.Parse(time.Kitchen, receivedData.CustomTime)
+		// if err != nil {
+		// 	context.AbortWithStatus(http.StatusBadRequest)
+		// 	return
+		// }
+		// context.JSON(http.StatusOK, parsedTimeFromReceivedTime.Format(time.Kitchen))
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
@@ -26,11 +36,17 @@ func (PriceRateManagementService) Register() gin.HandlerFunc {
 
 		context.BindJSON(&receivedData)
 
-		priceRateEntity := mappers.CreatePriceRateEntity(receivedData, serviceProviderID)
+		priceRateEntity, mappingError := mappers.CreatePriceRateEntity(receivedData, serviceProviderID)
+
+		if mappingError != nil {
+			context.AbortWithStatus(http.StatusBadRequest)
+			return
+		}
+
 		databaseError := priceRateEntity.Register()
 
 		if databaseError != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatus(http.StatusConflict)
 			return
 		}
 
