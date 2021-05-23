@@ -8,7 +8,7 @@ type ServiceProviderRepository struct{}
 
 func (ServiceProviderRepository) FindByID(serviceProvider interface{}, ID interface{}) error {
 	DB := database.GetDatabase()
-	result := DB.Preload("User").Preload("Reviews").Preload("PriceRates").First(serviceProvider, ID)
+	result := DB.Preload("User").Preload("Reviews").Preload("PriceRates.WorkingDays").Preload("PriceRates.City").First(serviceProvider, ID)
 	return result.Error
 }
 

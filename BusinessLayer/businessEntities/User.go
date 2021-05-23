@@ -1,6 +1,6 @@
 package businessEntities
 
-import (
+import (	
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories"
 	uuid "github.com/satori/go.uuid"
 	"gorm.io/gorm"
@@ -25,8 +25,20 @@ type User struct {
 	State        State
 }
 
-func (user *User) Login() error {
+func (user *User) Login() (uuid.UUID, error) {
 	repository := repositories.Repository{}
 	databaseError := repository.FindMatches(&user, "email_address = ?", user.EmailAddress)
-	return databaseError
+	var userTypeID uuid.UUID	
+	if databaseError == nil{
+		if user.UserType == ServiceProviderType{
+			var serviceProvider ServiceProvider
+			repository.FindMatches(&serviceProvider, "user_id = ?", user.ID)			
+			userTypeID = serviceProvider.ID
+		}else{
+			var serviceRequester ServiceRequester
+			repository.FindMatches(&serviceRequester, "user_id = ?", user.ID)
+			userTypeID = serviceRequester.ID			
+		}
+	}	
+	return userTypeID, databaseError
 }

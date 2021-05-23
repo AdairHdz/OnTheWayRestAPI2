@@ -4,17 +4,17 @@ import uuid "github.com/satori/go.uuid"
 
 type ResponseServiceProviderDTO struct {
 	ID uuid.UUID `json:"id"`
-	Names string
-	LastName string
-	EmailAddress string
-	AverageScore uint8
-	PriceRates []ResponsePriceRateDTOWithCity
+	Names string `json:"names"`
+	LastName string `json:"lastName"`
+	EmailAddress string `json:"emailAddress"`
+	AverageScore uint8 `json:"averageScore"`
+	PriceRates []ResponsePriceRateDTOWithCity `json:"priceRates"`
 }
 
 type ResponseServiceProviderOverviewDTO struct {
 	ID uuid.UUID `json:"id"`
-	Names string
-	LastName string	
-	AverageScore uint8
-	PriceRate float32
+	Names string `json:"names"`
+	LastName string	`json:"lastName"`
+	AverageScore uint8 `json:"averageScore"`
+	PriceRate float32 `json:"priceRate"`
 }

@@ -18,7 +18,11 @@ type RegisterService struct{}
 func (RegisterService) RegisterUser() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		receivedData := dataTransferObjects.ReceivedUserDTO{}
-			context.BindJSON(&receivedData)
+			bindingError := context.BindJSON(&receivedData)
+
+			if bindingError != nil{
+				context.AbortWithStatus(http.StatusBadRequest)
+			}
 	
 			validate := validators.GetValidator()
 			validationErrors := validate.Struct(receivedData)

@@ -26,7 +26,7 @@ func (LoginService) Login()  gin.HandlerFunc {
 			EmailAddress: receivedData.EmailAddress,
 		}
 	
-		loginError := user.Login()			
+		userTypeID, loginError := user.Login()			
 
 		if loginError != nil {
 			context.AbortWithStatus(http.StatusConflict)
@@ -51,17 +51,18 @@ func (LoginService) Login()  gin.HandlerFunc {
 			return
 		}
 
+
 		response := struct {
-			ID uuid.UUID
-			Names string
-			LastName string
-			EmailAddress string
-			UserType uint8
-			Verified bool
-			StateID uuid.UUID
-			Token string
+			ID uuid.UUID `json:"id"`
+			Names string `json:"names"`
+			LastName string `json:"lastName"`
+			EmailAddress string `json:"emailAddress"`
+			UserType uint8 `json:"userType"`
+			Verified bool `json:"verified"`
+			StateID uuid.UUID `json:"stateId"`
+			Token string `json:"token"`
 		}{
-			ID: user.ID,
+			ID: userTypeID,
 			Names: user.Names,
 			LastName: user.LastName,
 			EmailAddress: user.EmailAddress,

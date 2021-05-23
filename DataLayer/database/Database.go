@@ -9,7 +9,7 @@ var database *gorm.DB
 var err error
 
 func init() {
-	dsn := "adair:adahplf0015@tcp(127.0.0.1:3306)/gorm?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "adair:adahplf0015@tcp(127.0.0.1:3306)/gorm?parseTime=true&charset=utf8mb4&loc=Local"
 	database, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil{

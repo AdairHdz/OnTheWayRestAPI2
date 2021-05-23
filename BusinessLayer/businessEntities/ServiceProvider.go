@@ -1,8 +1,6 @@
 package businessEntities
 
 import (
-	"fmt"
-
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories"
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories/serviceProviderRepository"
 	uuid "github.com/satori/go.uuid"
@@ -45,6 +43,5 @@ func (ServiceProvider) FindMatches(maxPriceRate float64, cityName string, kindOf
 	var serviceProviders []ServiceProvider
 	repository := serviceProviderRepository.ServiceProviderRepository{}
 	err := repository.FindMatches(&serviceProviders, maxPriceRate, cityName, kindOfService)
-	fmt.Println(serviceProviders)
 	return serviceProviders, err
 }
