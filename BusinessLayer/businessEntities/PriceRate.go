@@ -68,6 +68,10 @@ func (priceRate PriceRate) priceRateShceduleCollides(startingHourOfExistingPrice
 		return true, err
 	}
 
+	if startingHourOfNewPriceRate.Sub(endingHourOfNewPriceRate) == 0{
+		return true, nil
+	}
+
 	if startingHourOfNewPriceRate.Sub(startingHourOfExistingPriceRate) == 0 || startingHourOfNewPriceRate.Sub(endingHourOfExistingPriceRate) == 0 {
 		return true, nil
 	}

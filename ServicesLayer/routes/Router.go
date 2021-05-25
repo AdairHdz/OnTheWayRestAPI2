@@ -5,6 +5,8 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"time"
+
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/middlewares"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/requesters"
@@ -12,7 +14,10 @@ import (
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/states"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/loginService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/registerService"
-	"github.com/gin-gonic/gin"	
+	"github.com/didip/tollbooth"
+	"github.com/didip/tollbooth/limiter"
+	"github.com/didip/tollbooth_gin"
+	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -30,9 +35,12 @@ func setupLogOutput() {
 func init(){
 	setupLogOutput()
 	router = gin.Default()
-	router.Use(middlewares.Logger())	
-	v1 := router.Group("/v1")
+	router.Use(middlewares.Logger())
+	limiter := tollbooth.NewLimiter(50, &limiter.ExpirableOptions{DefaultExpirationTTL: time.Hour})
+	limiter.SetIPLookups([]string{"RemoteAddr", "X-Forwarded-For", "X-Real-IP"})
+	v1 := router.Group("/v1", tollbooth_gin.LimitHandler(limiter))
 	{
+				
 		router.StaticFS("/images", http.Dir("./images"))
 
 		v1.POST("/register", _registerService.RegisterUser())

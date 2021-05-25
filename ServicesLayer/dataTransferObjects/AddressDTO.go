@@ -6,7 +6,7 @@ type ReceivedAddressDTO struct {
 	IndoorNumber  string    `json:"indoorNumber" validate:"max=8"`
 	OutdoorNumber string    `json:"outdoorNumber" validate:"required,max=8"`
 	Street        string    `json:"street" validate:"required,max=50"`
-	Suburb        string    `json:"suburb" validate:"required,max=50"`
+	Suburb        string    `json:"suburb" validate:"max=50"`
 	CityID        uuid.UUID `json:"cityId" validate:"required"`
 }
 

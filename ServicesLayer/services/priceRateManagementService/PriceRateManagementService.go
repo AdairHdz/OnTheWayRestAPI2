@@ -14,17 +14,6 @@ type PriceRateManagementService struct{}
 
 func (PriceRateManagementService) Register() gin.HandlerFunc {
 	return func(context *gin.Context){
-		// receivedData := struct{
-		// 	CustomTime string
-		// }{}
-
-		// context.BindJSON(&receivedData)
-		// parsedTimeFromReceivedTime, err := time.Parse(time.Kitchen, receivedData.CustomTime)
-		// if err != nil {
-		// 	context.AbortWithStatus(http.StatusBadRequest)
-		// 	return
-		// }
-		// context.JSON(http.StatusOK, parsedTimeFromReceivedTime.Format(time.Kitchen))
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
