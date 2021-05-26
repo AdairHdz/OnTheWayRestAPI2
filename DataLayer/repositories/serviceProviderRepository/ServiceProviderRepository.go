@@ -1,7 +1,9 @@
 package serviceProviderRepository
 
 import (
-	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/database")
+	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/database"
+	"github.com/AdairHdz/OnTheWayRestAPI/helpers/customErrors"
+)
 
 
 type ServiceProviderRepository struct{}
@@ -9,6 +11,9 @@ type ServiceProviderRepository struct{}
 func (ServiceProviderRepository) FindByID(serviceProvider interface{}, ID interface{}) error {
 	DB := database.GetDatabase()
 	result := DB.Preload("User").Preload("Reviews").Preload("PriceRates.WorkingDays").Preload("PriceRates.City").First(serviceProvider, ID)
+	if result.RowsAffected == 0 {
+		return customErrors.RecordNotFoundError{}
+	}
 	return result.Error
 }
 

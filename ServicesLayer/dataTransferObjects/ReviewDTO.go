@@ -6,9 +6,9 @@ import (
 
 
 type ReceivedReviewDTO struct {
-	Title              string `json:"title"`
-	Details            string `json:"details"`
-	Score              uint8  `json:"score"`
+	Title              string `json:"title" validate:"required,max=50"`
+	Details            string `json:"details" validate:"max=250"`
+	Score              uint8  `json:"score" validate:"min=1,max=5"`
 	Evidence []ReviewEvidenceDTO `json:"evidence"`
 	ServiceRequesterID uuid.UUID `json:"serviceRequesterId"`
 }

@@ -8,206 +8,164 @@
 [GIN-debug] HEAD   /images/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
 [GIN-debug] POST   /v1/register              --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/registerService.RegisterService.RegisterUser.func1 (5 handlers)
 [GIN-debug] POST   /v1/login                 --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/loginService.LoginService.Login.func1 (5 handlers)
-[GIN-debug] GET    /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequesterManagementService.ServiceRequesterManagementService.Find.func1 (5 handlers)
-[GIN-debug] PATCH  /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequesterManagementService.ServiceRequesterManagementService.Update.func1 (5 handlers)
-[GIN-debug] POST   /v1/requesters/:requesterId/addresses --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/addressManagementService.AddressManagementService.Register.func1 (5 handlers)
-[GIN-debug] GET    /v1/requesters/:requesterId/addresses --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/addressManagementService.AddressManagementService.FindAll.func1 (5 handlers)
-[GIN-debug] GET    /v1/requesters/:requesterId/requests --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/requesters.Routes.func1 (5 handlers)
-[GIN-debug] GET    /v1/providers/            --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.FindMatches.func1 (5 handlers)
-[GIN-debug] GET    /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.Find.func1 (5 handlers)
-[GIN-debug] PATCH  /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.Update.func1 (5 handlers)
-[GIN-debug] PUT    /v1/providers/:providerId/image --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.UpdateServiceProviderImage.func1 (5 handlers)
-[GIN-debug] POST   /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Register.func1 (5 handlers)
-[GIN-debug] GET    /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Find.func1 (5 handlers)
-[GIN-debug] POST   /v1/providers/:providerId/reviews/:reviewId/evidence --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func1 (5 handlers)
-[GIN-debug] POST   /v1/providers/:providerId/priceRates --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.Register.func1 (5 handlers)
-[GIN-debug] GET    /v1/providers/:providerId/priceRates --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.FindAll.func1 (5 handlers)
-[GIN-debug] DELETE /v1/providers/:providerId/priceRates/:priceRateId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.Delete.func1 (5 handlers)
-[GIN-debug] GET    /v1/providers/:providerId/requests --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func2 (5 handlers)
-[GIN-debug] GET    /v1/states/               --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/stateManagementService.StateManagementService.FindAll.func1 (5 handlers)
-[GIN-debug] GET    /v1/states/:stateId/cities --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/stateManagementService.StateManagementService.FindAllCitiesOfState.func1 (5 handlers)
-[GIN-debug] POST   /v1/requests/             --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Register.func1 (5 handlers)
-[GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (5 handlers)
-[GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (5 handlers)
+[GIN-debug] GET    /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequesterManagementService.ServiceRequesterManagementService.Find.func1 (6 handlers)
+[GIN-debug] PATCH  /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequesterManagementService.ServiceRequesterManagementService.Update.func1 (6 handlers)
+[GIN-debug] POST   /v1/requesters/:requesterId/addresses --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/addressManagementService.AddressManagementService.Register.func1 (6 handlers)
+[GIN-debug] GET    /v1/requesters/:requesterId/addresses --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/addressManagementService.AddressManagementService.FindAll.func1 (6 handlers)
+[GIN-debug] GET    /v1/requesters/:requesterId/requests --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/requesters.Routes.func1 (6 handlers)
+[GIN-debug] GET    /v1/providers/            --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.FindMatches.func1 (6 handlers)
+[GIN-debug] GET    /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.Find.func1 (6 handlers)
+[GIN-debug] PATCH  /v1/providers/:providerId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.Update.func1 (6 handlers)
+[GIN-debug] PUT    /v1/providers/:providerId/image --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.UpdateServiceProviderImage.func1 (6 handlers)
+[GIN-debug] POST   /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Register.func1 (6 handlers)
+[GIN-debug] GET    /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Find.func1 (6 handlers)
+[GIN-debug] POST   /v1/providers/:providerId/reviews/:reviewId/evidence --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func1 (6 handlers)
+[GIN-debug] POST   /v1/providers/:providerId/priceRates --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.Register.func1 (6 handlers)
+[GIN-debug] GET    /v1/providers/:providerId/priceRates --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.FindAll.func1 (6 handlers)
+[GIN-debug] DELETE /v1/providers/:providerId/priceRates/:priceRateId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.Delete.func1 (6 handlers)
+[GIN-debug] GET    /v1/providers/:providerId/requests --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func2 (6 handlers)
+[GIN-debug] GET    /v1/states/               --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/stateManagementService.StateManagementService.FindAll.func1 (6 handlers)
+[GIN-debug] GET    /v1/states/:stateId/cities --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/stateManagementService.StateManagementService.FindAllCitiesOfState.func1 (6 handlers)
+[GIN-debug] POST   /v1/requests/             --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Register.func1 (6 handlers)
+[GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Find.func1 (6 handlers)
+[GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (6 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/register 201 560.9159ms
-[GIN] 2021/05/25 - 00:49:31 | 201 |    583.8178ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/register 201 697.5548ms
-[GIN] 2021/05/25 - 00:49:32 | 201 |    716.2507ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:49:32 | 400 |      7.0685ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:49:33 | 400 |      6.2159ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:49:33 | 400 |     70.0969ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:49:33 | 400 |     10.4253ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:49:33 | 400 |      5.7839ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:49:33 | 400 |     15.7761ms |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/register 201 186.7888ms
+[GIN] 2021/05/25 - 23:13:22 | 201 |    187.7708ms |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/register 201 199.107ms
+[GIN] 2021/05/25 - 23:13:22 | 201 |    199.3622ms |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/register 400 0s
+[GIN] 2021/05/25 - 23:13:23 | 400 |      1.3051ms |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/register 400 0s
+[GIN] 2021/05/25 - 23:13:23 | 400 |      1.2534ms |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/register 400 0s
+[GIN] 2021/05/25 - 23:13:23 | 400 |      1.0539ms |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/register 400 354.1µs
+[GIN] 2021/05/25 - 23:13:23 | 400 |       926.4µs |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/register 400 430.2µs
+[GIN] 2021/05/25 - 23:13:23 | 400 |      1.0041ms |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/register 400 0s
+[GIN] 2021/05/25 - 23:13:23 | 400 |       648.8µs |  192.168.100.41 | POST     "/v1/register"
 [GIN-debug] [WARNING] Headers were already written. Wanted to override status code 400 with 409
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/register 409 267.0226ms
-[GIN] 2021/05/25 - 00:49:34 | 409 |    273.0596ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/login 200 158.2117ms
-[GIN] 2021/05/25 - 00:49:34 | 200 |    166.2186ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/login 200 84.6632ms
-[GIN] 2021/05/25 - 00:49:35 | 200 |     84.6632ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/login 401 11.9965ms
-[GIN] 2021/05/25 - 00:49:35 | 401 |     15.9954ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/login 401 60.0613ms
-[GIN] 2021/05/25 - 00:49:35 | 401 |     64.0594ms |  192.168.100.41 | POST     "/v1/login"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/register 409 92.972ms
+[GIN] 2021/05/25 - 23:13:23 | 409 |      92.972ms |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/login 200 41.3096ms
+[GIN] 2021/05/25 - 23:13:24 | 200 |     42.2833ms |  192.168.100.41 | POST     "/v1/login"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/login 200 36.0804ms
+[GIN] 2021/05/25 - 23:13:24 | 200 |      37.081ms |  192.168.100.41 | POST     "/v1/login"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/login 401 2.1023ms
+[GIN] 2021/05/25 - 23:13:24 | 401 |      2.6784ms |  192.168.100.41 | POST     "/v1/login"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/login 401 2.4713ms
+[GIN] 2021/05/25 - 23:13:24 | 401 |      5.1032ms |  192.168.100.41 | POST     "/v1/login"
 [GIN-debug] redirecting request 301: /v1/states/ --> /v1/states/
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/states/ 200 12.6308ms
-[GIN] 2021/05/25 - 00:49:35 | 200 |     16.6282ms |  192.168.100.41 | GET      "/v1/states/"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/states/ 200 2.0058ms
+[GIN] 2021/05/25 - 23:13:24 | 200 |      2.2071ms |  192.168.100.41 | GET      "/v1/states/"
 [GIN-debug] redirecting request 301: /v1/states/ --> /v1/states/
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/states/ 200 2.8479ms
-[GIN] 2021/05/25 - 00:49:35 | 200 |      3.2375ms |  192.168.100.41 | GET      "/v1/states/"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities 200 64.4084ms
-[GIN] 2021/05/25 - 00:49:36 | 200 |     65.4742ms |  192.168.100.41 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e4o/cities 409 0s
-[GIN] 2021/05/25 - 00:49:36 | 409 |     15.9632ms |  192.168.100.41 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e4o/cities"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 4.0066ms
-[GIN] 2021/05/25 - 00:49:36 | 200 |      4.0066ms |  192.168.100.41 | GET      "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters/3d5b56f8-0e6c-495d-b010-196f26d87e48 409 2.9588ms
-[GIN] 2021/05/25 - 00:49:36 | 409 |      4.0278ms |  192.168.100.41 | GET      "/v1/requesters/3d5b56f8-0e6c-495d-b010-196f26d87e48"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 3.9626ms
-[GIN] 2021/05/25 - 00:49:36 | 200 |      3.9626ms |  192.168.100.41 | GET      "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] PATCH /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 268.3968ms
-[GIN] 2021/05/25 - 00:49:37 | 200 |    272.3989ms |  192.168.100.41 | PATCH    "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 6.6547ms
-[GIN] 2021/05/25 - 00:49:37 | 200 |     14.0185ms |  192.168.100.41 | GET      "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/login 401 76.0754ms
-[GIN] 2021/05/25 - 00:49:37 | 401 |     80.0769ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:49 CDT] PATCH /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 171.8686ms
-[GIN] 2021/05/25 - 00:49:38 | 200 |    174.7328ms |  192.168.100.41 | PATCH    "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 34.1182ms
-[GIN] 2021/05/25 - 00:49:38 | 200 |     49.6039ms |  192.168.100.41 | GET      "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] PATCH /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 562.5018ms
-[GIN] 2021/05/25 - 00:49:39 | 200 |    569.5562ms |  192.168.100.41 | PATCH    "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 18.1748ms
-[GIN] 2021/05/25 - 00:49:39 | 200 |     21.2118ms |  192.168.100.41 | GET      "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] PATCH /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 570.0632ms
-[GIN] 2021/05/25 - 00:49:39 | 200 |    572.1123ms |  192.168.100.41 | PATCH    "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/login 401 52.7016ms
-[GIN] 2021/05/25 - 00:49:40 | 401 |     52.7016ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:49 CDT] PATCH /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 400 11.0091ms
-[GIN] 2021/05/25 - 00:49:40 | 400 |     15.0292ms |  192.168.100.41 | PATCH    "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] PATCH /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071 200 237.9075ms
-[GIN] 2021/05/25 - 00:49:40 | 200 |    241.9065ms |  192.168.100.41 | PATCH    "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters//addresses 409 0s
-[GIN] 2021/05/25 - 00:49:40 | 409 |     18.0387ms |  192.168.100.41 | GET      "/v1/requesters//addresses"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses 400 0s
-[GIN] 2021/05/25 - 00:49:41 | 400 |          28ms |  192.168.100.41 | POST     "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters//addresses 409 0s
-[GIN] 2021/05/25 - 00:49:41 | 409 |        42.3ms |  192.168.100.41 | GET      "/v1/requesters//addresses"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters//addresses 409 0s
-[GIN] 2021/05/25 - 00:49:41 | 409 |            0s |  192.168.100.41 | GET      "/v1/requesters//addresses"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses 201 285.5928ms
-[GIN] 2021/05/25 - 00:49:41 | 201 |    295.4051ms |  192.168.100.41 | POST     "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses 400 0s
-[GIN] 2021/05/25 - 00:49:42 | 400 |      2.0578ms |  192.168.100.41 | POST     "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses 400 3.9407ms
-[GIN] 2021/05/25 - 00:49:42 | 400 |     42.2866ms |  192.168.100.41 | POST     "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses 400 0s
-[GIN] 2021/05/25 - 00:49:42 | 400 |      5.0741ms |  192.168.100.41 | POST     "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses"
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses 201 220.508ms
-[GIN] 2021/05/25 - 00:49:42 | 201 |    221.3997ms |  192.168.100.41 | POST     "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/addresses"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/requests 200 0s
-[GIN] 2021/05/25 - 00:49:42 | 200 |      4.1415ms |  192.168.100.41 | GET      "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/requests"
-192.168.100.41 - [25 May 21 00:49 CDT] GET /v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/requests 200 0s
-[GIN] 2021/05/25 - 00:49:43 | 200 |      8.0333ms |  192.168.100.41 | GET      "/v1/requesters/d700f8cb-d2d2-4647-b60e-e22d70770071/requests"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/states/ 401 652.1µs
+[GIN] 2021/05/25 - 23:13:24 | 401 |      1.4721ms |  192.168.100.41 | GET      "/v1/states/"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities 200 3.0163ms
+[GIN] 2021/05/25 - 23:13:24 | 200 |      3.5704ms |  192.168.100.41 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e4o/cities 409 454.5µs
+[GIN] 2021/05/25 - 23:13:25 | 409 |       1.047ms |  192.168.100.41 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e4o/cities"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 200 3.0675ms
+[GIN] 2021/05/25 - 23:13:25 | 200 |      3.5831ms |  192.168.100.41 | GET      "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/3d5b56f8-0e6c-495d-b010-196f26d87e48 404 5.9348ms
+[GIN] 2021/05/25 - 23:13:25 | 404 |      7.5683ms |  192.168.100.41 | GET      "/v1/requesters/3d5b56f8-0e6c-495d-b010-196f26d87e48"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 401 2.2256ms
+[GIN] 2021/05/25 - 23:13:25 | 401 |      2.7597ms |  192.168.100.41 | GET      "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] PATCH /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 200 155.1088ms
+[GIN] 2021/05/25 - 23:13:25 | 200 |    156.9826ms |  192.168.100.41 | PATCH    "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 200 15.2843ms
+[GIN] 2021/05/25 - 23:13:25 | 200 |      16.284ms |  192.168.100.41 | GET      "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/login 401 37.0433ms
+[GIN] 2021/05/25 - 23:13:26 | 401 |      37.596ms |  192.168.100.41 | POST     "/v1/login"
+192.168.100.41 - [25 May 21 23:13 CDT] PATCH /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 200 173.2881ms
+[GIN] 2021/05/25 - 23:13:26 | 200 |    175.5655ms |  192.168.100.41 | PATCH    "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 200 3.73ms
+[GIN] 2021/05/25 - 23:13:26 | 200 |        3.73ms |  192.168.100.41 | GET      "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] PATCH /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 200 174.0825ms
+[GIN] 2021/05/25 - 23:13:26 | 200 |    174.4355ms |  192.168.100.41 | PATCH    "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 200 3.7414ms
+[GIN] 2021/05/25 - 23:13:26 | 200 |       4.636ms |  192.168.100.41 | GET      "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] PATCH /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 200 284.4218ms
+[GIN] 2021/05/25 - 23:13:27 | 200 |    285.0107ms |  192.168.100.41 | PATCH    "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/login 401 42.9918ms
+[GIN] 2021/05/25 - 23:13:27 | 401 |     42.9918ms |  192.168.100.41 | POST     "/v1/login"
+192.168.100.41 - [25 May 21 23:13 CDT] PATCH /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 400 8.3862ms
+[GIN] 2021/05/25 - 23:13:27 | 400 |      9.3782ms |  192.168.100.41 | PATCH    "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] PATCH /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a 401 559.5µs
+[GIN] 2021/05/25 - 23:13:27 | 401 |      1.1318ms |  192.168.100.41 | PATCH    "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/5a0dc2dc-f758-451e-bad2-84f86d8e1466/addresses 404 2.8558ms
+[GIN] 2021/05/25 - 23:13:27 | 404 |      3.4908ms |  192.168.100.41 | GET      "/v1/requesters/5a0dc2dc-f758-451e-bad2-84f86d8e1466/addresses"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses 201 177.9969ms
+[GIN] 2021/05/25 - 23:13:28 | 201 |    177.9969ms |  192.168.100.41 | POST     "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses 200 3.005ms
+[GIN] 2021/05/25 - 23:13:28 | 200 |       3.005ms |  192.168.100.41 | GET      "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters//addresses 401 995.8µs
+[GIN] 2021/05/25 - 23:13:28 | 401 |      1.9997ms |  192.168.100.41 | GET      "/v1/requesters//addresses"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses 201 91.8707ms
+[GIN] 2021/05/25 - 23:13:28 | 201 |     94.9106ms |  192.168.100.41 | POST     "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses 400 1.0043ms
+[GIN] 2021/05/25 - 23:13:28 | 400 |      3.1595ms |  192.168.100.41 | POST     "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses 400 5.9984ms
+[GIN] 2021/05/25 - 23:13:28 | 400 |      7.9112ms |  192.168.100.41 | POST     "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses 400 999.6µs
+[GIN] 2021/05/25 - 23:13:28 | 400 |      1.7469ms |  192.168.100.41 | POST     "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses 401 986.7µs
+[GIN] 2021/05/25 - 23:13:29 | 401 |      1.1862ms |  192.168.100.41 | POST     "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/addresses"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/requests 200 871.9µs
+[GIN] 2021/05/25 - 23:13:29 | 200 |      1.4307ms |  192.168.100.41 | GET      "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/requests"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/1bdbee8b-941f-475a-886c-efa902fefc1o/requests 200 1.4003ms
+[GIN] 2021/05/25 - 23:13:29 | 200 |      2.4286ms |  192.168.100.41 | GET      "/v1/requesters/1bdbee8b-941f-475a-886c-efa902fefc1o/requests"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/requests 401 709.4µs
+[GIN] 2021/05/25 - 23:13:29 | 401 |         939µs |  192.168.100.41 | GET      "/v1/requesters/823ed878-f4a5-441f-83f8-4b858c20386a/requests"
 [GIN-debug] redirecting request 307: /v1/requests/ --> /v1/requests/
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/requests/ 201 151.48ms
+[GIN] 2021/05/25 - 23:13:29 | 201 |    152.4082ms |  192.168.100.41 | POST     "/v1/requests/"
+[GIN-debug] redirecting request 301: /v1/providers/ --> /v1/providers/?maxPriceRate=90&city=Xalapa&kindOfService=10
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/providers/?maxPriceRate=90&city=Xalapa&kindOfService=10 404 1.7566ms
+[GIN] 2021/05/25 - 23:13:29 | 404 |      2.7593ms |  192.168.100.41 | GET      "/v1/providers/?maxPriceRate=90&city=Xalapa&kindOfService=10"
+[GIN-debug] redirecting request 301: /v1/providers/ --> /v1/providers/
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/providers/ 401 2.8785ms
+[GIN] 2021/05/25 - 23:13:29 | 401 |      3.4826ms |  192.168.100.41 | GET      "/v1/providers/"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff 200 6.6038ms
+[GIN] 2021/05/25 - 23:13:30 | 200 |       7.209ms |  192.168.100.41 | GET      "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/providers/19b0b86a-0e3d-434c-9248-7f5cb1f290c8 404 3.3525ms
+[GIN] 2021/05/25 - 23:13:30 | 404 |      3.6271ms |  192.168.100.41 | GET      "/v1/providers/19b0b86a-0e3d-434c-9248-7f5cb1f290c8"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/providers/1bdbee8b-941f-475a-886c-efa902fefck 400 1.0003ms
+[GIN] 2021/05/25 - 23:13:30 | 400 |      6.9946ms |  192.168.100.41 | GET      "/v1/providers/1bdbee8b-941f-475a-886c-efa902fefck"
+192.168.100.41 - [25 May 21 23:13 CDT] GET /v1/providers/1bdbee8b-941f-475a-886c-efa902fefc 401 462.2µs
+[GIN] 2021/05/25 - 23:13:30 | 401 |      1.1804ms |  192.168.100.41 | GET      "/v1/providers/1bdbee8b-941f-475a-886c-efa902fefc"
+192.168.100.41 - [25 May 21 23:13 CDT] PUT /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image 400 7.8854ms
+[GIN] 2021/05/25 - 23:13:30 | 400 |      8.1189ms |  192.168.100.41 | PUT      "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image"
+192.168.100.41 - [25 May 21 23:13 CDT] PUT /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image 400 5.3912ms
+[GIN] 2021/05/25 - 23:13:30 | 400 |       6.029ms |  192.168.100.41 | PUT      "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image"
+192.168.100.41 - [25 May 21 23:13 CDT] PUT /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image 401 928.5µs
+[GIN] 2021/05/25 - 23:13:30 | 401 |       928.5µs |  192.168.100.41 | PUT      "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image"
+192.168.100.41 - [25 May 21 23:13 CDT] PUT /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image 400 6.4602ms
+[GIN] 2021/05/25 - 23:13:30 | 400 |      7.1365ms |  192.168.100.41 | PUT      "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image"
+192.168.100.41 - [25 May 21 23:13 CDT] PUT /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image 400 14.6056ms
+[GIN] 2021/05/25 - 23:13:31 | 400 |     30.2591ms |  192.168.100.41 | PUT      "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews 201 245.8875ms
+[GIN] 2021/05/25 - 23:13:31 | 201 |    246.8845ms |  192.168.100.41 | POST     "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews 201 158.5828ms
+[GIN] 2021/05/25 - 23:13:31 | 201 |    159.7909ms |  192.168.100.41 | POST     "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews 201 117.6038ms
+[GIN] 2021/05/25 - 23:13:31 | 201 |    118.1748ms |  192.168.100.41 | POST     "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews 401 1.0207ms
+[GIN] 2021/05/25 - 23:13:32 | 401 |      4.0266ms |  192.168.100.41 | POST     "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews 400 997.1µs
+[GIN] 2021/05/25 - 23:13:32 | 400 |       997.1µs |  192.168.100.41 | POST     "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews 400 0s
+[GIN] 2021/05/25 - 23:13:32 | 400 |       924.2µs |  192.168.100.41 | POST     "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews 201 196.3262ms
+[GIN] 2021/05/25 - 23:13:32 | 201 |    197.1655ms |  192.168.100.41 | POST     "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews"
 [GIN-debug] [WARNING] Headers were already written. Wanted to override status code 400 with 409
-192.168.100.41 - [25 May 21 00:49 CDT] POST /v1/requests/ 409 151.0178ms
-[GIN] 2021/05/25 - 00:49:43 | 409 |    154.9736ms |  192.168.100.41 | POST     "/v1/requests/"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/register 201 293.0677ms
-[GIN] 2021/05/25 - 00:50:08 | 201 |    293.6212ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/register 201 533.5229ms
-[GIN] 2021/05/25 - 00:50:09 | 201 |    533.6541ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/register 400 3.1017ms
-[GIN] 2021/05/25 - 00:50:09 | 400 |      3.6884ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:50:09 | 400 |            0s |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/register 400 4.0081ms
-[GIN] 2021/05/25 - 00:50:09 | 400 |       8.004ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:50:10 | 400 |      3.0027ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:50:10 | 400 |      3.5922ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/register 400 0s
-[GIN] 2021/05/25 - 00:50:10 | 400 |       4.195ms |  192.168.100.41 | POST     "/v1/register"
-[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 400 with 409
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/register 409 130.1381ms
-[GIN] 2021/05/25 - 00:50:10 | 409 |    130.6709ms |  192.168.100.41 | POST     "/v1/register"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/login 200 55.4931ms
-[GIN] 2021/05/25 - 00:50:10 | 200 |     58.2727ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/login 200 52.3859ms
-[GIN] 2021/05/25 - 00:50:10 | 200 |     52.3859ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/login 401 3.3604ms
-[GIN] 2021/05/25 - 00:50:11 | 401 |      4.9755ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/login 401 3.6907ms
-[GIN] 2021/05/25 - 00:50:11 | 401 |      4.5717ms |  192.168.100.41 | POST     "/v1/login"
-[GIN-debug] redirecting request 301: /v1/states/ --> /v1/states/
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/states/ 200 0s
-[GIN] 2021/05/25 - 00:50:11 | 200 |            0s |  192.168.100.41 | GET      "/v1/states/"
-[GIN-debug] redirecting request 301: /v1/states/ --> /v1/states/
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/states/ 200 4.0058ms
-[GIN] 2021/05/25 - 00:50:11 | 200 |      7.9988ms |  192.168.100.41 | GET      "/v1/states/"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities 200 4.9649ms
-[GIN] 2021/05/25 - 00:50:11 | 200 |     10.3339ms |  192.168.100.41 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e4o/cities 409 0s
-[GIN] 2021/05/25 - 00:50:11 | 409 |     12.4655ms |  192.168.100.41 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e4o/cities"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 12.677ms
-[GIN] 2021/05/25 - 00:50:12 | 200 |     13.7844ms |  192.168.100.41 | GET      "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters/3d5b56f8-0e6c-495d-b010-196f26d87e48 409 11.438ms
-[GIN] 2021/05/25 - 00:50:12 | 409 |     15.1587ms |  192.168.100.41 | GET      "/v1/requesters/3d5b56f8-0e6c-495d-b010-196f26d87e48"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 4.0017ms
-[GIN] 2021/05/25 - 00:50:12 | 200 |      4.0017ms |  192.168.100.41 | GET      "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] PATCH /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 244.1434ms
-[GIN] 2021/05/25 - 00:50:12 | 200 |     248.139ms |  192.168.100.41 | PATCH    "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 2.9731ms
-[GIN] 2021/05/25 - 00:50:13 | 200 |      2.9731ms |  192.168.100.41 | GET      "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/login 401 60.6065ms
-[GIN] 2021/05/25 - 00:50:13 | 401 |      61.149ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:50 CDT] PATCH /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 120.0191ms
-[GIN] 2021/05/25 - 00:50:13 | 200 |    120.7088ms |  192.168.100.41 | PATCH    "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 7.9722ms
-[GIN] 2021/05/25 - 00:50:13 | 200 |      7.9722ms |  192.168.100.41 | GET      "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] PATCH /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 185.5196ms
-[GIN] 2021/05/25 - 00:50:13 | 200 |    185.5196ms |  192.168.100.41 | PATCH    "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 541.8143ms
-[GIN] 2021/05/25 - 00:50:14 | 200 |    546.8639ms |  192.168.100.41 | GET      "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] PATCH /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 480.0033ms
-[GIN] 2021/05/25 - 00:50:15 | 200 |    480.0033ms |  192.168.100.41 | PATCH    "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/login 401 161.3182ms
-[GIN] 2021/05/25 - 00:50:15 | 401 |    161.3182ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [25 May 21 00:50 CDT] PATCH /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 400 2.5789ms
-[GIN] 2021/05/25 - 00:50:15 | 400 |      2.5789ms |  192.168.100.41 | PATCH    "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] PATCH /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403 200 131.5135ms
-[GIN] 2021/05/25 - 00:50:15 | 200 |     134.022ms |  192.168.100.41 | PATCH    "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters//addresses 409 0s
-[GIN] 2021/05/25 - 00:50:16 | 409 |      4.1416ms |  192.168.100.41 | GET      "/v1/requesters//addresses"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses 400 0s
-[GIN] 2021/05/25 - 00:50:16 | 400 |      2.8539ms |  192.168.100.41 | POST     "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters//addresses 409 0s
-[GIN] 2021/05/25 - 00:50:16 | 409 |      4.6979ms |  192.168.100.41 | GET      "/v1/requesters//addresses"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters//addresses 409 0s
-[GIN] 2021/05/25 - 00:50:16 | 409 |            0s |  192.168.100.41 | GET      "/v1/requesters//addresses"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses 201 237.8608ms
-[GIN] 2021/05/25 - 00:50:16 | 201 |    237.8608ms |  192.168.100.41 | POST     "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses 400 0s
-[GIN] 2021/05/25 - 00:50:17 | 400 |            0s |  192.168.100.41 | POST     "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses 400 0s
-[GIN] 2021/05/25 - 00:50:17 | 400 |      1.9058ms |  192.168.100.41 | POST     "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses 400 0s
-[GIN] 2021/05/25 - 00:50:17 | 400 |            0s |  192.168.100.41 | POST     "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses"
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses 201 122.5404ms
-[GIN] 2021/05/25 - 00:50:17 | 201 |    122.5404ms |  192.168.100.41 | POST     "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/addresses"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/requests 200 0s
-[GIN] 2021/05/25 - 00:50:17 | 200 |      4.0106ms |  192.168.100.41 | GET      "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/requests"
-192.168.100.41 - [25 May 21 00:50 CDT] GET /v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/requests 200 0s
-[GIN] 2021/05/25 - 00:50:17 | 200 |      7.3354ms |  192.168.100.41 | GET      "/v1/requesters/52894750-8c85-416f-87bf-93d3b303b403/requests"
-[GIN-debug] redirecting request 307: /v1/requests/ --> /v1/requests/
-192.168.100.41 - [25 May 21 00:50 CDT] POST /v1/requests/ 201 519.7819ms
-[GIN] 2021/05/25 - 00:50:18 | 201 |    519.7819ms |  192.168.100.41 | POST     "/v1/requests/"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews 409 90.8517ms
+[GIN] 2021/05/25 - 23:13:32 | 409 |     90.8517ms |  192.168.100.41 | POST     "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews"
+192.168.100.41 - [25 May 21 23:13 CDT] POST /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews 409 33.3399ms
+[GIN] 2021/05/25 - 23:13:32 | 409 |     36.3837ms |  192.168.100.41 | POST     "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/reviews"
+192.168.100.41 - [25 May 21 23:14 CDT] POST /v1/register 201 259.0478ms
+[GIN] 2021/05/25 - 23:14:47 | 201 |    260.7041ms |  192.168.100.41 | POST     "/v1/register"
+192.168.100.41 - [25 May 21 23:14 CDT] PUT /v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image 200 369.399ms
+[GIN] 2021/05/25 - 23:14:51 | 200 |    369.8905ms |  192.168.100.41 | PUT      "/v1/providers/91fd94d1-3e01-48c4-b166-c78453ec96ff/image"
