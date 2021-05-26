@@ -1,7 +1,6 @@
 package serviceProviderManagementService
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -9,6 +8,7 @@ import (
 
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
+	"github.com/AdairHdz/OnTheWayRestAPI/helpers/customErrors"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/fileAnalyzer"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/hashing"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
@@ -23,7 +23,7 @@ func (ServiceProviderManagementService) Find() gin.HandlerFunc {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatus(http.StatusBadRequest)
 			return
 		}
 
@@ -31,6 +31,11 @@ func (ServiceProviderManagementService) Find() gin.HandlerFunc {
 		searchError := serviceProvider.Find(serviceProviderID)		
 
 		if searchError != nil {
+			_, errorIsOfTypeRecordNotFoundError := searchError.(customErrors.RecordNotFoundError)
+			if errorIsOfTypeRecordNotFoundError {
+				context.AbortWithStatus(http.StatusNotFound)
+				return	
+			}
 			context.AbortWithStatus(http.StatusConflict)
 			return
 		}
@@ -57,6 +62,11 @@ func (ServiceProviderManagementService) FindMatches() gin.HandlerFunc {
 
 		if err != nil {
 			context.Status(http.StatusConflict)
+			return
+		}
+
+		if len(serviceProviders) == 0 {
+			context.AbortWithStatus(http.StatusNotFound)
 			return
 		}
 		response := mappers.CreateServiceProviderOverviewDTOAsResponse(serviceProviders)
@@ -156,14 +166,20 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 
 
 		if serviceProvider.ID == uuid.Nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatus(http.StatusNotFound)
 			return
 		}
 
 		dirIsEmpty, err := fileAnalyzer.DirIsEmpty(path)
-	
+
 		
-		file, _ := context.FormFile("image")		
+		file, noFileSentError := context.FormFile("image")
+		if noFileSentError != nil {
+			context.Status(http.StatusBadRequest)
+			return
+		}
+		
+		
 		fileExtension := filepath.Ext(file.Filename)
 
 		if !fileAnalyzer.ImageHasValidFormat(fileExtension) {
@@ -172,16 +188,14 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 		}
 
 		if !dirIsEmpty {
-			pathOfImageToBeDeleted := path + "/" + serviceProvider.BusinessPicture
-			
-			fmt.Println(pathOfImageToBeDeleted)
+			pathOfImageToBeDeleted := path + "/" + serviceProvider.BusinessPicture		
 			os.Remove(pathOfImageToBeDeleted)
 		}
 		
 		err = context.SaveUploadedFile(file, path + "/" + file.Filename)
 		
 		if err != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.JSON(http.StatusConflict, err.Error())
 			return
 		}
 

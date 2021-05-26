@@ -6,6 +6,7 @@ import (
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
+	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 )
@@ -21,10 +22,18 @@ func (ReviewManagementService) Register() gin.HandlerFunc {
 		if parsingError != nil {
 			context.AbortWithStatus(http.StatusBadRequest)
 			return
-		}
+		}		
 
 		receivedData := dataTransferObjects.ReceivedReviewDTO{}
 		context.BindJSON(&receivedData)
+
+		validate := validators.GetValidator()
+		validationErrors := validate.Struct(receivedData)
+
+		if validationErrors != nil {
+			context.AbortWithStatus(http.StatusBadRequest)
+			return
+		}
 
 		review := mappers.CreateReviewEntity(receivedData, serviceProviderID)
 		databaseError := review.Register()

@@ -9,6 +9,7 @@ import (
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
+	"github.com/AdairHdz/OnTheWayRestAPI/helpers/customErrors"
 )
 
 
@@ -27,6 +28,11 @@ func (ServiceRequesterManagementService) Find() gin.HandlerFunc {
 		searchError := serviceRequester.Find(serviceRequesterID)
 
 		if searchError != nil {
+			_, errorIsOfTypeRecordNotFoundError := searchError.(customErrors.RecordNotFoundError)
+			if errorIsOfTypeRecordNotFoundError {
+				context.AbortWithStatus(http.StatusNotFound)
+				return	
+			}
 			context.AbortWithStatus(http.StatusConflict)
 			return
 		}

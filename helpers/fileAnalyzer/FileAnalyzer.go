@@ -28,3 +28,17 @@ func ImageHasValidFormat(fileExtension string) bool {
 
 	return false
 }
+
+func EvidenceHasValidFormat(fileExtension string) bool {
+	isImageWithValidFormat := ImageHasValidFormat(fileExtension)
+	isVideoWithValidFormat := false
+
+	if fileExtension == ".mp4" {
+		return true
+	}
+
+	if !isImageWithValidFormat && !isVideoWithValidFormat {
+		return false
+	}
+	return true
+}

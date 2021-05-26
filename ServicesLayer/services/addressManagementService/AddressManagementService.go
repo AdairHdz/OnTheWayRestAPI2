@@ -72,6 +72,11 @@ func (AddressManagementService) FindAll() gin.HandlerFunc {
 		for _, address := range addresses {
 			response = append(response, mappers.CreateAddressDTOWithCityAsResponse(address))
 		}
+
+		if len(addresses) == 0 {
+			context.AbortWithStatus(http.StatusNotFound)
+			return
+		}
 		context.JSON(http.StatusOK, response)
 	}
 	
