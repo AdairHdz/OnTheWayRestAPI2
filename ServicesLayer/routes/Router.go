@@ -44,7 +44,7 @@ func init(){
 		router.StaticFS("/images", http.Dir("./images"))
 
 		v1.POST("/register", _registerService.RegisterUser())
-		v1.POST("/login", _loginService.Login())
+		v1.POST("/login", _loginService.Login())		
 		requesters.Routes(v1)
 		providers.Routes(v1)
 		states.Routes(v1)

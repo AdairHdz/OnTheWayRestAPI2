@@ -1,6 +1,7 @@
 package providers
 
-import (	
+import (
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/middlewares"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService"
@@ -16,6 +17,7 @@ var(
 func Routes(route *gin.RouterGroup) {
 	providers := route.Group("/providers")
 	{		
+		providers.Use(middlewares.Authenticate())
 		providers.GET("/", _serviceProviderManagementService.FindMatches())
 		providers.GET("/:providerId", _serviceProviderManagementService.Find())
 		providers.PATCH("/:providerId", _serviceProviderManagementService.Update())

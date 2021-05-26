@@ -1,10 +1,10 @@
 package requesters
 
-import (		
+import (
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/middlewares"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/addressManagementService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequesterManagementService"
 	"github.com/gin-gonic/gin"
-	
 )
 
 var (
@@ -15,6 +15,7 @@ var (
 func Routes(route *gin.RouterGroup) {
 	requesters := route.Group("/requesters")
 	{
+		requesters.Use(middlewares.Authenticate())
 		requesters.GET("/:requesterId", serviceRequesterMgtService.Find())
 		requesters.PATCH("/:requesterId", serviceRequesterMgtService.Update())
 		requesters.POST("/:requesterId/addresses", addressMgtService.Register())

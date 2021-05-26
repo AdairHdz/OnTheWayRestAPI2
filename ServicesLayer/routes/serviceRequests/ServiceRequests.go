@@ -1,6 +1,7 @@
 package serviceRequests
 
-import (	
+import (
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/middlewares"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService"
 	"github.com/gin-gonic/gin"
 )
@@ -12,6 +13,7 @@ var(
 func Routes(route *gin.RouterGroup) {
 	serviceRequest := route.Group("/requests")
 	{
+		serviceRequest.Use(middlewares.Authenticate())
 		serviceRequest.POST("/", serviceRequestMgtService.Register())
 		serviceRequest.GET("/:serviceRequestId", serviceRequestMgtService.Find())
 		serviceRequest.PATCH("/:serviceRequestId", serviceRequestMgtService.Update())
