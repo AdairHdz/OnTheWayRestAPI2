@@ -15,7 +15,7 @@ func Routes(route *gin.RouterGroup) {
 	{
 		serviceRequest.Use(middlewares.Authenticate())
 		serviceRequest.POST("/", serviceRequestMgtService.Register())
-		serviceRequest.GET("/:serviceRequestId", serviceRequestMgtService.Find())
+		serviceRequest.GET("/:serviceRequestId", serviceRequestMgtService.FindByID())
 		serviceRequest.PATCH("/:serviceRequestId", serviceRequestMgtService.Update())
 	}
 }

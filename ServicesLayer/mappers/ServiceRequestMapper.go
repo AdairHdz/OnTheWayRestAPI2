@@ -26,9 +26,10 @@ func CreateServiceRequestEntity(serviceRequestDTO dataTransferObjects.ReceivedSe
 }
 
 func CreateServiceRequestDTOAsResponse(serviceRequest businessEntities.ServiceRequest) dataTransferObjects.ResponseServiceRequestDTO {
+	formattedDate := serviceRequest.Date.Format("2006-01-02")
 	response := dataTransferObjects.ResponseServiceRequestDTO{
 		ID: serviceRequest.ID,
-		Date: serviceRequest.Date,
+		Date: formattedDate,
 		Status: serviceRequest.ServiceStatus,
 		Cost: serviceRequest.Cost,
 		DeliveryAddressID: serviceRequest.AddressID,
@@ -42,9 +43,10 @@ func CreateServiceRequestDTOAsResponse(serviceRequest businessEntities.ServiceRe
 }
 
 func CreateServiceRequestDTOWithDetailsAsResponse(serviceRequest businessEntities.ServiceRequest) dataTransferObjects.ResponseServiceRequestDTOWithDetails {
+	formattedDate := serviceRequest.Date.Format("2006-01-02")
 	response := dataTransferObjects.ResponseServiceRequestDTOWithDetails{
 		ID: serviceRequest.ID,
-		Date: serviceRequest.Date,
+		Date: formattedDate,
 		Status: serviceRequest.ServiceStatus,
 		Cost: serviceRequest.Cost,
 		DeliveryAddress: CreateAddressDTOWithCityAsResponse(serviceRequest.DeliveryAddress),

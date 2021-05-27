@@ -17,10 +17,10 @@ type ResponsePriceRateDTO struct {
 type ReceivedPriceRateDTO struct {	
 	StartingHour string `json:"startingHour"`
 	EndingHour string `json:"endingHour"`
-	Price float32 `json:"price"`
-	KindOfService uint8 `json:"kindOfService"`
+	Price float32 `json:"price" validate:"min=1,max=100"`
+	KindOfService uint8 `json:"kindOfService" validate:"min=0,max=4"`
 	CityID uuid.UUID `json:"cityId"`
-	WorkingDays []int `json:"workingDays"`
+	WorkingDays []int `json:"workingDays" validate:"required,unique,min=1,max=7"`
 }
 
 type ResponsePriceRateDTOWithCity struct {
