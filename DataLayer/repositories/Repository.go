@@ -16,7 +16,7 @@ func (Repository) FindByID(entity interface{}, ID interface{}) (interface{}, err
 	return entity, result.Error
 }
 
-func (Repository) FindMatches(target interface{}, query interface{}, args interface{}) error {
+func (Repository) FindMatches(target interface{}, query interface{}, args ...interface{}) error {
 	DB := database.GetDatabase()
 	result := DB.Where(query, args).Find(target)
 	return result.Error
@@ -28,10 +28,10 @@ func (Repository) Update(entity interface{}) error {
 	return result.Error
 }
 
-func (Repository) Delete(entity, query, args interface{}) error {
+func (Repository) Delete(entity, query, args interface{}) (int, error) {
 	DB := database.GetDatabase()
 	result := DB.Where(query, args).Delete(entity)
-	return result.Error
+	return int(result.RowsAffected), result.Error
 }
 
 func (Repository) FindAll(target interface{}) error {

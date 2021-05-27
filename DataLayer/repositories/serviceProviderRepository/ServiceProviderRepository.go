@@ -19,7 +19,7 @@ func (ServiceProviderRepository) FindByID(serviceProvider interface{}, ID interf
 
 func (ServiceProviderRepository) Update(serviceProvider interface{}) (error) {
 	DB := database.GetDatabase()
-	result := DB.Updates(serviceProvider)
+	result := DB.Save(serviceProvider)
 	return result.Error
 }
 

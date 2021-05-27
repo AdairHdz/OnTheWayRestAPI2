@@ -20,7 +20,7 @@ type ServiceRequest struct {
 	gorm.Model
 	ID uuid.UUID
 	Cost float32
-	Date time.Time
+	Date time.Time `gorm:"type:date"`
 	AddressID uuid.UUID `gorm:"size:191"`
 	DeliveryAddress Address `gorm:"foreignKey:AddressID"`
 	Description string
@@ -42,6 +42,25 @@ func (serviceRequest *ServiceRequest) Find(serviceRequestId uuid.UUID) error {
 	repository := serviceRequestRepository.ServiceRequestRepository{}
 	databaseError := repository.FindByID(&serviceRequest, serviceRequestId)
 	return databaseError
+}
+
+func (ServiceRequest) FindByDate(date string, id uuid.UUID, userType int) ([]ServiceRequest, error){
+	var serviceRequests []ServiceRequest
+	serviceRequestRepository := serviceRequestRepository.ServiceRequestRepository{}
+
+	var databaseError error
+	
+	if userType == ServiceProviderType {
+		databaseError = serviceRequestRepository.FindByDateAndServiceProviderID(&serviceRequests, date, id)
+	}else {
+		databaseError = serviceRequestRepository.FindByDateAndServiceRequesterID(&serviceRequests, date, id)
+	}
+
+	if databaseError != nil {
+		return serviceRequests, databaseError
+	}
+
+	return serviceRequests, nil
 }
 
 

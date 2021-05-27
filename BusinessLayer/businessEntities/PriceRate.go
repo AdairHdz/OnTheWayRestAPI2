@@ -6,6 +6,7 @@ import (
 
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories"
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories/priceRateRepository"
+	"github.com/AdairHdz/OnTheWayRestAPI/helpers/customErrors"
 	uuid "github.com/satori/go.uuid"
 	"gorm.io/gorm"
 )
@@ -122,7 +123,10 @@ func (priceRate PriceRate) Find(serviceProviderID uuid.UUID) ([]PriceRate, error
 }
 
 func (priceRate *PriceRate) Delete(serviceProviderID uuid.UUID) error {
-	repository := repositories.Repository{}
-	databaseError := repository.Delete(&priceRate, "service_provider_id = ?", serviceProviderID)
+	repository := repositories.Repository{}		
+	rowsAffected, databaseError := repository.Delete(&priceRate, "service_provider_id = ?", serviceProviderID)		
+	if rowsAffected == 0 {
+		return customErrors.RecordNotFoundError{}
+	}
 	return databaseError
 }

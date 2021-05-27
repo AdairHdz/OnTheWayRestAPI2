@@ -67,6 +67,11 @@ func (ReviewManagementService) Find() gin.HandlerFunc {
 		}
 
 		response := mappers.CreateSliceOfResponseReviewDTO(reviews)
+
+		if len(response) == 0 {
+			context.Status(http.StatusNotFound)
+			return
+		}
 		context.JSON(http.StatusOK, response)		
 	}
 }

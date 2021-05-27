@@ -174,7 +174,7 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 
 		
 		file, noFileSentError := context.FormFile("image")
-		if noFileSentError != nil {
+		if noFileSentError != nil {			
 			context.Status(http.StatusBadRequest)
 			return
 		}

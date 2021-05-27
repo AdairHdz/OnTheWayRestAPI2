@@ -1,10 +1,12 @@
 package providers
 
 import (
+	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/middlewares"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,6 +14,7 @@ var(
 	_reviewManagementService = reviewManagementService.ReviewManagementService{}
 	priceRateMgtService = priceRateManagementService.PriceRateManagementService{}
 	_serviceProviderManagementService = serviceProviderManagementService.ServiceProviderManagementService{}
+	_serviceRequestManagementService = serviceRequestManagementService.ServiceRequestManagementService{}
 )
 
 func Routes(route *gin.RouterGroup) {
@@ -28,7 +31,7 @@ func Routes(route *gin.RouterGroup) {
 			reviews.POST("/reviews", _reviewManagementService.Register())
 			reviews.GET("/reviews", _reviewManagementService.Find())
 			reviews.POST("/reviews/:reviewId/evidence", func(context *gin.Context) {
-				
+
 			})
 		}
 
@@ -41,9 +44,7 @@ func Routes(route *gin.RouterGroup) {
 		
 		requests := providers.Group("/:providerId")
 		{
-			requests.GET("/requests", func(context *gin.Context) {
-				
-			})
+			requests.GET("/requests", _serviceRequestManagementService.FindByDate(businessEntities.ServiceProviderType))
 		}
 	}
 }

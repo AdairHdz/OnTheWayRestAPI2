@@ -1,23 +1,22 @@
 package dataTransferObjects
 
-import (
-	"time"
+import (	
 
 	uuid "github.com/satori/go.uuid")
 
 
 type ReceivedServiceRequestDTO struct {
-	Cost              float32 `json:"cost"`
+	Cost              float32 `json:"cost" validate:"min=1,max=100"`
 	DeliveryAddressID uuid.UUID `json:"deliveryAddressId"`
-	Description string `json:"description"`
-	KindOfService uint8 `json:"kindOfService"`
+	Description string `json:"description" validate:"max=250"`
+	KindOfService uint8 `json:"kindOfService" validate:"min=0,max=4"`
 	ServiceProviderID uuid.UUID `json:"serviceProviderId"`
 	ServiceRequesterID uuid.UUID `json:"serviceRequesterId"`
 }
 
 type ResponseServiceRequestDTO struct {
 	ID uuid.UUID `json:"id"`
-	Date time.Time `json:"date"`
+	Date string `json:"date"`
 	Status uint8 `json:"status"`
 	Cost              float32 `json:"cost"`
 	DeliveryAddressID uuid.UUID `json:"deliveryAddressId"`
@@ -29,7 +28,7 @@ type ResponseServiceRequestDTO struct {
 
 type ResponseServiceRequestDTOWithDetails struct {
 	ID uuid.UUID `json:"id"`
-	Date time.Time `json:"date"`
+	Date string `json:"date"`
 	Status uint8 `json:"status"`
 	Cost              float32 `json:"cost"`
 	DeliveryAddress ResponseAddressWithCityDTO `json:"deliveryAddressId"`

@@ -75,14 +75,8 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 		}
 				
 		if receivedData.Password != "" {
-			hashedPassword, hashingError := hashing.GenerateHash(serviceRequester.User.Password)	
-			if hashingError != nil {
-				context.AbortWithStatus(http.StatusConflict)
-				return
-			}
-	
-			serviceRequester.User.Password = hashedPassword
-		}				
+			serviceRequester.User.Password = receivedData.Password							
+		}
 		
 		validator :=  validators.GetValidator()
 		validationErrors := validator.Var(serviceRequester.User.Names, "required,min=1,max=50,lettersAndSpaces")
@@ -105,6 +99,13 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 			context.AbortWithStatus(http.StatusBadRequest)
 			return
 		}
+
+		hashedPassword, hashingError := hashing.GenerateHash(serviceRequester.User.Password)	
+		if hashingError != nil {
+			context.AbortWithStatus(http.StatusConflict)
+			return
+		}
+		serviceRequester.User.Password = hashedPassword
 
 		updateError := serviceRequester.Update()
 
