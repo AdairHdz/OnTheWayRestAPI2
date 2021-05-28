@@ -30,9 +30,7 @@ func Routes(route *gin.RouterGroup) {
 		{
 			reviews.POST("/reviews", _reviewManagementService.Register())
 			reviews.GET("/reviews", _reviewManagementService.Find())
-			reviews.POST("/reviews/:reviewId/evidence", func(context *gin.Context) {
-
-			})
+			reviews.POST("/reviews/:reviewId/evidence", _reviewManagementService.UploadEvidence())
 		}
 
 		priceRates := providers.Group("/:providerId")

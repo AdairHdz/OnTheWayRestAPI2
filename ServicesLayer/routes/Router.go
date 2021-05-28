@@ -36,13 +36,14 @@ func init(){
 	setupLogOutput()
 	router = gin.Default()
 	router.Use(middlewares.Logger())
+	router.MaxMultipartMemory = 8 << 20  // 8 MiB
 	limiter := tollbooth.NewLimiter(50, &limiter.ExpirableOptions{DefaultExpirationTTL: time.Hour})
 	limiter.SetIPLookups([]string{"RemoteAddr", "X-Forwarded-For", "X-Real-IP"})
 	v1 := router.Group("/v1", tollbooth_gin.LimitHandler(limiter))
 	{
 				
 		router.StaticFS("/images", http.Dir("./images"))
-
+		router.StaticFS("/reviews", http.Dir("./public/reviews"))
 		v1.POST("/register", _registerService.RegisterUser())
 		v1.POST("/login", _loginService.Login())		
 		requesters.Routes(v1)

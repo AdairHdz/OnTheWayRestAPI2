@@ -6,6 +6,8 @@
 
 [GIN-debug] GET    /images/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
 [GIN-debug] HEAD   /images/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] GET    /reviews/*filepath        --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] HEAD   /reviews/*filepath        --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
 [GIN-debug] POST   /v1/register              --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/registerService.RegisterService.RegisterUser.func1 (5 handlers)
 [GIN-debug] POST   /v1/login                 --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/loginService.LoginService.Login.func1 (5 handlers)
 [GIN-debug] GET    /v1/requesters/:requesterId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequesterManagementService.ServiceRequesterManagementService.Find.func1 (6 handlers)
@@ -19,7 +21,7 @@
 [GIN-debug] PUT    /v1/providers/:providerId/image --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceProviderManagementService.ServiceProviderManagementService.UpdateServiceProviderImage.func1 (6 handlers)
 [GIN-debug] POST   /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Register.func1 (6 handlers)
 [GIN-debug] GET    /v1/providers/:providerId/reviews --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.Find.func1 (6 handlers)
-[GIN-debug] POST   /v1/providers/:providerId/reviews/:reviewId/evidence --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers.Routes.func1 (6 handlers)
+[GIN-debug] POST   /v1/providers/:providerId/reviews/:reviewId/evidence --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/reviewManagementService.ReviewManagementService.UploadEvidence.func1 (6 handlers)
 [GIN-debug] POST   /v1/providers/:providerId/priceRates --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.Register.func1 (6 handlers)
 [GIN-debug] GET    /v1/providers/:providerId/priceRates --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.FindAll.func1 (6 handlers)
 [GIN-debug] DELETE /v1/providers/:providerId/priceRates/:priceRateId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/priceRateManagementService.PriceRateManagementService.Delete.func1 (6 handlers)
@@ -30,111 +32,18 @@
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.FindByID.func1 (6 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (6 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.81 - [26 May 21 23:12 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe 404 0s
-[GIN] 2021/05/26 - 23:12:39 | 404 |       944.1µs |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe"
-192.168.100.41 - [26 May 21 23:13 CDT] DELETE /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe 401 2.1564ms
-[GIN] 2021/05/26 - 23:13:55 | 401 |      2.8465ms |  192.168.100.41 | DELETE   "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe"
-192.168.100.41 - [26 May 21 23:14 CDT] POST /v1/login 200 44.9257ms
-[GIN] 2021/05/26 - 23:14:14 | 200 |     45.9244ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [26 May 21 23:14 CDT] DELETE /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe 401 1.6234ms
-[GIN] 2021/05/26 - 23:14:17 | 401 |      2.6634ms |  192.168.100.41 | DELETE   "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe"
-192.168.100.41 - [26 May 21 23:14 CDT] DELETE /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe 401 998.1µs
-[GIN] 2021/05/26 - 23:14:36 | 401 |      1.9994ms |  192.168.100.41 | DELETE   "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe"
-192.168.100.41 - [26 May 21 23:15 CDT] DELETE /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe 204 425.2949ms
-[GIN] 2021/05/26 - 23:15:02 | 204 |    426.4948ms |  192.168.100.41 | DELETE   "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/dad772c3-3dc4-4b65-bd65-79d48e7f1efe"
-192.168.100.81 - [26 May 21 23:15 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 1.4852ms
-[GIN] 2021/05/26 - 23:15:11 | 404 |      1.6687ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:15 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 177.2547ms
-[GIN] 2021/05/26 - 23:15:11 | 200 |    177.8367ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:17 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/ce8110b0-d411-494c-80b8-bbd4c053f02b 404 0s
-[GIN] 2021/05/26 - 23:17:25 | 404 |       839.4µs |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/ce8110b0-d411-494c-80b8-bbd4c053f02b"
-192.168.100.81 - [26 May 21 23:17 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 457.7µs
-[GIN] 2021/05/26 - 23:17:26 | 404 |      1.0678ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:17 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 171.9378ms
-[GIN] 2021/05/26 - 23:17:26 | 200 |    172.5191ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:20 CDT] POST /v1/login 200 151.1481ms
-[GIN] 2021/05/26 - 23:20:18 | 200 |     169.797ms |  192.168.100.81 | POST     "/v1/login"
-192.168.100.81 - [26 May 21 23:20 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 5.7497ms
-[GIN] 2021/05/26 - 23:20:18 | 200 |       6.292ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:20 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 54.3395ms
-[GIN] 2021/05/26 - 23:20:18 | 404 |     54.8532ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:20 CDT] DELETE /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/fb3e5709-26c9-40f8-ab71-bbcfb8d37cf5 204 281.6115ms
-[GIN] 2021/05/26 - 23:20:22 | 204 |    282.6983ms |  192.168.100.81 | DELETE   "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/fb3e5709-26c9-40f8-ab71-bbcfb8d37cf5"
-192.168.100.81 - [26 May 21 23:20 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 434.7µs
-[GIN] 2021/05/26 - 23:20:24 | 404 |      1.4978ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:20 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 6.078ms
-[GIN] 2021/05/26 - 23:20:24 | 200 |      6.5692ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:20 CDT] DELETE /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/ce8110b0-d411-494c-80b8-bbd4c053f02b 204 435.0589ms
-[GIN] 2021/05/26 - 23:20:31 | 204 |    436.2093ms |  192.168.100.81 | DELETE   "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/ce8110b0-d411-494c-80b8-bbd4c053f02b"
-192.168.100.81 - [26 May 21 23:20 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 816.7µs
-[GIN] 2021/05/26 - 23:20:35 | 404 |      1.4152ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:20 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 6.2417ms
-[GIN] 2021/05/26 - 23:20:35 | 200 |      7.1817ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:21 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 57.1871ms
-[GIN] 2021/05/26 - 23:21:38 | 404 |     57.1871ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:21 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 478.6µs
-[GIN] 2021/05/26 - 23:21:42 | 404 |       523.4µs |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:21 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 4.2529ms
-[GIN] 2021/05/26 - 23:21:42 | 200 |      4.8115ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:21 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 0s
-[GIN] 2021/05/26 - 23:21:45 | 404 |      1.5697ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:21 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 10.516ms
-[GIN] 2021/05/26 - 23:21:45 | 200 |     16.2802ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:22 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 956.9µs
-[GIN] 2021/05/26 - 23:22:12 | 404 |      1.5964ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:22 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 766.7µs
-[GIN] 2021/05/26 - 23:22:16 | 404 |      1.4023ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:22 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 3.5418ms
-[GIN] 2021/05/26 - 23:22:16 | 200 |      4.1208ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:22 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 1.0021ms
-[GIN] 2021/05/26 - 23:22:47 | 404 |      2.6883ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:22 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 435.8µs
-[GIN] 2021/05/26 - 23:22:52 | 404 |      1.0067ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:22 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 4.4732ms
-[GIN] 2021/05/26 - 23:22:52 | 200 |      5.0388ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:25 CDT] POST /v1/login 200 39.2404ms
-[GIN] 2021/05/26 - 23:25:21 | 200 |     39.2404ms |  192.168.100.81 | POST     "/v1/login"
-192.168.100.81 - [26 May 21 23:25 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 0s
-[GIN] 2021/05/26 - 23:25:21 | 404 |            0s |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:25 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 32.1498ms
-[GIN] 2021/05/26 - 23:25:21 | 200 |     32.7415ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:26 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 781.2µs
-[GIN] 2021/05/26 - 23:26:41 | 404 |      2.6217ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:26 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 155.5µs
-[GIN] 2021/05/26 - 23:26:48 | 404 |       743.6µs |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:26 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities 200 98.4105ms
-[GIN] 2021/05/26 - 23:26:48 | 200 |     98.9589ms |  192.168.100.81 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities"
-192.168.100.81 - [26 May 21 23:27 CDT] POST /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates 201 435.486ms
-[GIN] 2021/05/26 - 23:27:07 | 201 |    436.0505ms |  192.168.100.81 | POST     "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates"
-192.168.100.81 - [26 May 21 23:27 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 0s
-[GIN] 2021/05/26 - 23:27:09 | 404 |       574.2µs |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:27 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 540.9µs
-[GIN] 2021/05/26 - 23:27:10 | 404 |       1.169ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:27 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 36.4865ms
-[GIN] 2021/05/26 - 23:27:10 | 200 |     37.2694ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:27 CDT] DELETE /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/108d0482-7f7f-4ffd-b898-f88679abbe36 204 185.5937ms
-[GIN] 2021/05/26 - 23:27:13 | 204 |    186.4242ms |  192.168.100.81 | DELETE   "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/108d0482-7f7f-4ffd-b898-f88679abbe36"
-192.168.100.81 - [26 May 21 23:27 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 811.3µs
-[GIN] 2021/05/26 - 23:27:19 | 404 |      1.3544ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:27 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 3.0408ms
-[GIN] 2021/05/26 - 23:27:19 | 200 |      3.6164ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:27 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 410.1µs
-[GIN] 2021/05/26 - 23:27:44 | 404 |      1.0864ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:27 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities 200 2.4299ms
-[GIN] 2021/05/26 - 23:27:46 | 200 |      2.7381ms |  192.168.100.81 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities"
-192.168.100.81 - [26 May 21 23:27 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 913.5µs
-[GIN] 2021/05/26 - 23:27:46 | 404 |      1.5652ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:28 CDT] POST /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates 201 245.4286ms
-[GIN] 2021/05/26 - 23:28:04 | 201 |    245.9744ms |  192.168.100.81 | POST     "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates"
-192.168.100.81 - [26 May 21 23:28 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 877.9µs
-[GIN] 2021/05/26 - 23:28:06 | 404 |      1.4409ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:28 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 759.4µs
-[GIN] 2021/05/26 - 23:28:08 | 404 |       855.8µs |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:28 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 67.6118ms
-[GIN] 2021/05/26 - 23:28:08 | 200 |     68.1251ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
-192.168.100.81 - [26 May 21 23:28 CDT] DELETE /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/c006f671-c954-43b1-852e-bb080d59acd2 204 297.7533ms
-[GIN] 2021/05/26 - 23:28:10 | 204 |    298.3071ms |  192.168.100.81 | DELETE   "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a/priceRates/c006f671-c954-43b1-852e-bb080d59acd2"
-192.168.100.81 - [26 May 21 23:28 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 450µs
-[GIN] 2021/05/26 - 23:28:13 | 404 |      1.0394ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [26 May 21 23:28 CDT] GET /v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a 200 4.1137ms
-[GIN] 2021/05/26 - 23:28:13 | 200 |      4.1137ms |  192.168.100.81 | GET      "/v1/providers/62454fac-5ad3-4929-957b-7085ac0e928a"
+[GIN-debug] redirecting request 301: /reviews/ --> /reviews/
+192.168.100.41 - [27 May 21 19:36 CDT] GET /reviews/ 200 4.9763ms
+[GIN] 2021/05/27 - 19:36:30 | 200 |      5.9415ms |  192.168.100.41 | GET      "/reviews/"
+192.168.100.41 - [27 May 21 19:36 CDT] GET /favicon.ico 404 0s
+[GIN] 2021/05/27 - 19:36:31 | 404 |       999.2µs |  192.168.100.41 | GET      "/favicon.ico"
+192.168.100.41 - [27 May 21 19:36 CDT] GET /reviews/5543ae3a-d662-4d7a-8388-f33373ff68e7/ 200 988.1µs
+[GIN] 2021/05/27 - 19:36:35 | 200 |      2.9815ms |  192.168.100.41 | GET      "/reviews/5543ae3a-d662-4d7a-8388-f33373ff68e7/"
+192.168.100.41 - [27 May 21 19:37 CDT] GET /reviews/5543ae3a-d662-4d7a-8388-f33373ff68e7/chance.mp4 200 346.9955ms
+[GIN] 2021/05/27 - 19:37:24 | 200 |    349.6549ms |  192.168.100.41 | GET      "/reviews/5543ae3a-d662-4d7a-8388-f33373ff68e7/chance.mp4"
+192.168.100.41 - [27 May 21 19:37 CDT] GET /reviews/5543ae3a-d662-4d7a-8388-f33373ff68e7/chance.mp4 206 349.4482ms
+[GIN] 2021/05/27 - 19:37:24 | 206 |    359.4462ms |  192.168.100.41 | GET      "/reviews/5543ae3a-d662-4d7a-8388-f33373ff68e7/chance.mp4"
+192.168.100.41 - [27 May 21 19:37 CDT] GET /favicon.ico 404 0s
+[GIN] 2021/05/27 - 19:37:24 | 404 |       718.1µs |  192.168.100.41 | GET      "/favicon.ico"
+192.168.100.41 - [27 May 21 19:40 CDT] GET /reviews/5543ae3a-d662-4d7a-8388-f33373ff68e7/chance.mp4 206 1m5.4189852s
+[GIN] 2021/05/27 - 19:40:40 | 206 |          1m5s |  192.168.100.41 | GET      "/reviews/5543ae3a-d662-4d7a-8388-f33373ff68e7/chance.mp4"
