@@ -1,16 +1,16 @@
 package serviceProviderManagementService
 
-import (
+import (	
 	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
-
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/customErrors"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/fileAnalyzer"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/hashing"
+	"github.com/AdairHdz/OnTheWayRestAPI/helpers/directoryManager"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
@@ -152,11 +152,11 @@ func (ServiceProviderManagementService) Update() gin.HandlerFunc {
 func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.HandlerFunc{
 	return func(context *gin.Context){
 		providerID := context.Param("providerId")
-		path := "./images/" + providerID
-		_, err := os.Stat(path)
+		path := "./images/" + providerID								
+		directoryCreationError := directoryManager.CreateDirectory(path)
 
-		if os.IsNotExist(err) {
-			os.Mkdir(path, 777)
+		if directoryCreationError != nil {
+			context.AbortWithStatus(http.StatusConflict)
 		}
 		
 		serviceProvider := businessEntities.ServiceProvider{}

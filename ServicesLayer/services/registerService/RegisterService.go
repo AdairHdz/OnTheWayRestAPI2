@@ -1,13 +1,12 @@
 package registerService
 
-import (
+import (	
 	"net/http"
-
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
+	"github.com/AdairHdz/OnTheWayRestAPI/helpers/codeGenerator"	
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
-	"github.com/AdairHdz/OnTheWayRestAPI/helpers/codeGenerator"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 )
@@ -55,6 +54,7 @@ func (RegisterService) RegisterUser() gin.HandlerFunc {
 					context.AbortWithStatus(http.StatusConflict)
 					return
 				}
+
 
 				response = mappers.CreateUserDTOAsResponse(serviceProviderEntity.User, serviceProviderEntity.ID)
 			}else{				
