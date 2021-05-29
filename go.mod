@@ -4,8 +4,8 @@ go 1.16
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/didip/tollbooth v4.0.2+incompatible // indirect
-	github.com/didip/tollbooth_gin v0.0.0-20170928041415-5752492be505 // indirect
+	github.com/didip/tollbooth v4.0.2+incompatible
+	github.com/didip/tollbooth_gin v0.0.0-20170928041415-5752492be505
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/go-playground/validator/v10 v10.6.1 // indirect
