@@ -29,7 +29,14 @@ func (TokenRefreshService) RefreshToken() gin.HandlerFunc {
 				context.AbortWithStatusJSON(http.StatusConflict, "Error al generar el token")
 				return
 			}
-			context.JSON(http.StatusOK, generatedToken)
+
+			response := struct {
+				Token string `json:"token"`
+			}{
+				Token: generatedToken,	
+			}
+
+			context.JSON(http.StatusOK, response)
 		} else {
 			context.AbortWithStatusJSON(http.StatusConflict, "Error")
 			return

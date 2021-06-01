@@ -19,17 +19,22 @@ func CreateServiceProviderDTOAsResponse(serviceProvider businessEntities.Service
 }
 
 func CreateServiceProviderOverviewDTOAsResponse(serviceProviders []businessEntities.ServiceProvider) []dataTransferObjects.ResponseServiceProviderOverviewDTO {
-	var response []dataTransferObjects.ResponseServiceProviderOverviewDTO
-
+	var response []dataTransferObjects.ResponseServiceProviderOverviewDTO	
+	
 	for _, serviceProviderElement := range serviceProviders {
-		serviceProviderDTO := dataTransferObjects.ResponseServiceProviderOverviewDTO {
-			ID: serviceProviderElement.ID,
-			Names: serviceProviderElement.User.Names,
-			LastName: serviceProviderElement.User.LastName,
-			AverageScore: uint8(serviceProviderElement.AverageScore),
-			PriceRate: serviceProviderElement.PriceRates[0].Price,
+
+		if len(serviceProviderElement.PriceRates) != 0 {			
+			serviceProviderDTO := dataTransferObjects.ResponseServiceProviderOverviewDTO {
+				ID: serviceProviderElement.ID,
+				Names: serviceProviderElement.User.Names,
+				LastName: serviceProviderElement.User.LastName,
+				AverageScore: uint8(serviceProviderElement.AverageScore),
+				PriceRate: serviceProviderElement.PriceRates[0].Price,
+			}
+			response = append(response, serviceProviderDTO)
 		}
-		response = append(response, serviceProviderDTO)
+
+
 	}
 
 	
