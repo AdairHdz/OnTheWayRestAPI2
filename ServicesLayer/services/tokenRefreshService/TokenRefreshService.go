@@ -41,10 +41,5 @@ func (TokenRefreshService) RefreshToken() gin.HandlerFunc {
 			context.AbortWithStatusJSON(http.StatusConflict, "Error")
 			return
 		}
-
-		
-
-
-		
 	}
 }

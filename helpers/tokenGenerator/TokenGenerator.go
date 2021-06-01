@@ -4,7 +4,7 @@ import (
 	"crypto/rsa"
 	"io/ioutil"
 	"time"
-	"github.com/dgrijalva/jwt-go"	
+	"github.com/dgrijalva/jwt-go"		
 )
 
 
@@ -85,4 +85,5 @@ func CreateRefreshToken(emailAddress string, userType int) (string, error) {
 
 	return token.SignedString(signKey)
 }
+
 

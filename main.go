@@ -1,9 +1,9 @@
 package main
 
-import (
+import (		
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/database"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes"	
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -104,6 +104,40 @@ func main() {
 	}
 
 	DB.Save(&cities)	
+
+	// tokenBlackListHandler := tokenBlacklist.GetInstance()
+
+	// x := tokenBlacklist.CustomMarshalData{
+	// 	EmailAddress: "adairho16@gmail.com",
+	// 	AssociatedTokens: nil,
+	// }
+
+	// x.AssociatedTokens = append(x.AssociatedTokens, "Token 1")
+	// x.AssociatedTokens = append(x.AssociatedTokens, "Token 2")
+
+	// marshaledData, err := x.MarshalBinary()
+	// if err != nil {
+	// 	println(err.Error())
+	// 	return
+	// }	
+
+	// err2 := tokenBlackListHandler.Save("trying", marshaledData, time.Minute * 1)
+	// if err2 != nil {
+	// 	println(err2.Error())
+	// 	return
+	// }
+
+	// result, err := tokenBlackListHandler.Get("trying")
+	// if err != nil {
+	// 	println(err.Error())
+	// 	return
+	// }
+	// x.UnmarshalBinary(result)
+	// println("Unmarshaled data: ", x.EmailAddress)
+	// for _, item :=  range x.AssociatedTokens {
+	// 	println(item)
+	// }
+	// println(result)		
 
 	routes.StartServer()	
 }
