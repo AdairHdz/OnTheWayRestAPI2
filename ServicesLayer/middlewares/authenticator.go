@@ -66,6 +66,25 @@ func AuthenticateWithRefreshToken()  gin.HandlerFunc {
 		if !token.Valid {
 			context.AbortWithStatus(http.StatusUnauthorized)			
 			return
+		}	
+		
+		extractedRefreshToken, err := request.HeaderExtractor{"Token-Request"}.ExtractToken(context.Request)
+		if err != nil {
+			context.AbortWithStatusJSON(http.StatusForbidden, "Error while trying to extract token")
+			return
+		}
+
+		tokenBlackListHandler := tokenBlackList.GetInstance()
+		_, err = tokenBlackListHandler.Get(fmt.Sprintf("BlackListedRefreshToken_%v", extractedRefreshToken))
+		if err != nil {
+			if err == redis.Nil {
+				context.Next()
+				return
+			}
+			context.AbortWithStatusJSON(http.StatusForbidden, "There was an error while trying to validate your token")
+			return
 		}		
+		context.AbortWithStatusJSON(http.StatusForbidden, "This token can no longer be used")
+		return	
 	}
 }
