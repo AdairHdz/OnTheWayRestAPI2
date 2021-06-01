@@ -11,12 +11,13 @@ import (
 
 func Authenticate() gin.HandlerFunc {
 	return func(context *gin.Context){		
-		token, err := request.ParseFromRequest(context.Request, request.OAuth2Extractor, func (token *jwt.Token) (interface{}, error){
+		token, err := request.ParseFromRequest(context.Request, request.OAuth2Extractor, func (token *jwt.Token) (interface{}, error){			
 			return 	tokenGenerator.VerifyKey, nil
-		}, request.WithClaims(&tokenGenerator.CustomClaim{}))
-		
+		}, request.WithClaims(&tokenGenerator.CustomClaim{}))		
+
 		if err != nil {
 			fmt.Println("Invalid token", err)
+			fmt.Println(token)
 			context.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
