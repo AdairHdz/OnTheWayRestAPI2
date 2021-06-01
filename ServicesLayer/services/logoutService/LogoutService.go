@@ -25,7 +25,18 @@ func (LogoutService) Logout() gin.HandlerFunc {
 						
 		err = tokenBlackListHandler.Save(fmt.Sprintf("BlackListedToken_%v", extractedToken), extractedToken, time.Minute * 15)		
 		if err != nil {
-			context.AbortWithStatusJSON(http.StatusConflict, "Errorr while trying to log user out")
+			context.AbortWithStatusJSON(http.StatusConflict, "Error while trying to log user out")
+		}
+
+		extractedRefreshToken, err := request.HeaderExtractor{"Token-Request"}.ExtractToken(context.Request)
+		if err != nil {
+			context.AbortWithStatusJSON(http.StatusForbidden, "Error while trying to extract token")
+			return
+		}
+		
+		err = tokenBlackListHandler.Save(fmt.Sprintf("BlackListedRefreshToken_%v", extractedRefreshToken), extractedRefreshToken, time.Hour * 168)		
+		if err != nil {
+			context.AbortWithStatusJSON(http.StatusConflict, "Error while trying to log user out")
 		}
 
 	}
