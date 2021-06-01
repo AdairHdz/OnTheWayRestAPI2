@@ -44,13 +44,19 @@ func (LoginService) Login()  gin.HandlerFunc {
 			return
 		}
 
-		token, tokenError := tokenGenerator.CreateToken(user.EmailAddress)
+		token, tokenError := tokenGenerator.CreateToken(user.EmailAddress, int(user.UserType))
 
 		if tokenError != nil {
 			context.Status(http.StatusConflict)
 			return
 		}
 
+		refreshToken, tokenError := tokenGenerator.CreateRefreshToken(user.EmailAddress, int(user.UserType))
+
+		if tokenError != nil {
+			context.Status(http.StatusConflict)
+			return
+		}		
 
 		response := struct {
 			ID uuid.UUID `json:"id"`
@@ -61,6 +67,7 @@ func (LoginService) Login()  gin.HandlerFunc {
 			Verified bool `json:"verified"`
 			StateID uuid.UUID `json:"stateId"`
 			Token string `json:"token"`
+			RefreshToken string `json:"refreshToken"`
 		}{
 			ID: userTypeID,
 			Names: user.Names,
@@ -70,6 +77,7 @@ func (LoginService) Login()  gin.HandlerFunc {
 			Verified: user.Verified,
 			StateID: user.StateID,
 			Token: token,
+			RefreshToken: refreshToken,
 		}
 
 		context.JSON(http.StatusOK, response)

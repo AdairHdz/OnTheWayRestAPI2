@@ -14,6 +14,7 @@ import (
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/states"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/loginService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/registerService"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/tokenRefreshService"
 	"github.com/didip/tollbooth"
 	"github.com/didip/tollbooth/limiter"
 	"github.com/didip/tollbooth_gin"
@@ -24,6 +25,7 @@ var (
 	router *gin.Engine
 	_loginService = loginService.LoginService{}
 	_registerService = registerService.RegisterService{}
+	_tokenRefreshService = tokenRefreshService.TokenRefreshService {}
 )
 
 
@@ -39,7 +41,7 @@ func init(){
 	router.MaxMultipartMemory = 8 << 20  // 8 MiB
 	limiter := tollbooth.NewLimiter(50, &limiter.ExpirableOptions{DefaultExpirationTTL: time.Hour})
 	limiter.SetIPLookups([]string{"RemoteAddr", "X-Forwarded-For", "X-Real-IP"})
-	v1 := router.Group("/v1", tollbooth_gin.LimitHandler(limiter))
+	v1 := router.Group("/v1", tollbooth_gin.LimitHandler(limiter))	
 	{
 				
 		router.StaticFS("/images", http.Dir("./images"))
@@ -50,7 +52,13 @@ func init(){
 		providers.Routes(v1)
 		states.Routes(v1)
 		serviceRequests.Routes(v1)
-	}		
+	}
+	
+	trying := v1.Group("/refresh")
+	{
+		trying.Use(middlewares.AuthenticateWithRefreshToken())
+		trying.POST("/", _tokenRefreshService.RefreshToken())
+	}
 }
 
 func StartServer(){

@@ -23,7 +23,27 @@ func Authenticate() gin.HandlerFunc {
 
 		if !token.Valid {
 			context.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}		
+	}
+}
+
+func AuthenticateWithRefreshToken()  gin.HandlerFunc {
+	return func(context *gin.Context) {
+		token, err := request.ParseFromRequest(context.Request, request.HeaderExtractor{"Token-Request"}, func (token *jwt.Token) (interface{}, error){
+			return 	tokenGenerator.VerifyKey, nil
+		}, request.WithClaims(&tokenGenerator.CustomClaim{}))
+						
+
+		if err != nil {
+			fmt.Println("Invalid token", err)
+			context.AbortWithStatus(http.StatusUnauthorized)			
+			return
 		}
 
+		if !token.Valid {
+			context.AbortWithStatus(http.StatusUnauthorized)			
+			return
+		}		
 	}
 }

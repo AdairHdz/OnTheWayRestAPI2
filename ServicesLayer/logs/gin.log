@@ -31,50 +31,32 @@
 [GIN-debug] POST   /v1/requests/             --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Register.func1 (6 handlers)
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.FindByID.func1 (6 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (6 handlers)
+[GIN-debug] POST   /v1/refresh/              --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/tokenRefreshService.TokenRefreshService.RefreshToken.func1 (6 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.100.41 - [28 May 21 11:14 CDT] POST /v1/login 200 35.7978ms
-[GIN] 2021/05/28 - 11:14:42 | 200 |     35.7978ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [28 May 21 11:14 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities 200 5.9381ms
-[GIN] 2021/05/28 - 11:14:44 | 200 |        8.88ms |  192.168.100.41 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities"
-[GIN-debug] redirecting request 301: /v1/providers/ --> /v1/providers/?maxPriceRate=91&city=Coatepec&kindOfService=0
-192.168.100.41 - [28 May 21 11:14 CDT] GET /v1/providers/?maxPriceRate=91&city=Coatepec&kindOfService=0 401 0s
-[GIN] 2021/05/28 - 11:14:46 | 401 |      1.0794ms |  192.168.100.41 | GET      "/v1/providers/?maxPriceRate=91&city=Coatepec&kindOfService=0"
-[GIN-debug] redirecting request 301: /v1/providers/ --> /v1/providers/?maxPriceRate=91&city=Coatepec&kindOfService=0
-192.168.100.41 - [28 May 21 11:14 CDT] GET /v1/providers/?maxPriceRate=91&city=Coatepec&kindOfService=0 401 517.6µs
-[GIN] 2021/05/28 - 11:14:53 | 401 |      2.1371ms |  192.168.100.41 | GET      "/v1/providers/?maxPriceRate=91&city=Coatepec&kindOfService=0"
-192.168.100.41 - [28 May 21 11:15 CDT] POST /v1/login 200 38.6515ms
-[GIN] 2021/05/28 - 11:15:57 | 200 |     38.6515ms |  192.168.100.41 | POST     "/v1/login"
-192.168.100.41 - [28 May 21 11:15 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities 200 23.0503ms
-[GIN] 2021/05/28 - 11:15:58 | 200 |     28.6714ms |  192.168.100.41 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities"
-[GIN-debug] redirecting request 301: /v1/providers/ --> /v1/providers/?maxPriceRate=91&city=Coatepec&kindOfService=0
-192.168.100.41 - [28 May 21 11:16 CDT] GET /v1/providers/?maxPriceRate=91&city=Coatepec&kindOfService=0 401 445.5µs
-[GIN] 2021/05/28 - 11:16:01 | 401 |      1.0302ms |  192.168.100.41 | GET      "/v1/providers/?maxPriceRate=91&city=Coatepec&kindOfService=0"
-[GIN-debug] redirecting request 301: /v1/states/ --> /v1/states/
-192.168.100.81 - [28 May 21 11:23 CDT] GET /v1/states/ 200 982.4µs
-[GIN] 2021/05/28 - 11:23:19 | 200 |      2.0174ms |  192.168.100.81 | GET      "/v1/states/"
-[GIN-debug] redirecting request 301: /v1/states/ --> /v1/states/
-192.168.100.81 - [28 May 21 11:23 CDT] GET /v1/states/ 200 1.6741ms
-[GIN] 2021/05/28 - 11:23:42 | 200 |       2.247ms |  192.168.100.81 | GET      "/v1/states/"
-[GIN-debug] redirecting request 301: /v1/states/ --> /v1/states/
-192.168.100.81 - [28 May 21 11:24 CDT] GET /v1/states/ 200 22.1325ms
-[GIN] 2021/05/28 - 11:24:31 | 200 |     27.2101ms |  192.168.100.81 | GET      "/v1/states/"
-192.168.100.81 - [28 May 21 11:25 CDT] POST /v1/login 200 61.9941ms
-[GIN] 2021/05/28 - 11:25:03 | 200 |     62.4507ms |  192.168.100.81 | POST     "/v1/login"
-192.168.100.81 - [28 May 21 11:25 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 60.0613ms
-[GIN] 2021/05/28 - 11:25:03 | 404 |     60.6156ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [28 May 21 11:25 CDT] GET /v1/providers/40ec587a-a2bb-4d10-a211-26ee46cbb700 200 426.2063ms
-[GIN] 2021/05/28 - 11:25:04 | 200 |    426.7645ms |  192.168.100.81 | GET      "/v1/providers/40ec587a-a2bb-4d10-a211-26ee46cbb700"
-192.168.100.81 - [28 May 21 11:25 CDT] GET /v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities 200 3.229ms
-[GIN] 2021/05/28 - 11:25:27 | 200 |      3.6292ms |  192.168.100.81 | GET      "/v1/states/3d5b56f8-0e6c-495d-b010-196f26d87e48/cities"
-192.168.100.81 - [28 May 21 11:25 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 0s
-[GIN] 2021/05/28 - 11:25:27 | 404 |       567.4µs |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [28 May 21 11:25 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 1.4672ms
-[GIN] 2021/05/28 - 11:25:28 | 404 |      2.1092ms |  192.168.100.81 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.81 - [28 May 21 11:38 CDT] GET /images/OnTheWayIcon.png 200 7.5688194s
-[GIN] 2021/05/28 - 11:38:06 | 200 |    7.5784894s |  192.168.100.81 | GET      "/images/OnTheWayIcon.png"
-192.168.100.81 - [28 May 21 11:38 CDT] GET /favicon.ico 404 0s
-[GIN] 2021/05/28 - 11:38:07 | 404 |      2.1173ms |  192.168.100.81 | GET      "/favicon.ico"
-192.168.100.41 - [28 May 21 11:39 CDT] GET /images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png 404 999.5µs
-[GIN] 2021/05/28 - 11:39:31 | 404 |    412.3193ms |  192.168.100.41 | GET      "/images/82e49b2e-cff5-46cb-8f4f-de932cbb6cbf/OnTheWayIcon.png"
-192.168.100.41 - [28 May 21 11:39 CDT] GET /images/OnTheWayIcon.png 200 1.0047ms
-[GIN] 2021/05/28 - 11:39:40 | 200 |      7.0201ms |  192.168.100.41 | GET      "/images/OnTheWayIcon.png"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:28 CDT] POST /v1/refresh/ 200 12.9693ms
+[GIN] 2021/05/31 - 20:28:46 | 200 |     16.1267ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:28 CDT] POST /v1/refresh/ 401 586µs
+[GIN] 2021/05/31 - 20:28:59 | 401 |      1.6726ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 401 1.9735ms
+[GIN] 2021/05/31 - 20:29:06 | 401 |      2.4864ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 9.6158ms
+[GIN] 2021/05/31 - 20:29:14 | 200 |     13.6688ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 401 1.8643ms
+[GIN] 2021/05/31 - 20:29:17 | 401 |     18.3978ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 4.7581ms
+[GIN] 2021/05/31 - 20:29:21 | 200 |      5.3322ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 5.2511ms
+[GIN] 2021/05/31 - 20:29:41 | 200 |      5.8102ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 3.6639ms
+[GIN] 2021/05/31 - 20:29:45 | 200 |      4.2183ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 3.4338ms
+[GIN] 2021/05/31 - 20:29:49 | 200 |      3.9981ms |  192.168.100.41 | POST     "/v1/refresh/"
