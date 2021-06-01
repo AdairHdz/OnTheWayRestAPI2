@@ -31,6 +31,32 @@
 [GIN-debug] POST   /v1/requests/             --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Register.func1 (6 handlers)
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.FindByID.func1 (6 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (6 handlers)
+[GIN-debug] POST   /v1/refresh/              --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/tokenRefreshService.TokenRefreshService.RefreshToken.func1 (6 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
-192.168.1.215 - [29 May 21 00:54 CDT] POST /v1/register 201 401.9938ms
-[GIN] 2021/05/29 - 00:54:39 | 201 |    403.6733ms |   192.168.1.215 | POST     "/v1/register"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:28 CDT] POST /v1/refresh/ 200 12.9693ms
+[GIN] 2021/05/31 - 20:28:46 | 200 |     16.1267ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:28 CDT] POST /v1/refresh/ 401 586µs
+[GIN] 2021/05/31 - 20:28:59 | 401 |      1.6726ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 401 1.9735ms
+[GIN] 2021/05/31 - 20:29:06 | 401 |      2.4864ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 9.6158ms
+[GIN] 2021/05/31 - 20:29:14 | 200 |     13.6688ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 401 1.8643ms
+[GIN] 2021/05/31 - 20:29:17 | 401 |     18.3978ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 4.7581ms
+[GIN] 2021/05/31 - 20:29:21 | 200 |      5.3322ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 5.2511ms
+[GIN] 2021/05/31 - 20:29:41 | 200 |      5.8102ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 3.6639ms
+[GIN] 2021/05/31 - 20:29:45 | 200 |      4.2183ms |  192.168.100.41 | POST     "/v1/refresh/"
+[GIN-debug] redirecting request 307: /v1/refresh/ --> /v1/refresh/
+192.168.100.41 - [31 May 21 20:29 CDT] POST /v1/refresh/ 200 3.4338ms
+[GIN] 2021/05/31 - 20:29:49 | 200 |      3.9981ms |  192.168.100.41 | POST     "/v1/refresh/"

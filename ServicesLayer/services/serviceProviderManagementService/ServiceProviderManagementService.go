@@ -145,7 +145,7 @@ func (ServiceProviderManagementService) Update() gin.HandlerFunc {
 			return
 		}
 
-		context.Status(http.StatusOK)
+		context.Status(http.StatusNoContent)
 	}
 }
 
