@@ -15,6 +15,7 @@ import (
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/loginService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/registerService"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/tokenRefreshService"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/logoutService"
 	"github.com/didip/tollbooth"
 	"github.com/didip/tollbooth/limiter"
 	"github.com/didip/tollbooth_gin"
@@ -25,7 +26,8 @@ var (
 	router *gin.Engine
 	_loginService = loginService.LoginService{}
 	_registerService = registerService.RegisterService{}
-	_tokenRefreshService = tokenRefreshService.TokenRefreshService {}
+	_tokenRefreshService = tokenRefreshService.TokenRefreshService{}
+	_logoutService = logoutService.LogoutService{}
 )
 
 
@@ -54,10 +56,16 @@ func init(){
 		serviceRequests.Routes(v1)
 	}
 	
-	trying := v1.Group("/refresh")
+	refresh := v1.Group("/refresh")
 	{
-		trying.Use(middlewares.AuthenticateWithRefreshToken())
-		trying.POST("/", _tokenRefreshService.RefreshToken())
+		refresh.Use(middlewares.AuthenticateWithRefreshToken())
+		refresh.POST("/", _tokenRefreshService.RefreshToken())
+	}
+
+	logout := v1.Group("/logout")
+	{
+		logout.Use(middlewares.Authenticate())
+		logout.POST("/", _logoutService.Logout())
 	}
 }
 

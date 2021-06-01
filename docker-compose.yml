@@ -9,8 +9,14 @@ services:
         volumes:
             - images:/app/images
             - logs:/app/ServicesLayer/logs
-            - .:/app
-            - /app/main
+            # - .:/app
+            # - /app/main
+    black_list_redis:
+        build: #redis en dockerhub
+        ports:
+            - "6379:6379"
+        volumes:
+            #- blacklist:/app/
     #   depends_on: 
     #         - mailing_service
     # # mailing_service:
