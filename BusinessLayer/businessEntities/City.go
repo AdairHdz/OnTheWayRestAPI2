@@ -1,8 +1,6 @@
 package businessEntities
 
-import (
-	"fmt"
-
+import (	
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories"
 	uuid "github.com/satori/go.uuid"
 	"gorm.io/gorm"
@@ -19,7 +17,6 @@ type City struct {
 func (City) FindAll(stateID uuid.UUID) ([]City, error) {
 	var cities []City
 	repository := repositories.Repository{}
-	databaseError := repository.FindMatches(&cities, "state_id = ?", stateID)
-	fmt.Println(cities)
+	databaseError := repository.FindMatches(&cities, "state_id = ?", stateID)	
 	return cities, databaseError
 }

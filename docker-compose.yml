@@ -9,17 +9,21 @@ services:
         volumes:
             - images:/app/images
             - logs:/app/ServicesLayer/logs
-            # - .:/app
-            # - /app/main
+        depends_on: 
+            - mailing_service
+            - black_list_redis
     black_list_redis:
-        build: #redis en dockerhub
+        image: "redis"
         ports:
             - "6379:6379"
         volumes:
-            #- blacklist:/app/
-    #   depends_on: 
-    #         - mailing_service
-    # # mailing_service:
+            - blacklist:/data
+        entrypoint: redis-server --appendonly yes
+    mailing_service:
+        image: "edhv99/node-grpc-server:latest"
+        ports:
+            - "4500:4500"
 volumes:
     images:
     logs:
+    blacklist:
