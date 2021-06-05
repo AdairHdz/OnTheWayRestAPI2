@@ -13,7 +13,7 @@ import (
 )
 
 func Authenticate() gin.HandlerFunc {
-	return func(context *gin.Context){		
+	return func(context *gin.Context){
 		token, err := request.ParseFromRequest(context.Request, request.OAuth2Extractor, func (token *jwt.Token) (interface{}, error){			
 			return 	tokenGenerator.VerifyKey, nil
 		}, request.WithClaims(&tokenGenerator.CustomClaim{}))		

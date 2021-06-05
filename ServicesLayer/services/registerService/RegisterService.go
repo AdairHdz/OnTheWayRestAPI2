@@ -1,21 +1,15 @@
 package registerService
 
-import (
-	ctx "context"	
-	"log"
+import (	
 	"net/http"
-
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/proto"
-
-	// "github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/proto/grpcServer"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"	
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/codeGenerator"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
-	"google.golang.org/grpc"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/mailerService"
 )
 
 
@@ -81,23 +75,9 @@ func (RegisterService) RegisterUser() gin.HandlerFunc {
 				response = mappers.CreateUserDTOAsResponse(serviceRequesterEntity.User, serviceRequesterEntity.ID)
 			}
 
-
-			conn, err := grpc.Dial("0.0.0.0:4500", grpc.WithInsecure())
-
-			if err != nil {
-				log.Println(err.Error())
-			}
-
-			serviceClient := proto.NewEmailTokenClient(conn)			
-
-			_ , err = serviceClient.GetEmailAndToken(ctx.Background(), &proto.EmailTokenRequest{
-				Email: userEntity.EmailAddress,
-				Token: userEntity.VerificationCode,
-			})
-
-			if err != nil {
-				log.Println(err.Error())
-			}					
+			mailerGRPCServer := mailerService.MailerGRPCService{}
+			mailerGRPCServer.SendEmail(userEntity.EmailAddress, userEntity.VerificationCode)
+			
 			context.JSON(http.StatusCreated, response)
 	}
 }

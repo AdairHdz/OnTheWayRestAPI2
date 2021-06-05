@@ -103,41 +103,7 @@ func main() {
 		StateID: veracruzID,
 	}
 
-	DB.Save(&cities)	
-
-	// tokenBlackListHandler := tokenBlacklist.GetInstance()
-
-	// x := tokenBlacklist.CustomMarshalData{
-	// 	EmailAddress: "adairho16@gmail.com",
-	// 	AssociatedTokens: nil,
-	// }
-
-	// x.AssociatedTokens = append(x.AssociatedTokens, "Token 1")
-	// x.AssociatedTokens = append(x.AssociatedTokens, "Token 2")
-
-	// marshaledData, err := x.MarshalBinary()
-	// if err != nil {
-	// 	println(err.Error())
-	// 	return
-	// }	
-
-	// err2 := tokenBlackListHandler.Save("trying", marshaledData, time.Minute * 1)
-	// if err2 != nil {
-	// 	println(err2.Error())
-	// 	return
-	// }
-
-	// result, err := tokenBlackListHandler.Get("trying")
-	// if err != nil {
-	// 	println(err.Error())
-	// 	return
-	// }
-	// x.UnmarshalBinary(result)
-	// println("Unmarshaled data: ", x.EmailAddress)
-	// for _, item :=  range x.AssociatedTokens {
-	// 	println(item)
-	// }
-	// println(result)		
+	DB.Save(&cities)		
 
 	routes.StartServer()	
 }
