@@ -1,7 +1,8 @@
 package businessEntities
 
-import (	
+import (
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories"
+	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/repositories/userRepository"
 	uuid "github.com/satori/go.uuid"
 	"gorm.io/gorm"
 )
@@ -41,4 +42,10 @@ func (user *User) Login() (uuid.UUID, error) {
 		}
 	}	
 	return userTypeID, databaseError
+}
+
+func (user *User) VerifyAccount(userID, activationCode string) (error) {
+	repository := userRepository.UserRepository{}
+	databaseError := repository.VerifyAccount(userID, activationCode, user)
+	return databaseError
 }
