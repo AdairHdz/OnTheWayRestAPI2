@@ -31,6 +31,9 @@
 [GIN-debug] POST   /v1/requests/             --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Register.func1 (6 handlers)
 [GIN-debug] GET    /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.FindByID.func1 (6 handlers)
 [GIN-debug] PATCH  /v1/requests/:serviceRequestId --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/serviceRequestManagementService.ServiceRequestManagementService.Update.func1 (6 handlers)
+[GIN-debug] PATCH  /v1/users/:userId/verify  --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/userManagementService.UserManagementService.VerifyAccount.func1 (5 handlers)
 [GIN-debug] POST   /v1/refresh/              --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/tokenRefreshService.TokenRefreshService.RefreshToken.func1 (6 handlers)
 [GIN-debug] POST   /v1/logout/               --> github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/logoutService.LogoutService.Logout.func1 (6 handlers)
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
+192.168.100.41 - [05 Jun 21 22:46 CDT] PATCH /v1/users/02001e36-c58b-4029-bc82-255026947f55/verify 409 17.0395ms
+[GIN] 2021/06/05 - 22:46:34 | 409 |     39.7702ms |  192.168.100.41 | PATCH    "/v1/users/02001e36-c58b-4029-bc82-255026947f55/verify"

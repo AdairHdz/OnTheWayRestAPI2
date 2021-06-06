@@ -9,6 +9,7 @@ import (
 
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/middlewares"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/providers"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/users"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/requesters"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/serviceRequests"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes/states"
@@ -54,6 +55,7 @@ func init(){
 		providers.Routes(v1)
 		states.Routes(v1)
 		serviceRequests.Routes(v1)
+		users.Routes(v1)
 	}
 	
 	refresh := v1.Group("/refresh")
