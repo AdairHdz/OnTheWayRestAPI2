@@ -16,3 +16,12 @@ func (UserRepository) VerifyAccount(userID, verification string, entity interfac
 	}
 	return result.Error
 }
+
+func (UserRepository) RefreshVerificationCode(userID string, entity interface{}) (error) {
+	DB := database.GetDatabase()
+	result := DB.Where("id = ?", userID).Updates(entity)
+	if result.RowsAffected == 0 {
+		return customErrors.RecordNotFoundError{}
+	}
+	return result.Error
+}
