@@ -2,16 +2,16 @@ package serviceRequesterManagementService
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
+	"github.com/AdairHdz/OnTheWayRestAPI/helpers/customErrors"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/hashing"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/validators"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
-	"github.com/AdairHdz/OnTheWayRestAPI/helpers/customErrors"
 )
-
 
 type ServiceRequesterManagementService struct{}
 
@@ -31,7 +31,7 @@ func (ServiceRequesterManagementService) Find() gin.HandlerFunc {
 			_, errorIsOfTypeRecordNotFoundError := searchError.(customErrors.RecordNotFoundError)
 			if errorIsOfTypeRecordNotFoundError {
 				context.AbortWithStatus(http.StatusNotFound)
-				return	
+				return
 			}
 			context.AbortWithStatus(http.StatusConflict)
 			return
@@ -42,8 +42,8 @@ func (ServiceRequesterManagementService) Find() gin.HandlerFunc {
 	}
 }
 
-func (ServiceRequesterManagementService) Update() gin.HandlerFunc {	
-	return func(context *gin.Context){
+func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
+	return func(context *gin.Context) {
 		serviceRequesterID, parsingError := uuid.FromString(context.Param("requesterId"))
 
 		if parsingError != nil {
@@ -51,8 +51,8 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 			return
 		}
 
-		receivedData := struct{
-			Names string `json:"names"`
+		receivedData := struct {
+			Names    string `json:"names"`
 			LastName string `json:"lastName"`
 			Password string `json:"password"`
 		}{}
@@ -63,22 +63,22 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 			return
 		}
 
-		serviceRequester := businessEntities.ServiceRequester{ }
+		serviceRequester := businessEntities.ServiceRequester{}
 		serviceRequester.Find(serviceRequesterID)
 
-		if receivedData.Names != ""{
+		if receivedData.Names != "" {
 			serviceRequester.User.Names = receivedData.Names
 		}
 
 		if receivedData.LastName != "" {
 			serviceRequester.User.LastName = receivedData.LastName
 		}
-				
+
 		if receivedData.Password != "" {
-			serviceRequester.User.Password = receivedData.Password							
+			serviceRequester.User.Password = receivedData.Password
 		}
-		
-		validator :=  validators.GetValidator()
+
+		validator := validators.GetValidator()
 		validationErrors := validator.Var(serviceRequester.User.Names, "required,min=1,max=50,lettersAndSpaces")
 
 		if validationErrors != nil {
@@ -100,7 +100,7 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 			return
 		}
 
-		hashedPassword, hashingError := hashing.GenerateHash(serviceRequester.User.Password)	
+		hashedPassword, hashingError := hashing.GenerateHash(serviceRequester.User.Password)
 		if hashingError != nil {
 			context.AbortWithStatus(http.StatusConflict)
 			return
@@ -109,7 +109,6 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 
 		updateError := serviceRequester.Update()
 
-
 		if updateError != nil {
 			context.AbortWithStatus(http.StatusConflict)
 			return
@@ -117,5 +116,58 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 
 		context.Status(http.StatusOK)
 
+	}
+}
+
+func (ServiceRequesterManagementService) GetStatistics() gin.HandlerFunc {
+	return func(context *gin.Context) {
+		startingDate := context.Query("startingDate")
+		endingDate := context.Query("endingDate")
+		requesterId, parsingError := uuid.FromString(context.Param("requesterId"))
+
+		if parsingError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The id you provided has a non-valid format.")
+			return
+		}
+
+		_, parseError := time.Parse("2006-01-02", startingDate)
+		if parseError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The starting date you provided has a non-valid format.")
+			return
+		}
+
+		_, parseError = time.Parse("2006-01-02", endingDate)
+		if parseError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ending date you provided has a non-valid format.")
+			return
+		}
+
+		serviceRequester := businessEntities.ServiceRequester{
+			ID: requesterId,
+		}
+
+		statisticsReport := struct {
+			RequestedServicesPerWeekdayqueryResult []struct {
+				RequestedServices int `json:"requestedServices"`
+				Weekday           int `json:"weekday"`
+			}
+
+			KindOfServicesQueryResult []struct {
+				RequestedServices int `json:"requestedServices"`
+				KindOfService     int `json:"kindOfService"`
+			}
+		}{}
+
+		databaseError := serviceRequester.GetStatisticsReport(&statisticsReport.RequestedServicesPerWeekdayqueryResult, &statisticsReport.KindOfServicesQueryResult, startingDate, endingDate)
+		if databaseError != nil {
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to get the statistics")
+			return
+		}
+
+		if statisticsReport.KindOfServicesQueryResult == nil || statisticsReport.RequestedServicesPerWeekdayqueryResult == nil {
+			context.AbortWithStatusJSON(http.StatusNotFound, "No service requests were found for the dates or the user you provided.")
+			return
+		}
+		context.JSON(http.StatusOK, statisticsReport)
 	}
 }
