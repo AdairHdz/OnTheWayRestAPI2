@@ -38,19 +38,6 @@ func (serviceRequester *ServiceRequester) Update() error {
 
 func (ServiceRequester *ServiceRequester) GetStatisticsReport(requestedServicesPerWeekdayqueryResult, kindOfServicesQueryResult interface{}, startingDate, endingDate string) error {
 	repository := serviceRequesterRepository.ServiceRequesterRepository{}
-
-	// statisticsReport := struct {
-	// 	RequestedServicesPerWeekdayqueryResult []struct {
-	// 		RequestedServices int
-	// 		Weekday           int
-	// 	}
-
-	// 	KindOfServicesQueryResult []struct {
-	// 		RequestedServices int
-	// 		KindOfService     int
-	// 	}
-	// }{}
-
 	databaseError := repository.GetStatisticsReport(requestedServicesPerWeekdayqueryResult, kindOfServicesQueryResult, ServiceRequester.ID.String(), startingDate, endingDate)
 	return databaseError
 }

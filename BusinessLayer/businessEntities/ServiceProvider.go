@@ -9,12 +9,12 @@ import (
 
 type ServiceProvider struct {
 	gorm.Model
-	ID uuid.UUID
-	User User
-	UserID uuid.UUID `gorm:"size:191"`
-	AverageScore float32
-	Reviews []Review
-	PriceRates []PriceRate
+	ID              uuid.UUID
+	User            User
+	UserID          uuid.UUID `gorm:"size:191"`
+	AverageScore    float32
+	Reviews         []Review
+	PriceRates      []PriceRate
 	BusinessPicture string
 }
 
@@ -24,16 +24,16 @@ func (serviceProvider ServiceProvider) Register() error {
 	return databaseError
 }
 
-func (serviceProvider *ServiceProvider) Find(serviceProviderID uuid.UUID) (error) {	
-	repository := serviceProviderRepository.ServiceProviderRepository{}	
-	databaseError := repository.FindByID(&serviceProvider, serviceProviderID)	
+func (serviceProvider *ServiceProvider) Find(serviceProviderID uuid.UUID) error {
+	repository := serviceProviderRepository.ServiceProviderRepository{}
+	databaseError := repository.FindByID(&serviceProvider, serviceProviderID)
 	return databaseError
-	
+
 }
 
-func (serviceProvider *ServiceProvider) Update() error{
-	repository := serviceProviderRepository.ServiceProviderRepository{}		
-	databaseError := repository.Update(&serviceProvider)	
+func (serviceProvider *ServiceProvider) Update() error {
+	repository := serviceProviderRepository.ServiceProviderRepository{}
+	databaseError := repository.Update(&serviceProvider)
 	return databaseError
 }
 
@@ -42,4 +42,10 @@ func (ServiceProvider) FindMatches(maxPriceRate float64, cityName string, kindOf
 	repository := serviceProviderRepository.ServiceProviderRepository{}
 	err := repository.FindMatches(&serviceProviders, maxPriceRate, cityName, kindOfService)
 	return serviceProviders, err
+}
+
+func (ServiceProvider *ServiceProvider) GetStatisticsReport(requestedServicesPerWeekdayqueryResult, kindOfServicesQueryResult interface{}, startingDate, endingDate string) error {
+	repository := serviceProviderRepository.ServiceProviderRepository{}
+	databaseError := repository.GetStatisticsReport(requestedServicesPerWeekdayqueryResult, kindOfServicesQueryResult, ServiceProvider.ID.String(), startingDate, endingDate)
+	return databaseError
 }

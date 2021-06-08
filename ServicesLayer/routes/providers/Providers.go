@@ -10,20 +10,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var(	
-	_reviewManagementService = reviewManagementService.ReviewManagementService{}
-	priceRateMgtService = priceRateManagementService.PriceRateManagementService{}
+var (
+	_reviewManagementService          = reviewManagementService.ReviewManagementService{}
+	priceRateMgtService               = priceRateManagementService.PriceRateManagementService{}
 	_serviceProviderManagementService = serviceProviderManagementService.ServiceProviderManagementService{}
-	_serviceRequestManagementService = serviceRequestManagementService.ServiceRequestManagementService{}
+	_serviceRequestManagementService  = serviceRequestManagementService.ServiceRequestManagementService{}
 )
 
 func Routes(route *gin.RouterGroup) {
 	providers := route.Group("/providers")
-	{		
+	{
 		providers.Use(middlewares.Authenticate())
 		providers.GET("/", _serviceProviderManagementService.FindMatches())
 		providers.GET("/:providerId", _serviceProviderManagementService.Find())
 		providers.PATCH("/:providerId", _serviceProviderManagementService.Update())
+		providers.GET("/:providerId/statistics", _serviceProviderManagementService.GetStatistics())
 		providers.PUT("/:providerId/image", _serviceProviderManagementService.UpdateServiceProviderImage())
 
 		reviews := providers.Group("/:providerId")
@@ -39,7 +40,7 @@ func Routes(route *gin.RouterGroup) {
 			priceRates.GET("/priceRates", priceRateMgtService.FindAll())
 			priceRates.DELETE("/priceRates/:priceRateId", priceRateMgtService.Delete())
 		}
-		
+
 		requests := providers.Group("/:providerId")
 		{
 			requests.GET("/requests", _serviceRequestManagementService.FindByDate(businessEntities.ServiceProviderType))
