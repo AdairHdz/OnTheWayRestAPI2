@@ -11,8 +11,8 @@ import (
 
 var (
 	serviceRequesterMgtService = serviceRequesterManagementService.ServiceRequesterManagementService{}
-	addressMgtService = addressManagementService.AddressManagementService{}
-	serviceRequestMgtService = serviceRequestManagementService.ServiceRequestManagementService{}
+	addressMgtService          = addressManagementService.AddressManagementService{}
+	serviceRequestMgtService   = serviceRequestManagementService.ServiceRequestManagementService{}
 )
 
 func Routes(route *gin.RouterGroup) {
@@ -22,7 +22,8 @@ func Routes(route *gin.RouterGroup) {
 		requesters.GET("/:requesterId", serviceRequesterMgtService.Find())
 		requesters.PATCH("/:requesterId", serviceRequesterMgtService.Update())
 		requesters.POST("/:requesterId/addresses", addressMgtService.Register())
-		requesters.GET("/:requesterId/addresses", addressMgtService.FindAll())		
+		requesters.GET("/:requesterId/addresses", addressMgtService.FindAll())
 		requesters.GET("/:requesterId/requests", serviceRequestMgtService.FindByDate(businessEntities.ServiceRequesterType))
+		requesters.GET(":requesterId/statistics", serviceRequesterMgtService.GetStatistics())
 	}
 }
