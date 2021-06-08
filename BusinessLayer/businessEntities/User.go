@@ -49,3 +49,9 @@ func (user *User) VerifyAccount(userID, activationCode string) (error) {
 	databaseError := repository.VerifyAccount(userID, activationCode, user)
 	return databaseError
 }
+
+func (user *User) RefreshVerificationCode(userID string) (error) {
+	repository := userRepository.UserRepository{}
+	databaseError := repository.RefreshVerificationCode(userID, user)
+	return databaseError
+}
