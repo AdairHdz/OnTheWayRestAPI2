@@ -1,8 +1,8 @@
 package users
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/userManagementService"
+	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -14,5 +14,7 @@ func Routes(route *gin.RouterGroup) {
 	{
 		users.PATCH("/:userId/verify", _userManagementService.VerifyAccount())
 		users.POST("/:userId/verify", _userManagementService.GetNewVerificationCode())
+		users.PATCH("/:userId/password", _userManagementService.RecoverPassword())
+		users.PUT("/recoveryCode", _userManagementService.SendRecoveryCode())
 	}
 }
