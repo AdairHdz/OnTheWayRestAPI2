@@ -23,11 +23,6 @@ func (ServiceRequesterRepository) Update(serviceRequester interface{}) error {
 }
 
 func (ServiceRequesterRepository) GetStatisticsReport(requestedServicesPerWeekdayqueryResult, kindOfServicesQueryResult interface{}, serviceRequesterID, startingDate, endingDate string) error {
-
-	// requestedServicesPerWeekdayqueryResult := []struct {
-	// 	RequestedServices int
-	// 	Weekday           int
-	// }{}
 	DB := database.GetDatabase()
 	requestedServicesPerWeekdayDatabaseResult := DB.Raw("SELECT COUNT(`id`) AS 'requested_services', "+
 		"WEEKDAY(DATE(`date`)) 'weekday' "+
@@ -39,11 +34,6 @@ func (ServiceRequesterRepository) GetStatisticsReport(requestedServicesPerWeekda
 	if requestedServicesPerWeekdayDatabaseResult.Error != nil {
 		return requestedServicesPerWeekdayDatabaseResult.Error
 	}
-
-	// kindOfServicesQueryResult := []struct {
-	// 	RequestedServices int
-	// 	KindOfService     int
-	// }{}
 
 	kindOfServicesDatabaseResult := DB.Raw("SELECT COUNT(`id`) AS 'requested_services', "+
 		"`kind_of_service` AS 'kind_of_service' "+
