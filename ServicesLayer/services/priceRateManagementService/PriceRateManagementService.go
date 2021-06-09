@@ -2,6 +2,8 @@ package priceRateManagementService
 
 import (
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
@@ -12,11 +14,10 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-
 type PriceRateManagementService struct{}
 
 func (PriceRateManagementService) Register() gin.HandlerFunc {
-	return func(context *gin.Context){
+	return func(context *gin.Context) {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
@@ -50,13 +51,13 @@ func (PriceRateManagementService) Register() gin.HandlerFunc {
 			return
 		}
 
-		response := mappers.CreatePriceRateDTOAsResponse(priceRateEntity)		
+		response := mappers.CreatePriceRateDTOAsResponse(priceRateEntity)
 		context.JSON(http.StatusCreated, response)
 	}
 }
 
 func (PriceRateManagementService) FindAll() gin.HandlerFunc {
-	return func(context *gin.Context){
+	return func(context *gin.Context) {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
@@ -64,25 +65,111 @@ func (PriceRateManagementService) FindAll() gin.HandlerFunc {
 			return
 		}
 
+		kindOfService := context.Query("kindOfService")
+		city := context.Query("city")
 		priceRate := businessEntities.PriceRate{}
 		priceRates, databaseError := priceRate.Find(serviceProviderID)
-		
+
 		if databaseError != nil {
-			context.Status(http.StatusConflict)
+			context.AbortWithStatus(http.StatusNotFound)
 			return
 		}
-		
+
 		response := mappers.CreatePriceRateDTOSliceAsResponse(priceRates)
 		if len(response) == 0 {
 			context.AbortWithStatus(http.StatusNotFound)
 			return
 		}
-		context.JSON(http.StatusOK, response)
+
+		if len(kindOfService) > 0 && len(city) > 0 {
+			validator := validators.GetValidator()
+			validationErrors := validator.Var(kindOfService, "min=0,max=4")
+			if validationErrors != nil {
+				context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
+				return
+			}
+
+			validationErrors = validator.Var(city, "min=1,max=50,lettersAndSpaces")
+			if validationErrors != nil {
+				context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
+				return
+			}
+
+			location, locationLoadingError := time.LoadLocation("America/Mexico_City")
+			if locationLoadingError != nil {
+				context.AbortWithStatusJSON(http.StatusBadRequest, "There was an eror while trying to retrieve the active price rate.")
+				return
+			}
+			parsedCurrentTime, parsingError := time.Parse(time.Kitchen, time.Now().In(location).Format(time.Kitchen))
+			if parsingError != nil {
+				context.AbortWithStatusJSON(http.StatusBadRequest, "There was an eror while trying to retrieve the price rates.")
+				return
+			}
+
+			activePriceRate := dataTransferObjects.ResponsePriceRateDTOWithCity{}
+
+			for _, priceRateElement := range response {
+				parsedStartingTime, parsingError := time.Parse(time.Kitchen, priceRateElement.StartingHour)
+				if parsingError != nil {
+					context.AbortWithStatusJSON(http.StatusBadRequest, "There was an eror while trying to retrieve the active price rate.")
+					return
+				}
+
+				parsedEndingTime, parsingError := time.Parse(time.Kitchen, priceRateElement.EndingHour)
+				if parsingError != nil {
+					context.AbortWithStatusJSON(http.StatusBadRequest, "There was an eror while trying to retrieve the active price rate.")
+					return
+				}
+
+				parsedkindOfService, parsingError := strconv.Atoi(kindOfService)
+
+				if parsingError != nil {
+					context.AbortWithStatusJSON(http.StatusBadRequest, "There was an eror while trying to retrieve the active price rate.")
+					return
+				}
+
+				priceRateAppliesToCurrentDay := false
+
+				for _, workingDayElement := range priceRateElement.WorkingDays {
+					if workingDayElement == parsedCurrentTime.Day() {
+						priceRateAppliesToCurrentDay = true
+						break
+					}
+				}
+
+				if parsedEndingTime.Sub(parsedStartingTime) < 0 {
+					if parsedCurrentTime.Before(parsedEndingTime) &&
+						priceRateElement.KindOfService == uint8(parsedkindOfService) &&
+						priceRateElement.City.Name == city &&
+						priceRateAppliesToCurrentDay {
+						context.JSON(http.StatusOK, priceRateElement)
+						return
+					}
+				} else {
+					if parsedCurrentTime.After(parsedStartingTime) && parsedCurrentTime.Before(parsedEndingTime) &&
+						priceRateElement.KindOfService == uint8(parsedkindOfService) &&
+						priceRateElement.City.Name == city &&
+						priceRateAppliesToCurrentDay {
+						context.JSON(http.StatusOK, priceRateElement)
+						return
+					}
+				}
+
+			}
+
+			if activePriceRate.ID == uuid.Nil {
+				context.AbortWithStatusJSON(http.StatusNotFound, "There is not an active price rate for the current time.")
+				return
+			}
+		} else {
+			context.JSON(http.StatusOK, response)
+		}
+
 	}
 }
 
 func (PriceRateManagementService) Delete() gin.HandlerFunc {
-	return func(context *gin.Context){		
+	return func(context *gin.Context) {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
@@ -103,7 +190,7 @@ func (PriceRateManagementService) Delete() gin.HandlerFunc {
 
 		databaseError := priceRate.Delete(serviceProviderID)
 
-		if databaseError != nil {			
+		if databaseError != nil {
 			_, errorIsOfTypeRecordNotFound := databaseError.(customErrors.RecordNotFoundError)
 			if errorIsOfTypeRecordNotFound {
 				context.Status(http.StatusNotFound)
@@ -114,7 +201,6 @@ func (PriceRateManagementService) Delete() gin.HandlerFunc {
 		}
 
 		context.Status(http.StatusNoContent)
-
 
 	}
 }

@@ -12,12 +12,20 @@ services:
         depends_on: 
             - mailing_service
             - black_list_redis
+            - cache_redis
     black_list_redis:
         image: "redis"
         ports:
             - "6379:6379"
         volumes:
             - blacklist:/data
+        entrypoint: redis-server --appendonly yes
+    cache_redis:
+        image: "redis"
+        ports:
+            - "8250:6379"
+        volumes:
+            - cache_redis:/data
         entrypoint: redis-server --appendonly yes
     mailing_service:
         image: "edhv99/node-grpc-server:latest"
@@ -27,3 +35,4 @@ volumes:
     images:
     logs:
     blacklist:
+    cache_redis:
