@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"path/filepath"
+	"strconv"
 
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
@@ -15,18 +16,17 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-
 type ReviewManagementService struct{}
 
 func (ReviewManagementService) Register() gin.HandlerFunc {
-	return func(context *gin.Context){
+	return func(context *gin.Context) {
 
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
 			context.AbortWithStatus(http.StatusBadRequest)
 			return
-		}		
+		}
 
 		receivedData := dataTransferObjects.ReceivedReviewDTO{}
 		context.BindJSON(&receivedData)
@@ -54,7 +54,7 @@ func (ReviewManagementService) Register() gin.HandlerFunc {
 }
 
 func (ReviewManagementService) Find() gin.HandlerFunc {
-	return func(context *gin.Context){				
+	return func(context *gin.Context) {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
@@ -62,21 +62,78 @@ func (ReviewManagementService) Find() gin.HandlerFunc {
 			return
 		}
 
+		page, conversionError := strconv.Atoi(context.Query("page"))
+		if conversionError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "Invalid page parameter")
+			return
+		}
+
+		pagesize, conversionError := strconv.Atoi(context.Query("pagesize"))
+		if conversionError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "Invalid pagesize parameter")
+			return
+		}
+
+		var rowCount int64
 		review := businessEntities.Review{}
-		reviews, databaseError := review.Find(serviceProviderID)
-		
+		reviews, databaseError := review.Find(page, pagesize, &rowCount, serviceProviderID)
+
 		if databaseError != nil {
 			context.AbortWithStatus(http.StatusConflict)
 			return
 		}
 
-		response := mappers.CreateSliceOfResponseReviewDTO(reviews)
-
-		if len(response) == 0 {
-			context.Status(http.StatusNotFound)
+		if len(reviews) == 0 {
+			context.AbortWithStatus(http.StatusNotFound)
 			return
 		}
-		context.JSON(http.StatusOK, response)		
+
+		response := mappers.CreateSliceOfResponseReviewDTO(reviews)
+		lastPage := int(rowCount / int64(pagesize))
+		var previousPage int = 1
+		var nextPage int
+
+		if page-1 > 1 {
+			previousPage = page - 1
+		}
+
+		if page+1 <= lastPage {
+			nextPage = page + 1
+		} else {
+			nextPage = lastPage
+		}
+
+		dataResponse := struct {
+			Links struct {
+				First string
+				Last  string
+				Prev  string
+				Next  string
+			}
+			Page    int
+			Pages   int
+			PerPage int
+			Total   int64
+			Data    []dataTransferObjects.ResponseReviewDTOWithServiceRequesterData
+		}{
+			Links: struct {
+				First string
+				Last  string
+				Prev  string
+				Next  string
+			}{
+				First: fmt.Sprintf("providers/%s/reviews?page=%d&pagesize=%d", serviceProviderID, 1, pagesize),
+				Last:  fmt.Sprintf("providers/%s/reviews?page=%d&pagesize=%d", serviceProviderID, lastPage, pagesize),
+				Prev:  fmt.Sprintf("providers/%s/reviews?page=%d&pagesize=%d", serviceProviderID, previousPage, pagesize),
+				Next:  fmt.Sprintf("providers/%s/reviews?page=%d&pagesize=%d", serviceProviderID, nextPage, pagesize),
+			},
+			Page:    page,
+			Pages:   lastPage,
+			PerPage: pagesize,
+			Total:   rowCount,
+			Data:    response,
+		}
+		context.JSON(http.StatusOK, dataResponse)
 	}
 }
 
@@ -104,7 +161,7 @@ func (ReviewManagementService) UploadEvidence() gin.HandlerFunc {
 		if !dirIsEmpty {
 			context.AbortWithStatusJSON(http.StatusConflict, "Attempted to add files to a review that already has files registered")
 			return
-		}		
+		}
 
 		if len(files) == 0 {
 			context.AbortWithStatusJSON(http.StatusBadRequest, "Request should contain at least one file")
@@ -127,8 +184,8 @@ func (ReviewManagementService) UploadEvidence() gin.HandlerFunc {
 			}
 		}
 
-		for _, file := range files {						
-			fileSavingError := context.SaveUploadedFile(file, path + "/" + file.Filename)
+		for _, file := range files {
+			fileSavingError := context.SaveUploadedFile(file, path+"/"+file.Filename)
 			if fileSavingError != nil {
 				context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to save the evidence")
 			}
