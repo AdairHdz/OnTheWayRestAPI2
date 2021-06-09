@@ -11,16 +11,15 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-
 type AddressManagementService struct{}
 
 func (AddressManagementService) Register() gin.HandlerFunc {
-	return func(context *gin.Context){
+	return func(context *gin.Context) {
 
 		serviceRequesterID, parsingError := uuid.FromString(context.Param("requesterId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -31,16 +30,16 @@ func (AddressManagementService) Register() gin.HandlerFunc {
 		validationErrors := validator.Struct(receivedData)
 
 		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
 			return
 		}
 
-		addressEntity := mappers.CreateAddressEntity(receivedData, serviceRequesterID)		
+		addressEntity := mappers.CreateAddressEntity(receivedData, serviceRequesterID)
 
 		databaseError := addressEntity.Register()
 
 		if databaseError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to register the resource.")
 			return
 		}
 
@@ -51,11 +50,11 @@ func (AddressManagementService) Register() gin.HandlerFunc {
 }
 
 func (AddressManagementService) FindAll() gin.HandlerFunc {
-	return func(context *gin.Context){
+	return func(context *gin.Context) {
 		serviceRequesterID, parsingError := uuid.FromString(context.Param("requesterId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -63,7 +62,7 @@ func (AddressManagementService) FindAll() gin.HandlerFunc {
 		addresses, databaseError := address.FindAllAddressesOfServiceRequester(serviceRequesterID)
 
 		if databaseError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to retrieve the data.")
 			return
 		}
 
@@ -74,10 +73,10 @@ func (AddressManagementService) FindAll() gin.HandlerFunc {
 		}
 
 		if len(addresses) == 0 {
-			context.AbortWithStatus(http.StatusNotFound)
+			context.AbortWithStatusJSON(http.StatusNotFound, "There is no data for the period you provided.")
 			return
 		}
 		context.JSON(http.StatusOK, response)
 	}
-	
+
 }

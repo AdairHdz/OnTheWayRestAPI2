@@ -1,7 +1,8 @@
 package tokenRefreshService
 
-import (	
+import (
 	"net/http"
+
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/tokenGenerator"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
@@ -12,33 +13,33 @@ type TokenRefreshService struct{}
 
 func (TokenRefreshService) RefreshToken() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		token, err := request.ParseFromRequest(context.Request, request.HeaderExtractor{"Token-Request"}, func (token *jwt.Token) (interface{}, error){
-			return 	tokenGenerator.VerifyKey, nil
+		token, err := request.ParseFromRequest(context.Request, request.HeaderExtractor{"Token-Request"}, func(token *jwt.Token) (interface{}, error) {
+			return tokenGenerator.VerifyKey, nil
 		}, request.WithClaims(&tokenGenerator.CustomClaim{}))
-		
+
 		if err != nil {
-			context.AbortWithStatusJSON(http.StatusConflict, "El token no fue válido")
+			context.AbortWithStatusJSON(http.StatusConflict, "Invalid token")
 			return
 		}
 
 		claims, claimsConversionWentOK := token.Claims.(*tokenGenerator.CustomClaim)
 
-		if claimsConversionWentOK && token.Valid {			
+		if claimsConversionWentOK && token.Valid {
 			generatedToken, err := tokenGenerator.CreateToken(claims.UserInfo.EmailAddress, claims.UserInfo.UserType)
 			if err != nil {
-				context.AbortWithStatusJSON(http.StatusConflict, "Error al generar el token")
+				context.AbortWithStatusJSON(http.StatusConflict, "Error while trying to assign you a token")
 				return
 			}
 
 			response := struct {
 				Token string `json:"token"`
 			}{
-				Token: generatedToken,	
+				Token: generatedToken,
 			}
 
 			context.JSON(http.StatusOK, response)
 		} else {
-			context.AbortWithStatusJSON(http.StatusConflict, "Error")
+			context.AbortWithStatusJSON(http.StatusConflict, "Invalid token")
 			return
 		}
 	}

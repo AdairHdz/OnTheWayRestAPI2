@@ -27,7 +27,7 @@ func (ServiceProviderManagementService) Find() gin.HandlerFunc {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The Id you provided has a non-valid format.")
 			return
 		}
 
@@ -37,10 +37,10 @@ func (ServiceProviderManagementService) Find() gin.HandlerFunc {
 		if searchError != nil {
 			_, errorIsOfTypeRecordNotFoundError := searchError.(customErrors.RecordNotFoundError)
 			if errorIsOfTypeRecordNotFoundError {
-				context.AbortWithStatus(http.StatusNotFound)
+				context.AbortWithStatusJSON(http.StatusNotFound, "There are no matches for the search parameters you provided.")
 				return
 			}
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to retrieve the requested data.")
 			return
 		}
 
@@ -82,12 +82,12 @@ func (ServiceProviderManagementService) FindMatches() gin.HandlerFunc {
 		var count int64
 		serviceProviders, err := serviceProvider.FindMatches(page, pagesize, &count, maxPriceRate, city, kindOfService)
 		if err != nil {
-			context.Status(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to retrieve the data.")
 			return
 		}
 
 		if len(serviceProviders) == 0 {
-			context.AbortWithStatus(http.StatusNotFound)
+			context.AbortWithStatusJSON(http.StatusNotFound, "There are no matches for the data you requested.")
 			return
 		}
 
@@ -145,7 +145,7 @@ func (ServiceProviderManagementService) Update() gin.HandlerFunc {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format")
 			return
 		}
 
@@ -158,6 +158,7 @@ func (ServiceProviderManagementService) Update() gin.HandlerFunc {
 		bindingError := context.BindJSON(&receivedData)
 
 		if bindingError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format")
 			return
 		}
 
@@ -175,7 +176,7 @@ func (ServiceProviderManagementService) Update() gin.HandlerFunc {
 		if receivedData.Password != "" {
 			hashedPassword, hashingError := hashing.GenerateHash(serviceProvider.User.Password)
 			if hashingError != nil {
-				context.AbortWithStatus(http.StatusConflict)
+				context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to update the resource")
 				return
 			}
 
@@ -186,32 +187,32 @@ func (ServiceProviderManagementService) Update() gin.HandlerFunc {
 		validationErrors := validator.Var(serviceProvider.User.Names, "required,min=1,max=50,lettersAndSpaces")
 
 		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format")
 			return
 		}
 
 		validationErrors = validator.Var(serviceProvider.User.LastName, "required,min=1,max=50,lettersAndSpaces")
 
 		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format")
 			return
 		}
 
 		validationErrors = validator.Var(serviceProvider.User.Password, "required,max=80")
 
 		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format")
 			return
 		}
 
 		updateError := serviceProvider.Update()
 
 		if updateError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to update the resource")
 			return
 		}
 
-		context.Status(http.StatusNoContent)
+		context.Status(http.StatusOK)
 	}
 }
 
@@ -222,7 +223,8 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 		directoryCreationError := directoryManager.CreateDirectory(path)
 
 		if directoryCreationError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to save your image.")
+			return
 		}
 
 		serviceProvider := businessEntities.ServiceProvider{}
@@ -230,7 +232,7 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 		serviceProvider.Find(uuid.FromStringOrNil(providerID))
 
 		if serviceProvider.ID == uuid.Nil {
-			context.AbortWithStatus(http.StatusNotFound)
+			context.AbortWithStatusJSON(http.StatusNotFound, "There is not a service provider with the ID you provided.")
 			return
 		}
 
@@ -243,14 +245,14 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 
 		file, noFileSentError := context.FormFile("image")
 		if noFileSentError != nil {
-			context.Status(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "You didn't provide any file.")
 			return
 		}
 
 		fileExtension := filepath.Ext(file.Filename)
 
 		if !fileAnalyzer.ImageHasValidFormat(fileExtension) {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "Invalid image format. Please make sure your file has jpg, jpeg, or png extension")
 			return
 		}
 
@@ -262,7 +264,7 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 		err = context.SaveUploadedFile(file, path+"/"+file.Filename)
 
 		if err != nil {
-			context.JSON(http.StatusConflict, err.Error())
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to save your image.")
 			return
 		}
 
@@ -271,7 +273,7 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 		databaseError := serviceProvider.Update()
 
 		if databaseError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to save your image.")
 			return
 		}
 

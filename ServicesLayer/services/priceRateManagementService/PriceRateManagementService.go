@@ -21,7 +21,7 @@ func (PriceRateManagementService) Register() gin.HandlerFunc {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -33,21 +33,21 @@ func (PriceRateManagementService) Register() gin.HandlerFunc {
 		validationErrors := validator.Struct(receivedData)
 
 		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
 			return
 		}
 
 		priceRateEntity, mappingError := mappers.CreatePriceRateEntity(receivedData, serviceProviderID)
 
 		if mappingError != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
 			return
 		}
 
 		databaseError := priceRateEntity.Register()
 
 		if databaseError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to register the resource.")
 			return
 		}
 
@@ -61,7 +61,7 @@ func (PriceRateManagementService) FindAll() gin.HandlerFunc {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -71,13 +71,13 @@ func (PriceRateManagementService) FindAll() gin.HandlerFunc {
 		priceRates, databaseError := priceRate.Find(serviceProviderID)
 
 		if databaseError != nil {
-			context.AbortWithStatus(http.StatusNotFound)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to retrieve the data.")
 			return
 		}
 
 		response := mappers.CreatePriceRateDTOSliceAsResponse(priceRates)
 		if len(response) == 0 {
-			context.AbortWithStatus(http.StatusNotFound)
+			context.AbortWithStatusJSON(http.StatusNotFound, "There are no price rates registered for this service provider.")
 			return
 		}
 
@@ -173,14 +173,14 @@ func (PriceRateManagementService) Delete() gin.HandlerFunc {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
 		priceRateID, parsingError := uuid.FromString(context.Param("priceRateId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -193,10 +193,10 @@ func (PriceRateManagementService) Delete() gin.HandlerFunc {
 		if databaseError != nil {
 			_, errorIsOfTypeRecordNotFound := databaseError.(customErrors.RecordNotFoundError)
 			if errorIsOfTypeRecordNotFound {
-				context.Status(http.StatusNotFound)
+				context.AbortWithStatusJSON(http.StatusNotFound, "There are no matches for the parameters of the resource you tried to delete.")
 				return
 			}
-			context.Status(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to delete the resource.")
 			return
 		}
 
