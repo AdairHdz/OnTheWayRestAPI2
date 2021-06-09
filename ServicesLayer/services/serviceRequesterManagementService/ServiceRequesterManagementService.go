@@ -20,7 +20,7 @@ func (ServiceRequesterManagementService) Find() gin.HandlerFunc {
 		serviceRequesterID, parsingError := uuid.FromString(context.Param("requesterId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -30,10 +30,10 @@ func (ServiceRequesterManagementService) Find() gin.HandlerFunc {
 		if searchError != nil {
 			_, errorIsOfTypeRecordNotFoundError := searchError.(customErrors.RecordNotFoundError)
 			if errorIsOfTypeRecordNotFoundError {
-				context.AbortWithStatus(http.StatusNotFound)
+				context.AbortWithStatusJSON(http.StatusNotFound, "There are no matches for the ID you provided.")
 				return
 			}
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to retrieve the data.")
 			return
 		}
 
@@ -47,7 +47,7 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 		serviceRequesterID, parsingError := uuid.FromString(context.Param("requesterId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -82,27 +82,27 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 		validationErrors := validator.Var(serviceRequester.User.Names, "required,min=1,max=50,lettersAndSpaces")
 
 		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
 			return
 		}
 
 		validationErrors = validator.Var(serviceRequester.User.LastName, "required,min=1,max=50,lettersAndSpaces")
 
 		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
 			return
 		}
 
 		validationErrors = validator.Var(serviceRequester.User.Password, "required,max=80")
 
 		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
 			return
 		}
 
 		hashedPassword, hashingError := hashing.GenerateHash(serviceRequester.User.Password)
 		if hashingError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to update the resource.")
 			return
 		}
 		serviceRequester.User.Password = hashedPassword
@@ -110,7 +110,7 @@ func (ServiceRequesterManagementService) Update() gin.HandlerFunc {
 		updateError := serviceRequester.Update()
 
 		if updateError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to update the resource.")
 			return
 		}
 

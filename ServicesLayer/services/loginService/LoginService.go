@@ -28,32 +28,32 @@ func (LoginService) Login() gin.HandlerFunc {
 		userTypeID, loginError := user.Login()
 
 		if loginError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to verify your credentials. Please try again later.")
 			return
 		}
 
 		if user.ID == uuid.Nil {
-			context.AbortWithStatus(http.StatusUnauthorized)
+			context.AbortWithStatusJSON(http.StatusUnauthorized, "Invalid credentials.")
 			return
 		}
 
 		passwordError := hashing.VerifyPassword(user.Password, receivedData.Password)
 		if passwordError != nil {
-			context.AbortWithStatus(http.StatusUnauthorized)
+			context.AbortWithStatusJSON(http.StatusUnauthorized, "Invalid credentials.")
 			return
 		}
 
 		token, tokenError := tokenGenerator.CreateToken(user.EmailAddress, int(user.UserType))
 
 		if tokenError != nil {
-			context.Status(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to log you in. Please try again later.")
 			return
 		}
 
 		refreshToken, tokenError := tokenGenerator.CreateRefreshToken(user.EmailAddress, int(user.UserType))
 
 		if tokenError != nil {
-			context.Status(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to log you in. Please try again later.")
 			return
 		}
 

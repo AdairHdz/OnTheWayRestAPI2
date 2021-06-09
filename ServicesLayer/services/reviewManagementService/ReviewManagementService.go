@@ -24,7 +24,7 @@ func (ReviewManagementService) Register() gin.HandlerFunc {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -35,7 +35,7 @@ func (ReviewManagementService) Register() gin.HandlerFunc {
 		validationErrors := validate.Struct(receivedData)
 
 		if validationErrors != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
 			return
 		}
 
@@ -43,7 +43,7 @@ func (ReviewManagementService) Register() gin.HandlerFunc {
 		databaseError := review.Register()
 
 		if databaseError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to register your review.")
 			return
 		}
 
@@ -58,7 +58,7 @@ func (ReviewManagementService) Find() gin.HandlerFunc {
 		serviceProviderID, parsingError := uuid.FromString(context.Param("providerId"))
 
 		if parsingError != nil {
-			context.AbortWithStatus(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -79,12 +79,12 @@ func (ReviewManagementService) Find() gin.HandlerFunc {
 		reviews, databaseError := review.Find(page, pagesize, &rowCount, serviceProviderID)
 
 		if databaseError != nil {
-			context.AbortWithStatus(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to retrieve the data you requested.")
 			return
 		}
 
 		if len(reviews) == 0 {
-			context.AbortWithStatus(http.StatusNotFound)
+			context.AbortWithStatusJSON(http.StatusNotFound, "There are no matches for the parameters you provided.")
 			return
 		}
 

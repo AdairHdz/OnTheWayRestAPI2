@@ -32,7 +32,12 @@ func (StateManagementService) FindAll() gin.HandlerFunc {
 		states, databaseError := state.FindAll()
 
 		if databaseError != nil {
-			context.Status(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to retrieve the data.")
+			return
+		}
+
+		if len(states) == 0 {
+			context.AbortWithStatusJSON(http.StatusNotFound, "There are no matches for the state id you provided.")
 			return
 		}
 
@@ -53,7 +58,7 @@ func (StateManagementService) FindAllCitiesOfState() gin.HandlerFunc {
 		stateID, parsingError := uuid.FromString(context.Param("stateId"))
 
 		if parsingError != nil {
-			context.Status(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The ID you provided has a non-valid format.")
 			return
 		}
 
@@ -71,7 +76,12 @@ func (StateManagementService) FindAllCitiesOfState() gin.HandlerFunc {
 		cities, databaseError := city.FindAll(stateID)
 
 		if databaseError != nil {
-			context.Status(http.StatusConflict)
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to retrieve the data.")
+			return
+		}
+
+		if len(cities) == 0 {
+			context.AbortWithStatusJSON(http.StatusNotFound, "There are no matches for the state ID you provided.")
 			return
 		}
 
@@ -83,7 +93,6 @@ func (StateManagementService) FindAllCitiesOfState() gin.HandlerFunc {
 				cacheManager.Save(stateID.String(), jsonStates, time.Hour*2)
 			}
 		}
-
 		context.JSON(http.StatusOK, response)
 	}
 }
