@@ -37,10 +37,10 @@ func (serviceProvider *ServiceProvider) Update() error {
 	return databaseError
 }
 
-func (ServiceProvider) FindMatches(maxPriceRate float64, cityName string, kindOfService int64) ([]ServiceProvider, error) {
+func (ServiceProvider) FindMatches(page, pagesize int, numberOfRows *int64, maxPriceRate float64, cityName string, kindOfService int64) ([]ServiceProvider, error) {
 	var serviceProviders []ServiceProvider
 	repository := serviceProviderRepository.ServiceProviderRepository{}
-	err := repository.FindMatches(&serviceProviders, maxPriceRate, cityName, kindOfService)
+	err := repository.FindMatches(&serviceProviders, page, pagesize, numberOfRows, maxPriceRate, cityName, kindOfService)
 	return serviceProviders, err
 }
 
