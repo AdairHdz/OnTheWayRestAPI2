@@ -1,6 +1,7 @@
 package serviceProviderManagementService
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -8,6 +9,7 @@ import (
 	"time"
 
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/mappers"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/customErrors"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/directoryManager"
@@ -53,26 +55,90 @@ func (ServiceProviderManagementService) FindMatches() gin.HandlerFunc {
 		maxPriceRate, parseError := strconv.ParseFloat(context.Query("maxPriceRate"), 32)
 
 		if parseError != nil {
-			context.Status(http.StatusBadRequest)
+			context.AbortWithStatusJSON(http.StatusBadRequest, "Invalid max price rate parameter")
 			return
 		}
 
 		city := context.Query("city")
 		kindOfService, parseError := strconv.ParseInt(context.Query("kindOfService"), 10, 8)
-		serviceProvider := businessEntities.ServiceProvider{}
-		serviceProviders, err := serviceProvider.FindMatches(maxPriceRate, city, kindOfService)
+		if parseError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "Invalid kind of service parameter")
+			return
+		}
 
+		page, conversionError := strconv.Atoi(context.Query("page"))
+		if conversionError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "Invalid page parameter")
+			return
+		}
+
+		pagesize, conversionError := strconv.Atoi(context.Query("pagesize"))
+		if conversionError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "Invalid pagesize parameter")
+			return
+		}
+
+		serviceProvider := businessEntities.ServiceProvider{}
+		var count int64
+		serviceProviders, err := serviceProvider.FindMatches(page, pagesize, &count, maxPriceRate, city, kindOfService)
 		if err != nil {
 			context.Status(http.StatusConflict)
 			return
 		}
 
+		println(count)
+
 		if len(serviceProviders) == 0 {
 			context.AbortWithStatus(http.StatusNotFound)
 			return
 		}
+
 		response := mappers.CreateServiceProviderOverviewDTOAsResponse(serviceProviders)
-		context.JSON(http.StatusOK, response)
+		lastPage := (int(count) / pagesize) + 1
+		var previousPage int = 1
+		var nextPage int
+
+		if page-1 > 1 {
+			previousPage = page - 1
+		}
+
+		if page+1 <= lastPage {
+			nextPage = page + 1
+		} else {
+			nextPage = lastPage
+		}
+
+		dataResponse := struct {
+			Links struct {
+				First string
+				Last  string
+				Prev  string
+				Next  string
+			}
+			Page    int
+			Pages   int
+			PerPage int
+			Total   int64
+			Data    []dataTransferObjects.ResponseServiceProviderOverviewDTO
+		}{
+			Links: struct {
+				First string
+				Last  string
+				Prev  string
+				Next  string
+			}{
+				First: fmt.Sprintf("providers?maxPriceRate=%.2f&kindOfService=%d&city=%s&page=%d&pagesize=%d", maxPriceRate, kindOfService, city, 1, pagesize),
+				Last:  fmt.Sprintf("providers?maxPriceRate=%.2f&kindOfService=%d&city=%s&page=%d&pagesize=%d", maxPriceRate, kindOfService, city, lastPage, pagesize),
+				Prev:  fmt.Sprintf("providers?maxPriceRate=%.2f&kindOfService=%d&city=%s&page=%d&pagesize=%d", maxPriceRate, kindOfService, city, previousPage, pagesize),
+				Next:  fmt.Sprintf("providers?maxPriceRate=%.2f&kindOfService=%d&city=%s&page=%d&pagesize=%d", maxPriceRate, kindOfService, city, nextPage, pagesize),
+			},
+			Page:    page,
+			Pages:   lastPage,
+			PerPage: pagesize,
+			Total:   count,
+			Data:    response,
+		}
+		context.JSON(http.StatusOK, dataResponse)
 	}
 }
 
@@ -171,6 +237,11 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 		}
 
 		dirIsEmpty, err := fileAnalyzer.DirIsEmpty(path)
+
+		if err != nil {
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to save your image.")
+			return
+		}
 
 		file, noFileSentError := context.FormFile("image")
 		if noFileSentError != nil {

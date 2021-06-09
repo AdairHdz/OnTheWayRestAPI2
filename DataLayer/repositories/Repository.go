@@ -2,7 +2,7 @@ package repositories
 
 import "github.com/AdairHdz/OnTheWayRestAPI/DataLayer/database"
 
-type Repository struct { }
+type Repository struct{}
 
 func (Repository) Create(entity interface{}) error {
 	DB := database.GetDatabase()
@@ -10,7 +10,7 @@ func (Repository) Create(entity interface{}) error {
 	return result.Error
 }
 
-func (Repository) FindByID(entity interface{}, ID interface{}) (interface{}, error) {		
+func (Repository) FindByID(entity interface{}, ID interface{}) (interface{}, error) {
 	DB := database.GetDatabase()
 	result := DB.First(&entity, ID)
 	return entity, result.Error

@@ -3,6 +3,7 @@ package serviceProviderRepository
 import (
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/database"
 	"github.com/AdairHdz/OnTheWayRestAPI/helpers/customErrors"
+	"github.com/AdairHdz/OnTheWayRestAPI/helpers/paginator"
 )
 
 type ServiceProviderRepository struct{}
@@ -22,14 +23,23 @@ func (ServiceProviderRepository) Update(serviceProvider interface{}) error {
 	return result.Error
 }
 
-func (ServiceProviderRepository) FindMatches(target interface{}, maxPriceRate float64, cityName string, kindOfService int64) error {
+func (ServiceProviderRepository) FindMatches(target interface{}, page, pagesize int, count *int64, maxPriceRate float64, cityName string, kindOfService int64) error {
 	DB := database.GetDatabase()
 	result := DB.Preload("User").Preload("PriceRates").
 		Joins("INNER JOIN users ON users.id = service_providers.user_id").
 		Joins("INNER JOIN price_rates ON price_rates.service_provider_id = service_providers.id").
 		Joins("INNER JOIN cities ON price_rates.city_id = cities.id").
 		Where("price_rates.price <= ? AND cities.name = ? AND price_rates.kind_of_service = ?", maxPriceRate, cityName, kindOfService).
+		Scopes(paginator.Paginate(page, pagesize)).
 		Find(target)
+
+	var targetCount interface{}
+	DB.Table("service_providers").Select("service_providers.id").Joins("INNER JOIN users ON users.id = service_providers.user_id").
+		Joins("INNER JOIN price_rates ON price_rates.service_provider_id = service_providers.id").
+		Joins("INNER JOIN cities ON price_rates.city_id = cities.id").
+		Where("price_rates.price <= ? AND cities.name = ? AND price_rates.kind_of_service = ?", maxPriceRate, cityName, kindOfService).
+		Scan(&targetCount).
+		Count(count)
 	return result.Error
 }
 
