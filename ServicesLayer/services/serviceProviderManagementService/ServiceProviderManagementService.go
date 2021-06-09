@@ -86,8 +86,6 @@ func (ServiceProviderManagementService) FindMatches() gin.HandlerFunc {
 			return
 		}
 
-		println(count)
-
 		if len(serviceProviders) == 0 {
 			context.AbortWithStatus(http.StatusNotFound)
 			return
