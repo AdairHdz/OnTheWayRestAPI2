@@ -81,7 +81,7 @@ func (PriceRateManagementService) FindAll() gin.HandlerFunc {
 			return
 		}
 
-		if len(kindOfService) > 0 && len(city) > 0 {
+		if kindOfService != "" && city != "" {
 			validator := validators.GetValidator()
 			validationErrors := validator.Var(kindOfService, "min=0,max=4")
 			if validationErrors != nil {
