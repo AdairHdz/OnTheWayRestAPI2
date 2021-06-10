@@ -108,22 +108,22 @@ func (ServiceProviderManagementService) FindMatches() gin.HandlerFunc {
 
 		dataResponse := struct {
 			Links struct {
-				First string
-				Last  string
-				Prev  string
-				Next  string
-			}
-			Page    int
-			Pages   int
-			PerPage int
-			Total   int64
-			Data    []dataTransferObjects.ResponseServiceProviderOverviewDTO
+				First string `json:"first"`
+				Last  string `json:"last"`
+				Prev  string `json:"prev"`
+				Next  string `json:"next"`
+			} `json:"links"`
+			Page    int                                                      `json:"page"`
+			Pages   int                                                      `json:"pages"`
+			PerPage int                                                      `json:"perPage"`
+			Total   int64                                                    `json:"total"`
+			Data    []dataTransferObjects.ResponseServiceProviderOverviewDTO `json:"data"`
 		}{
 			Links: struct {
-				First string
-				Last  string
-				Prev  string
-				Next  string
+				First string `json:"first"`
+				Last  string `json:"last"`
+				Prev  string `json:"prev"`
+				Next  string `json:"next"`
 			}{
 				First: fmt.Sprintf("providers?maxPriceRate=%.2f&kindOfService=%d&city=%s&page=%d&pagesize=%d", maxPriceRate, kindOfService, city, 1, pagesize),
 				Last:  fmt.Sprintf("providers?maxPriceRate=%.2f&kindOfService=%d&city=%s&page=%d&pagesize=%d", maxPriceRate, kindOfService, city, lastPage, pagesize),

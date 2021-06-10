@@ -97,13 +97,8 @@ func (UserManagementService) GetNewVerificationCode() gin.HandlerFunc {
 
 func (UserManagementService) RecoverPassword() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		userID, parsingError := uuid.FromString(context.Param("userId"))
-		if parsingError != nil {
-			context.AbortWithStatusJSON(http.StatusBadRequest, "The user ID you provided is not valid.")
-			return
-		}
-
 		receivedData := struct {
+			EmailAddress string `json:"emailAddress" validate:"email"`
 			RecoveryCode string `json:"recoveryCode"`
 			NewPassword  string `json:"newPassword"`
 		}{}
@@ -111,6 +106,14 @@ func (UserManagementService) RecoverPassword() gin.HandlerFunc {
 		bindingError := context.BindJSON(&receivedData)
 		if bindingError != nil {
 			context.AbortWithStatusJSON(http.StatusBadRequest, "The data you provided has a non-valid format.")
+			return
+		}
+
+		validator := validators.GetValidator()
+		validationError := validator.Struct(receivedData)
+
+		if validationError != nil {
+			context.AbortWithStatusJSON(http.StatusBadRequest, "The email address you provided has a non-valid format.")
 			return
 		}
 
@@ -128,7 +131,7 @@ func (UserManagementService) RecoverPassword() gin.HandlerFunc {
 			Password: hashedPassword,
 		}
 
-		passwordUpdateError := user.RecoverPassword(userID.String(), receivedData.RecoveryCode)
+		passwordUpdateError := user.RecoverPassword(receivedData.EmailAddress, receivedData.RecoveryCode)
 		if passwordUpdateError != nil {
 			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to update your password.")
 			return

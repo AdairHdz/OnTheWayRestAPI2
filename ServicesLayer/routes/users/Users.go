@@ -13,8 +13,8 @@ func Routes(route *gin.RouterGroup) {
 	users := route.Group("/users")
 	{
 		users.PATCH("/:userId/verify", _userManagementService.VerifyAccount())
-		users.POST("/:userId/verify", _userManagementService.GetNewVerificationCode())
-		users.PATCH("/:userId/password", _userManagementService.RecoverPassword())
+		users.PUT("/:userId/verify", _userManagementService.GetNewVerificationCode())
+		users.PATCH("/password", _userManagementService.RecoverPassword())
 		users.PUT("/recoveryCode", _userManagementService.SendRecoveryCode())
 	}
 }
