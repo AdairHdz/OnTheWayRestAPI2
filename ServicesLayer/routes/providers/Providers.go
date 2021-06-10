@@ -21,7 +21,7 @@ func Routes(route *gin.RouterGroup) {
 	providers := route.Group("/providers")
 	{
 		providers.Use(middlewares.Authenticate())
-		providers.GET("/", _serviceProviderManagementService.FindMatches())
+		providers.GET("", _serviceProviderManagementService.FindMatches())
 		providers.GET("/:providerId", _serviceProviderManagementService.Find())
 		providers.PATCH("/:providerId", _serviceProviderManagementService.Update())
 		providers.GET("/:providerId/statistics", _serviceProviderManagementService.GetStatistics())

@@ -25,9 +25,9 @@ func (UserRepository) RefreshVerificationCode(userID string, entity interface{})
 	return result.Error
 }
 
-func (UserRepository) RecoverPassword(userID, recoveryCode string, entity interface{}) error {
+func (UserRepository) RecoverPassword(emailAddress, recoveryCode string, entity interface{}) error {
 	DB := database.GetDatabase()
-	result := DB.Where("id = ? AND recovery_code = ?", userID, recoveryCode).Updates(entity)
+	result := DB.Where("email_address = ? AND recovery_code = ?", emailAddress, recoveryCode).Updates(entity)
 	if result.RowsAffected == 0 {
 		return customErrors.RecordNotFoundError{}
 	}

@@ -57,9 +57,9 @@ func (user *User) RefreshVerificationCode(userID string) error {
 	return databaseError
 }
 
-func (user *User) RecoverPassword(userID string, recoveryCode string) error {
+func (user *User) RecoverPassword(emailAddress string, recoveryCode string) error {
 	repository := userRepository.UserRepository{}
-	databaseError := repository.RecoverPassword(userID, recoveryCode, user)
+	databaseError := repository.RecoverPassword(emailAddress, recoveryCode, user)
 	return databaseError
 }
 
