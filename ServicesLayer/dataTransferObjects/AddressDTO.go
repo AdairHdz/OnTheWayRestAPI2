@@ -11,19 +11,19 @@ type ReceivedAddressDTO struct {
 }
 
 type ResponseAddressDTO struct {
-	ID uuid.UUID `json:"id"`
-	IndoorNumber string `json:"indoorNumber"`
-	OutdoorNumber string `json:"outdoorNumber"`
-	Street string `json:"street"`
-	Suburb string `json:"suburb"`
-	CityID uuid.UUID `json:"cityId"`
+	ID            uuid.UUID `json:"id"`
+	IndoorNumber  string    `json:"indoorNumber"`
+	OutdoorNumber string    `json:"outdoorNumber"`
+	Street        string    `json:"street"`
+	Suburb        string    `json:"suburb"`
+	CityID        uuid.UUID `json:"cityId"`
 }
 
 type ResponseAddressWithCityDTO struct {
-	ID uuid.UUID `json:"id"`
-	IndoorNumber string `json:"indoorNumber"`
-	OutdoorNumber string `json:"outdoorNumber"`
-	Street string `json:"street"`
-	Suburb string `json:"suburb"`
-	City CityDTO
+	ID            uuid.UUID `json:"id"`
+	IndoorNumber  string    `json:"indoorNumber"`
+	OutdoorNumber string    `json:"outdoorNumber"`
+	Street        string    `json:"street"`
+	Suburb        string    `json:"suburb"`
+	City          CityDTO   `json:"city"`
 }

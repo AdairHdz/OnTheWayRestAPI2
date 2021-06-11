@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var(
+var (
 	serviceRequestMgtService = serviceRequestManagementService.ServiceRequestManagementService{}
 )
 
@@ -14,7 +14,7 @@ func Routes(route *gin.RouterGroup) {
 	serviceRequest := route.Group("/requests")
 	{
 		serviceRequest.Use(middlewares.Authenticate())
-		serviceRequest.POST("/", serviceRequestMgtService.Register())
+		serviceRequest.POST("", serviceRequestMgtService.Register())
 		serviceRequest.GET("/:serviceRequestId", serviceRequestMgtService.FindByID())
 		serviceRequest.PATCH("/:serviceRequestId", serviceRequestMgtService.Update())
 	}
