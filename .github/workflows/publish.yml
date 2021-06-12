@@ -17,6 +17,6 @@ jobs:
     - name: Publish to registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: forbsey/go-github-actions
+        name: adairhz/on_the_way_restapi
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
