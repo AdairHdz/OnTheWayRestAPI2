@@ -15,13 +15,13 @@ type ReceivedReviewDTO struct {
 }
 
 type ResponseReviewDTO struct {
-	ID                 uuid.UUID           `json:"id"`
-	DateOfReview       time.Time           `json:"dateOfReview"`
-	Title              string              `json:"title"`
-	Details            string              `json:"details"`
-	Score              uint8               `json:"score"`
-	Evidence           []ReviewEvidenceDTO `json:"evidence"`
-	ServiceRequesterID uuid.UUID           `json:"serviceRequesterId"`
+	ID                 uuid.UUID                   `json:"id"`
+	DateOfReview       time.Time                   `json:"dateOfReview"`
+	Title              string                      `json:"title"`
+	Details            string                      `json:"details"`
+	Score              uint8                       `json:"score"`
+	Evidence           []ReviewEvidenceRespondeDTO `json:"evidence"`
+	ServiceRequesterID uuid.UUID                   `json:"serviceRequesterId"`
 }
 
 type ResponseReviewDTOWithServiceRequesterData struct {
@@ -30,6 +30,6 @@ type ResponseReviewDTOWithServiceRequesterData struct {
 	Title            string                       `json:"title"`
 	Details          string                       `json:"details"`
 	Score            uint8                        `json:"score"`
-	Evidence         []ReviewEvidenceDTO          `json:"evidence"`
+	Evidence         []ReviewEvidenceRespondeDTO  `json:"evidence"`
 	ServiceRequester ResponseUserDTOWithNamesOnly `json:"serviceRequester"`
 }

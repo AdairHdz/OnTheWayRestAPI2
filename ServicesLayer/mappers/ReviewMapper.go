@@ -29,7 +29,7 @@ func CreateResponseReviewDTO(review businessEntities.Review) dataTransferObjects
 		Title:              review.Title,
 		Details:            review.Details,
 		Score:              review.Score,
-		Evidence:           CreateSliceOfReviewEvidenceDTOAsResponse(review.Evidence),
+		Evidence:           CreateSliceOfReviewEvidenceDTOAsResponse(review.ID.String(), review.Evidence),
 		ServiceRequesterID: review.ServiceRequesterID,
 	}
 	return response
@@ -47,7 +47,7 @@ func CreateSliceOfResponseReviewDTO(reviews []businessEntities.Review) []dataTra
 			Title:        reviewElement.Title,
 			Details:      reviewElement.Details,
 			Score:        reviewElement.Score,
-			Evidence:     CreateSliceOfReviewEvidenceDTOAsResponse(reviewElement.Evidence),
+			Evidence:     CreateSliceOfReviewEvidenceDTOAsResponse(reviewElement.ID.String(), reviewElement.Evidence),
 			ServiceRequester: dataTransferObjects.ResponseUserDTOWithNamesOnly{
 				ID:       reviewElement.ServiceRequester.ID,
 				Names:    reviewElement.ServiceRequester.User.Names,

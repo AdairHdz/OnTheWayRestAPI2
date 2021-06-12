@@ -89,7 +89,7 @@ func (ReviewManagementService) Find() gin.HandlerFunc {
 		}
 
 		response := mappers.CreateSliceOfResponseReviewDTO(reviews)
-		lastPage := int(rowCount / int64(pagesize))
+		lastPage := int(rowCount/int64(pagesize)) + 1
 		var previousPage int = 1
 		var nextPage int
 
@@ -147,6 +147,7 @@ func (ReviewManagementService) UploadEvidence() gin.HandlerFunc {
 		directoryCreationError := directoryManager.CreateDirectory(path)
 
 		if directoryCreationError != nil {
+			println(directoryCreationError.Error())
 			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to save the evidence")
 			return
 		}
@@ -154,19 +155,23 @@ func (ReviewManagementService) UploadEvidence() gin.HandlerFunc {
 		dirIsEmpty, directoryEmptinessVerificationError := fileAnalyzer.DirIsEmpty(path)
 
 		if directoryEmptinessVerificationError != nil {
+			println(directoryEmptinessVerificationError.Error())
 			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to save the evidence")
 			return
 		}
 
 		if !dirIsEmpty {
+			println("Attempted to add files to a review that already has files registered")
 			context.AbortWithStatusJSON(http.StatusConflict, "Attempted to add files to a review that already has files registered")
 			return
 		}
 
 		if len(files) == 0 {
+			println("Request should contain at least one file")
 			context.AbortWithStatusJSON(http.StatusBadRequest, "Request should contain at least one file")
 			return
 		} else if len(files) > 3 {
+			println("Can't upload more than 3 files per request")
 			context.AbortWithStatusJSON(http.StatusBadRequest, "Can't upload more than 3 files per request")
 			return
 		}
@@ -174,11 +179,13 @@ func (ReviewManagementService) UploadEvidence() gin.HandlerFunc {
 		for _, file := range files {
 			var fileSizeTotal int64 = file.Size
 			if fileSizeTotal > maxFileSize {
+				println("One or more files have a size greater than 10 MB")
 				context.AbortWithStatusJSON(http.StatusConflict, "One or more files have a size greater than 10 MB")
 				return
 			}
 			fileExtension := filepath.Ext(file.Filename)
 			if !fileAnalyzer.EvidenceHasValidFormat(fileExtension) {
+				println("One or more files have invalid format")
 				context.AbortWithStatusJSON(http.StatusBadRequest, "One or more files have invalid format")
 				return
 			}
@@ -187,6 +194,7 @@ func (ReviewManagementService) UploadEvidence() gin.HandlerFunc {
 		for _, file := range files {
 			fileSavingError := context.SaveUploadedFile(file, path+"/"+file.Filename)
 			if fileSavingError != nil {
+				println("There was an error while trying to save the evidence", fileSavingError.Error())
 				context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to save the evidence")
 			}
 		}
