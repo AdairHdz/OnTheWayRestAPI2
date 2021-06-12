@@ -1,9 +1,9 @@
 package main
 
-import (
+import (		
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/database"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes"
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes"	
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -21,6 +21,7 @@ func main() {
 		&businessEntities.PriceRate{},
 		&businessEntities.ServiceRequest{},		
 		&businessEntities.Review{},
+		&businessEntities.ReviewEvidence{},
 		&businessEntities.ServiceRequester{},
 		&businessEntities.Address{})	
 
@@ -102,7 +103,7 @@ func main() {
 		StateID: veracruzID,
 	}
 
-	DB.Save(&cities)	
+	DB.Save(&cities)		
 
-	routes.StartServer()
+	routes.StartServer()	
 }

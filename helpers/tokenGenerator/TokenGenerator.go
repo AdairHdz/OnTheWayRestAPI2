@@ -4,10 +4,9 @@ import (
 	"crypto/rsa"
 	"io/ioutil"
 	"time"
-	"github.com/dgrijalva/jwt-go"
-	"github.com/dgrijalva/jwt-go/request"	
-)
 
+	"github.com/dgrijalva/jwt-go"
+)
 
 const (
 	privKeyPath = "./helpers/tokenGenerator/app.rsa"     // openssl genrsa -out app.rsa keysize
@@ -15,8 +14,8 @@ const (
 )
 
 var (
-	VerifyKey  *rsa.PublicKey
-	signKey    *rsa.PrivateKey
+	VerifyKey *rsa.PublicKey
+	signKey   *rsa.PrivateKey
 )
 
 func init() {
@@ -31,14 +30,13 @@ func init() {
 	if err != nil {
 		panic("There was an error while trying to parse the private key")
 	}
-	
+
 	verifyBytes, err := ioutil.ReadFile(pubKeyPath)
 
 	if err != nil {
 		panic("There was an error while trying to read the public key")
 	}
 
-	
 	VerifyKey, err = jwt.ParseRSAPublicKeyFromPEM(verifyBytes)
 
 	if err != nil {
@@ -49,30 +47,46 @@ func init() {
 
 type CustomClaim struct {
 	*jwt.StandardClaims
-	UserInfo struct{
-		Username string
-		UserType int
+	UserInfo struct {
+		EmailAddress string
+		UserType     int
 	}
 }
 
-func CreateToken(username string) (string, error) {
+func CreateToken(emailAddress string, userType int) (string, error) {
 	token := jwt.New(jwt.GetSigningMethod("RS256"))
 
 	token.Claims = &CustomClaim{
-		&jwt.StandardClaims{			
-			ExpiresAt: time.Now().Add(time.Hour * 1).Unix(),
+		&jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(time.Minute * 15).Unix(),
 		},
-		struct{Username string; UserType int}{
-			Username: username,
-			UserType: 1,
+		struct {
+			EmailAddress string
+			UserType     int
+		}{
+			EmailAddress: emailAddress,
+			UserType:     userType,
 		},
 	}
 
 	return token.SignedString(signKey)
 }
 
-func ValidateToken(){
-	request.ParseFromRequest(nil, request.OAuth2Extractor, func (token *jwt.Token) (interface{}, error){
-		return 	VerifyKey, nil
-	}, request.WithClaims(&CustomClaim{}))
+func CreateRefreshToken(emailAddress string, userType int) (string, error) {
+	token := jwt.New(jwt.GetSigningMethod("RS256"))
+
+	token.Claims = &CustomClaim{
+		&jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(time.Hour * 168).Unix(),
+		},
+		struct {
+			EmailAddress string
+			UserType     int
+		}{
+			EmailAddress: emailAddress,
+			UserType:     userType,
+		},
+	}
+
+	return token.SignedString(signKey)
 }

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package grpc;
+option go_package = "github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/services/proto";
+
+message EmailTokenRequest{
+    string email = 1;
+    string token = 2;
+}
+
+message EmailTokenResponse{
+    bool response = 1;
+}
+
+service EmailToken {
+    rpc getEmailAndToken (EmailTokenRequest) returns (EmailTokenResponse) {}
+}
