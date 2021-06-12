@@ -91,7 +91,7 @@ func (ServiceProviderManagementService) FindMatches() gin.HandlerFunc {
 			return
 		}
 
-		response := mappers.CreateServiceProviderOverviewDTOAsResponse(serviceProviders)
+		response := mappers.CreateServiceProviderOverviewDTOAsResponse(serviceProviders, maxPriceRate, uint8(kindOfService))
 		lastPage := (int(count) / pagesize)
 		var previousPage int = 1
 		var nextPage int

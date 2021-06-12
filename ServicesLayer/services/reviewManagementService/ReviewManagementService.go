@@ -40,7 +40,18 @@ func (ReviewManagementService) Register() gin.HandlerFunc {
 		}
 
 		review := mappers.CreateReviewEntity(receivedData, serviceProviderID)
-		databaseError := review.Register()
+		serviceProvider := businessEntities.ServiceProvider{}
+		serviceProvider.Find(serviceProviderID)
+		serviceProvider.TotalPoints += int(receivedData.Score)
+		serviceProvider.MaxTotalPossible += 5
+		serviceProvider.AverageScore = float32((serviceProvider.TotalPoints * 5) / serviceProvider.MaxTotalPossible)
+
+		databaseError := serviceProvider.Update()
+		if databaseError != nil {
+			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to register your review.")
+			return
+		}
+		databaseError = review.Register()
 
 		if databaseError != nil {
 			context.AbortWithStatusJSON(http.StatusConflict, "There was an error while trying to register your review.")
@@ -89,7 +100,7 @@ func (ReviewManagementService) Find() gin.HandlerFunc {
 		}
 
 		response := mappers.CreateSliceOfResponseReviewDTO(reviews)
-		lastPage := int(rowCount/int64(pagesize)) + 1
+		lastPage := int(rowCount / int64(pagesize))
 		var previousPage int = 1
 		var nextPage int
 
