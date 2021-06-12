@@ -18,7 +18,7 @@ images/*
 # vendor/
 
 *.log
-public/*
+public/reviews/*
 logs
 images/*
 env/*

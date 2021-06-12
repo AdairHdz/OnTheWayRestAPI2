@@ -1,17 +1,21 @@
 package mappers
 
 import (
+	"fmt"
+	"path/filepath"
+	"strings"
+
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/dataTransferObjects"
 	uuid "github.com/satori/go.uuid"
 )
 
-
-func CreateSliceOfReviewEvidenceDTOAsResponse(reviewEvidences []businessEntities.ReviewEvidence) []dataTransferObjects.ReviewEvidenceDTO {
-	var response []dataTransferObjects.ReviewEvidenceDTO
+func CreateSliceOfReviewEvidenceDTOAsResponse(reviewID string, reviewEvidences []businessEntities.ReviewEvidence) []dataTransferObjects.ReviewEvidenceRespondeDTO {
+	var response []dataTransferObjects.ReviewEvidenceRespondeDTO
 
 	for _, evidenceItem := range reviewEvidences {
-		evidence := dataTransferObjects.ReviewEvidenceDTO {
+		evidence := dataTransferObjects.ReviewEvidenceRespondeDTO{
+			Link: fmt.Sprintf("reviews/%s/%s", reviewID, evidenceItem.Name),
 			Name: evidenceItem.Name,
 		}
 
@@ -25,9 +29,10 @@ func CreateSliceOfReviewEvidenceEntities(reviewDTOs []dataTransferObjects.Review
 	var response []businessEntities.ReviewEvidence
 
 	for _, evidenceItem := range reviewDTOs {
-		evidence := businessEntities.ReviewEvidence {
-			ID: uuid.NewV4(),
-			Name: evidenceItem.Name,
+		escapedPath := strings.Replace(evidenceItem.Name, "\\", "/", -1)
+		evidence := businessEntities.ReviewEvidence{
+			ID:   uuid.NewV4(),
+			Name: filepath.Base(escapedPath),
 		}
 		response = append(response, evidence)
 	}

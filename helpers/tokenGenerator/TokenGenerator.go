@@ -4,9 +4,9 @@ import (
 	"crypto/rsa"
 	"io/ioutil"
 	"time"
-	"github.com/dgrijalva/jwt-go"		
-)
 
+	"github.com/dgrijalva/jwt-go"
+)
 
 const (
 	privKeyPath = "./helpers/tokenGenerator/app.rsa"     // openssl genrsa -out app.rsa keysize
@@ -14,8 +14,8 @@ const (
 )
 
 var (
-	VerifyKey  *rsa.PublicKey
-	signKey    *rsa.PrivateKey
+	VerifyKey *rsa.PublicKey
+	signKey   *rsa.PrivateKey
 )
 
 func init() {
@@ -30,14 +30,13 @@ func init() {
 	if err != nil {
 		panic("There was an error while trying to parse the private key")
 	}
-	
+
 	verifyBytes, err := ioutil.ReadFile(pubKeyPath)
 
 	if err != nil {
 		panic("There was an error while trying to read the public key")
 	}
 
-	
 	VerifyKey, err = jwt.ParseRSAPublicKeyFromPEM(verifyBytes)
 
 	if err != nil {
@@ -48,9 +47,9 @@ func init() {
 
 type CustomClaim struct {
 	*jwt.StandardClaims
-	UserInfo struct{
+	UserInfo struct {
 		EmailAddress string
-		UserType int
+		UserType     int
 	}
 }
 
@@ -58,12 +57,15 @@ func CreateToken(emailAddress string, userType int) (string, error) {
 	token := jwt.New(jwt.GetSigningMethod("RS256"))
 
 	token.Claims = &CustomClaim{
-		&jwt.StandardClaims{			
+		&jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Minute * 15).Unix(),
 		},
-		struct{EmailAddress string; UserType int}{
+		struct {
+			EmailAddress string
+			UserType     int
+		}{
 			EmailAddress: emailAddress,
-			UserType: userType,
+			UserType:     userType,
 		},
 	}
 
@@ -74,16 +76,17 @@ func CreateRefreshToken(emailAddress string, userType int) (string, error) {
 	token := jwt.New(jwt.GetSigningMethod("RS256"))
 
 	token.Claims = &CustomClaim{
-		&jwt.StandardClaims{			
+		&jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 168).Unix(),
 		},
-		struct{EmailAddress string; UserType int}{
+		struct {
+			EmailAddress string
+			UserType     int
+		}{
 			EmailAddress: emailAddress,
-			UserType: userType,
+			UserType:     userType,
 		},
 	}
 
 	return token.SignedString(signKey)
 }
-
-

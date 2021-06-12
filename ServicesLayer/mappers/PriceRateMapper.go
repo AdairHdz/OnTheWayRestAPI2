@@ -8,19 +8,18 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-
 func CreatePriceRateDTOSliceAsResponse(priceRates []businessEntities.PriceRate) []dataTransferObjects.ResponsePriceRateDTOWithCity {
 
 	var response []dataTransferObjects.ResponsePriceRateDTOWithCity
 	for _, priceRateElement := range priceRates {
 		priceRate := dataTransferObjects.ResponsePriceRateDTOWithCity{
-			ID: priceRateElement.ID,
-			StartingHour: priceRateElement.StartingHour,
-			EndingHour: priceRateElement.EndingHour,
-			Price: priceRateElement.Price,
-			KindOfService: priceRateElement.KindOfService,			
-			City: CreateCityDTOAsResponse(priceRateElement.City),
-			WorkingDays: CreateWorkingDayDTOSliceAsResponse(priceRateElement.WorkingDays),
+			ID:            priceRateElement.ID,
+			StartingHour:  priceRateElement.StartingHour,
+			EndingHour:    priceRateElement.EndingHour,
+			Price:         priceRateElement.Price,
+			KindOfService: priceRateElement.KindOfService,
+			City:          CreateCityDTOAsResponse(priceRateElement.City),
+			WorkingDays:   CreateWorkingDayDTOSliceAsResponse(priceRateElement.WorkingDays),
 		}
 		response = append(response, priceRate)
 	}
@@ -28,29 +27,25 @@ func CreatePriceRateDTOSliceAsResponse(priceRates []businessEntities.PriceRate) 
 }
 
 func CreatePriceRateDTOAsResponse(priceRate businessEntities.PriceRate) dataTransferObjects.ResponsePriceRateDTO {
-
-	var response dataTransferObjects.ResponsePriceRateDTO
-
-	response = dataTransferObjects.ResponsePriceRateDTO {
-		ID: priceRate.ID,
-		StartingHour: priceRate.StartingHour,
-		EndingHour: priceRate.EndingHour,
-		Price: priceRate.Price,
+	response := dataTransferObjects.ResponsePriceRateDTO{
+		ID:            priceRate.ID,
+		StartingHour:  priceRate.StartingHour,
+		EndingHour:    priceRate.EndingHour,
+		Price:         priceRate.Price,
 		KindOfService: priceRate.KindOfService,
-		CityID: priceRate.CityID,		
-		WorkingDays: CreateWorkingDayDTOSliceAsResponse(priceRate.WorkingDays),
+		CityID:        priceRate.CityID,
+		WorkingDays:   CreateWorkingDayDTOSliceAsResponse(priceRate.WorkingDays),
 	}
-	
-	
+
 	return response
 }
 
 func CreatePriceRateEntity(priceRateDTO dataTransferObjects.ReceivedPriceRateDTO, serviceProviderID uuid.UUID) (businessEntities.PriceRate, error) {
-	
+
 	var workingDayEntities []businessEntities.WorkingDay
 
 	for _, workingDayElement := range priceRateDTO.WorkingDays {
-		workingDay := businessEntities.WorkingDay {
+		workingDay := businessEntities.WorkingDay{
 			ID: workingDayElement,
 		}
 
@@ -68,14 +63,14 @@ func CreatePriceRateEntity(priceRateDTO dataTransferObjects.ReceivedPriceRateDTO
 	}
 
 	priceRate := businessEntities.PriceRate{
-		ID: uuid.NewV4(),
-		StartingHour: priceRateDTO.StartingHour,
-		EndingHour: priceRateDTO.EndingHour,
-		Price: priceRateDTO.Price,
-		WorkingDays: workingDayEntities,
+		ID:                uuid.NewV4(),
+		StartingHour:      priceRateDTO.StartingHour,
+		EndingHour:        priceRateDTO.EndingHour,
+		Price:             priceRateDTO.Price,
+		WorkingDays:       workingDayEntities,
 		ServiceProviderID: serviceProviderID,
-		CityID: priceRateDTO.CityID,
-		KindOfService: priceRateDTO.KindOfService,
+		CityID:            priceRateDTO.CityID,
+		KindOfService:     priceRateDTO.KindOfService,
 	}
 
 	return priceRate, nil

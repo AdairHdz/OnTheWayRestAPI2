@@ -91,8 +91,8 @@ func (ServiceProviderManagementService) FindMatches() gin.HandlerFunc {
 			return
 		}
 
-		response := mappers.CreateServiceProviderOverviewDTOAsResponse(serviceProviders)
-		lastPage := (int(count) / pagesize) + 1
+		response := mappers.CreateServiceProviderOverviewDTOAsResponse(serviceProviders, maxPriceRate, uint8(kindOfService))
+		lastPage := (int(count) / pagesize)
 		var previousPage int = 1
 		var nextPage int
 
@@ -312,12 +312,12 @@ func (ServiceProviderManagementService) GetStatistics() gin.HandlerFunc {
 			RequestedServicesPerWeekdayqueryResult []struct {
 				RequestedServices int `json:"requestedServices"`
 				Weekday           int `json:"weekday"`
-			}
+			} `json:"requestedServicesPerWeekday"`
 
 			KindOfServicesQueryResult []struct {
 				RequestedServices int `json:"requestedServices"`
 				KindOfService     int `json:"kindOfService"`
-			}
+			} `json:"requestedServicesPerKindOfService"`
 		}{}
 
 		databaseError := serviceProvider.GetStatisticsReport(&statisticsReport.RequestedServicesPerWeekdayqueryResult, &statisticsReport.KindOfServicesQueryResult, startingDate, endingDate)
