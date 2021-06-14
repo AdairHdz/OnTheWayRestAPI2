@@ -205,6 +205,7 @@ func (ServiceProviderManagementService) Update() gin.HandlerFunc {
 			return
 		}
 
+		serviceProvider.ID = serviceProviderID
 		updateError := serviceProvider.Update()
 
 		if updateError != nil {
