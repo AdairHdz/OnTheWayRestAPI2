@@ -24,7 +24,7 @@ func (Repository) FindMatches(target interface{}, query interface{}, args ...int
 
 func (Repository) Update(entity interface{}) error {
 	DB := database.GetDatabase()
-	result := DB.Updates(entity)
+	result := DB.Save(entity)
 	return result.Error
 }
 

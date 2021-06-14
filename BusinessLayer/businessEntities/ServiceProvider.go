@@ -35,7 +35,12 @@ func (serviceProvider *ServiceProvider) Find(serviceProviderID uuid.UUID) error 
 
 func (serviceProvider *ServiceProvider) Update() error {
 	repository := serviceProviderRepository.ServiceProviderRepository{}
-	databaseError := repository.Update(&serviceProvider)
+	databaseError := repository.Update(&serviceProvider.User)
+	if databaseError != nil {
+		return databaseError
+	}
+
+	databaseError = repository.Update(&serviceProvider)
 	return databaseError
 }
 

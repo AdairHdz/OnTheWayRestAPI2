@@ -13,6 +13,7 @@ func CreateServiceProviderDTOAsResponse(serviceProvider businessEntities.Service
 		EmailAddress: serviceProvider.User.EmailAddress,
 		AverageScore: uint8(serviceProvider.AverageScore),
 		PriceRates:   CreatePriceRateDTOSliceAsResponse(serviceProvider.PriceRates),
+		ProfileImage: serviceProvider.BusinessPicture,
 	}
 	return response
 }
