@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build Docker Image
-      run: docker build . --tag on_the_way_rest_api:$(date +%s)
+      run: docker build . --tag on_the_way_rest_api:$(date +%s)      
     
     - name: Publish to registry
       uses: elgohr/Publish-Docker-Github-Action@master
