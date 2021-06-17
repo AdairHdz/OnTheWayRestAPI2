@@ -137,7 +137,15 @@ func (ServiceRequestManagementService) Update() gin.HandlerFunc {
 		}{}
 
 		context.BindJSON(&serviceStatus)
+		if serviceRequest.ServiceStatus == businessEntities.Canceled && serviceStatus.ServiceStatus == businessEntities.Concluded {
+			context.AbortWithStatusJSON(http.StatusConflict, "It was not possible to cancel the service because it has already been marked as completed")
+			return
+		}
 
+		if serviceRequest.ServiceStatus == businessEntities.Canceled && serviceStatus.ServiceStatus == businessEntities.Active {
+			context.AbortWithStatusJSON(http.StatusConflict, "It was not possible to cancel the service because it has already been marked as canceled")
+			return
+		}
 		serviceRequest.ServiceStatus = serviceStatus.ServiceStatus
 		databaseError = serviceRequest.Update()
 
