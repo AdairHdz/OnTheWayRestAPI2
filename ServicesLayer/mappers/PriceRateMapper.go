@@ -1,6 +1,7 @@
 package mappers
 
 import (
+	"errors"
 	"time"
 
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
@@ -48,7 +49,9 @@ func CreatePriceRateEntity(priceRateDTO dataTransferObjects.ReceivedPriceRateDTO
 		workingDay := businessEntities.WorkingDay{
 			ID: workingDayElement,
 		}
-
+		if workingDayElement > 7 {
+			return businessEntities.PriceRate{}, errors.New("")
+		}
 		workingDayEntities = append(workingDayEntities, workingDay)
 	}
 

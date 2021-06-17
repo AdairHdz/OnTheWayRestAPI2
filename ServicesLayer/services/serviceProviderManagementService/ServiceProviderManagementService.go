@@ -253,7 +253,7 @@ func (ServiceProviderManagementService) UpdateServiceProviderImage() gin.Handler
 		fileExtension := filepath.Ext(file.Filename)
 
 		if !fileAnalyzer.ImageHasValidFormat(fileExtension) {
-			context.AbortWithStatusJSON(http.StatusConflict, "Invalid image format. Please make sure your file has jpg, jpeg, or png extension")
+			context.AbortWithStatusJSON(http.StatusBadRequest, "Invalid image format. Please make sure your file has jpg, jpeg, or png extension")
 			return
 		}
 
