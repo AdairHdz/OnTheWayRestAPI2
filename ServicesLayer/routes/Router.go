@@ -43,7 +43,7 @@ func init() {
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	limiter := tollbooth.NewLimiter(50, &limiter.ExpirableOptions{DefaultExpirationTTL: time.Hour})
 	limiter.SetIPLookups([]string{"RemoteAddr", "X-Forwarded-For", "X-Real-IP"})
-	v1 := router.Group("/v1", tollbooth_gin.LimitHandler(limiter))
+	v1 := router.Group("/v1.0.0", tollbooth_gin.LimitHandler(limiter))
 	{
 
 		router.StaticFS("/images", http.Dir("./images"))

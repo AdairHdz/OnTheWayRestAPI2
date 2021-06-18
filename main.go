@@ -1,15 +1,17 @@
 package main
 
-import (		
+import (
+	_ "github.com/AdairHdz/OnTheWayRestAPI/tzinit"
+
 	"github.com/AdairHdz/OnTheWayRestAPI/BusinessLayer/businessEntities"
 	"github.com/AdairHdz/OnTheWayRestAPI/DataLayer/database"
-	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes"	
+	"github.com/AdairHdz/OnTheWayRestAPI/ServicesLayer/routes"
+
 	uuid "github.com/satori/go.uuid"
 )
 
+func main() {
 
-func main() {	
-	
 	DB := database.GetDatabase()
 	DB.SetupJoinTable(&businessEntities.PriceRate{}, "WorkingDays", &businessEntities.PriceRateWorkingDay{})
 	DB.AutoMigrate(
@@ -17,42 +19,42 @@ func main() {
 		&businessEntities.WorkingDay{},
 		&businessEntities.State{},
 		&businessEntities.City{},
-		&businessEntities.ServiceProvider{},	
+		&businessEntities.ServiceProvider{},
 		&businessEntities.PriceRate{},
-		&businessEntities.ServiceRequest{},		
+		&businessEntities.ServiceRequest{},
 		&businessEntities.Review{},
 		&businessEntities.ReviewEvidence{},
 		&businessEntities.ServiceRequester{},
-		&businessEntities.Address{})	
+		&businessEntities.Address{})
 
 	var workingDays [7]businessEntities.WorkingDay
 	workingDays[0] = businessEntities.WorkingDay{
-		ID: 1,
+		ID:   1,
 		Name: "Lunes",
 	}
-	
-	workingDays[1] = businessEntities.WorkingDay{		
-		ID: 2,
+
+	workingDays[1] = businessEntities.WorkingDay{
+		ID:   2,
 		Name: "Martes",
 	}
 	workingDays[2] = businessEntities.WorkingDay{
-		ID: 3,
+		ID:   3,
 		Name: "Miércoles",
 	}
 	workingDays[3] = businessEntities.WorkingDay{
-		ID: 4,
+		ID:   4,
 		Name: "Jueves",
 	}
 	workingDays[4] = businessEntities.WorkingDay{
-		ID: 5,
+		ID:   5,
 		Name: "Viernes",
 	}
 	workingDays[5] = businessEntities.WorkingDay{
-		ID: 6,
+		ID:   6,
 		Name: "Sábado",
 	}
-	workingDays[6] = businessEntities.WorkingDay{		
-		ID: 7,
+	workingDays[6] = businessEntities.WorkingDay{
+		ID:   7,
 		Name: "Domingo",
 	}
 
@@ -63,17 +65,17 @@ func main() {
 	jaliscoID := uuid.FromStringOrNil("51fda705-4fc6-481e-bcab-c34ae7144b54")
 	nuevoLeonID := uuid.FromStringOrNil("a2064dcf-ebfe-4203-ae5a-f5f8e870bd02")
 	states[0] = businessEntities.State{
-		ID: veracruzID,
+		ID:   veracruzID,
 		Name: "Veracruz",
 	}
 
 	states[1] = businessEntities.State{
-		ID: jaliscoID,
+		ID:   jaliscoID,
 		Name: "Jalisco",
 	}
 
 	states[2] = businessEntities.State{
-		ID: nuevoLeonID,
+		ID:   nuevoLeonID,
 		Name: "Nuevo León",
 	}
 
@@ -86,24 +88,24 @@ func main() {
 	xicoID := uuid.FromStringOrNil("b4926200-bb8b-45c0-80cc-f4c40b5fb945")
 
 	cities[0] = businessEntities.City{
-		ID: xalapaID,
-		Name: "Xalapa",
+		ID:      xalapaID,
+		Name:    "Xalapa",
 		StateID: veracruzID,
 	}
-	
+
 	cities[1] = businessEntities.City{
-		ID: coatepecID,
-		Name: "Coatepec",
+		ID:      coatepecID,
+		Name:    "Coatepec",
 		StateID: veracruzID,
 	}
 
 	cities[2] = businessEntities.City{
-		ID: xicoID,
-		Name: "Xico",
+		ID:      xicoID,
+		Name:    "Xico",
 		StateID: veracruzID,
 	}
 
-	DB.Save(&cities)		
+	DB.Save(&cities)
 
-	routes.StartServer()	
+	routes.StartServer()
 }

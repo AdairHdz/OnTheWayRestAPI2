@@ -4,6 +4,7 @@ import "github.com/gin-gonic/gin"
 
 type IServiceRequestManagement interface {
 	Register() gin.HandlerFunc
-	Find() gin.HandlerFunc
+	FindByID() gin.HandlerFunc
+	FindByDate(userType int) gin.HandlerFunc
 	Update() gin.HandlerFunc
 }

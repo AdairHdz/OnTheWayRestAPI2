@@ -1,12 +1,11 @@
 package serviceRequesterManagementService
 
 import (
-	"github.com/gin-gonic/gin"	
+	"github.com/gin-gonic/gin"
 )
 
-
 type IServiceRequesterManagementService interface {
-	Register() gin.HandlerFunc
+	GetStatistics() gin.HandlerFunc
 	Find() gin.HandlerFunc
 	Update() gin.HandlerFunc
 }
