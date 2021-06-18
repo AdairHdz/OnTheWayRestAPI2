@@ -19,7 +19,7 @@ func Authenticate() gin.HandlerFunc {
 		}, request.WithClaims(&tokenGenerator.CustomClaim{}))
 
 		if err != nil {
-			fmt.Println("Invalid token", err.Error())
+			fmt.Println("Invalid token", err)
 			context.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
@@ -31,7 +31,6 @@ func Authenticate() gin.HandlerFunc {
 
 		extractedToken, err := request.OAuth2Extractor.ExtractToken(context.Request)
 		if err != nil {
-			fmt.Println("Invalid token", err.Error())
 			context.AbortWithStatusJSON(http.StatusForbidden, "Error while trying to extract token")
 			return
 		}
@@ -39,16 +38,13 @@ func Authenticate() gin.HandlerFunc {
 		tokenBlackListHandler := tokenBlackList.GetInstance()
 		_, err = tokenBlackListHandler.Get(fmt.Sprintf("BlackListedToken_%v", extractedToken))
 		if err != nil {
-			fmt.Println("Invalid token", err.Error())
 			if err == redis.Nil {
 				context.Next()
 				return
 			}
-			fmt.Println("Invalid token", err.Error())
 			context.AbortWithStatusJSON(http.StatusForbidden, "There was an error while trying to validate your token")
 			return
 		}
-		fmt.Println("Invalid token", err.Error())
 		context.AbortWithStatusJSON(http.StatusForbidden, "This token can no longer be used")
 	}
 }
@@ -60,7 +56,7 @@ func AuthenticateWithRefreshToken() gin.HandlerFunc {
 		}, request.WithClaims(&tokenGenerator.CustomClaim{}))
 
 		if err != nil {
-			fmt.Println("Invalid token", err.Error())
+			fmt.Println("Invalid token", err)
 			context.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
@@ -72,7 +68,6 @@ func AuthenticateWithRefreshToken() gin.HandlerFunc {
 
 		extractedRefreshToken, err := request.HeaderExtractor{"Token-Request"}.ExtractToken(context.Request)
 		if err != nil {
-			fmt.Println("Invalid token", err.Error())
 			context.AbortWithStatusJSON(http.StatusForbidden, "Error while trying to extract token")
 			return
 		}
@@ -80,7 +75,6 @@ func AuthenticateWithRefreshToken() gin.HandlerFunc {
 		tokenBlackListHandler := tokenBlackList.GetInstance()
 		_, err = tokenBlackListHandler.Get(fmt.Sprintf("BlackListedRefreshToken_%v", extractedRefreshToken))
 		if err != nil {
-			fmt.Println("Invalid token", err.Error())
 			if err == redis.Nil {
 				context.Next()
 				return
